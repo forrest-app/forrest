@@ -1,8 +1,8 @@
 import { ipcRenderer } from 'electron';
 
-export const addRepoPath = function( { dispatch, state }, repoPath ) {
-  ipcRenderer.once( 'updated-repos', function( event, repoPaths ) {
-    dispatch( 'UPDATED_REPO_PATHS', repoPaths );
+export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
+  ipcRenderer.once( 'updated-repos', function( event, repos ) {
+    dispatch( 'UPDATED_REPOS', repos );
   } );
 
   ipcRenderer.send( 'add-repo', repoPath );

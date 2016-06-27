@@ -6,6 +6,7 @@
     background-color : var(--header-background);
 
     margin : 0;
+    padding : .5em .5em;
   }
 
   .logo {

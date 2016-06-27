@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="scss" scoped>
   .logo {
     max-width : 5em;
   }
@@ -8,11 +8,10 @@
     flex-direction : column;
     height : 100%;
 
-  }
-
-  .projectList--container {
-    flex : 1 0;
-    overflow : auto;
+    &--container {
+      flex : 1 0;
+      overflow : auto;
+    }
   }
 
   .projectList-transition {
@@ -32,7 +31,7 @@
 </style>
 
 <template>
-  <div class="projectList" transition="projectList">
+  <div class="projectList scrollContainer" transition="projectList">
     <known-projects class="projectList--container"></known-projects>
     <open-projects-button></open-projects-button>
   </div>

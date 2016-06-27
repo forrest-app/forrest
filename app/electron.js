@@ -4,6 +4,7 @@ const { app, ipcMain, BrowserWindow } = require( 'electron' );
 const { spawn }                       = require( 'child_process' );
 const path                            = require( 'path' );
 const ElectronSettings                = require( 'electron-settings' );
+const fs                              = require( 'fs' )
 
 let mainWindow
 let config = {}
@@ -30,15 +31,33 @@ ipcMain.on( 'update-setting', ( event, name, setting ) => {
 } );
 
 ipcMain.on( 'add-repo', ( event, newRepoPath ) => {
-  let savedRepoPaths = settings.get( 'repoPaths' );
-  let repoPaths      = savedRepoPaths ? savedRepoPaths : [];
+  let repos = settings.get( 'repos' ) || [];
 
-  // does this piece of logic belong here?
-  repoPaths.push( newRepoPath );
+  fs.readFile( `${ newRepoPath }/package.json`, ( error, data ) => {
+    // TODO put error handling here
 
-  settings.set( 'repoPaths', repoPaths );
-  event.sender.send( 'updated-repos', repoPaths );
-  global.settings = settings.get();
+    try {
+      var packageJSON = JSON.parse( data );
+    } catch( error ) {
+      // TODO error handling
+    }
+
+    let url = packageJSON.repository &&
+              packageJSON.repository.url &&
+              packageJSON.repository.url.replace( /(git:\/\/|\.git)/g, '' );
+
+    // does this piece of logic belong here?
+    repos.push( {
+      path        : newRepoPath,
+      name        : packageJSON.name,
+      description : packageJSON.description,
+      url         : url
+    } );
+
+    settings.set( 'repos', repos );
+    event.sender.send( 'updated-repos', repos );
+    global.settings = settings.get();
+  } );
 } );
 
 

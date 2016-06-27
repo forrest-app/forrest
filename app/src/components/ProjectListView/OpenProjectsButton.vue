@@ -10,6 +10,7 @@
     padding : 1em;
 
     color : #fff;
+    font-size : inherit;
 
     margin-left  : auto;
     margin-right : auto;
@@ -21,12 +22,12 @@
 </template>
 
 <script>
-  import { addRepoPath } from '../../vuex/actions';
+  import { addRepoWithPath } from '../../vuex/actions';
 
   export default {
     vuex : {
       actions : {
-        addRepoPath : addRepoPath
+        addRepoWithPath : addRepoWithPath
       }
     },
     methods : {
@@ -35,7 +36,9 @@
           title      : 'Open project',
           properties : [ 'openDirectory' ]
         }, ( repoPaths ) => {
-          this.addRepoPath( repoPaths[ 0 ] );
+          if ( repoPaths ) {
+            this.addRepoWithPath( repoPaths[ 0 ] );
+          }
         } );
       }
     }

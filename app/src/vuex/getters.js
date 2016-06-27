@@ -1,5 +1,5 @@
-export function getRepoPaths( state ) {
-  return state.settings.repoPaths;
+export function getRepos( state ) {
+  return state.settings.repos;
 }
 
 export function getAppSettings( state ) {
