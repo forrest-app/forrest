@@ -20,7 +20,7 @@
 </style>
 
 <template>
-  <div class="project scrollContainer" transition="project">
+  <div class="project" transition="project">
     <project :project-index="$route.params.projectIndex"></project>
   </div>
 </template>

@@ -4,18 +4,22 @@
     &--headline {
       font-size : 1.125em;
 
-      height : 2em;
-
-      margin : .4444em 0 0;
-      padding : 0 0 .44444em;
+      margin  : 0;
+      padding : 0;
 
       text-align : center;
 
       color : var(--npm-red);
 
+      line-height : 2.5em;
+
       border-bottom : 1px solid #ddd;
     }
 
+    &--scriptsContainer {
+      position : relative;
+      height : calc( 100% - 2.8125em );
+    }
   }
 
   .script {
@@ -60,7 +64,7 @@
 
       position : absolute;
 
-      top    : 2.5em;
+      top    : 2.75em;
       right  : 0;
       bottom : 0;
       left   : 0;
@@ -147,37 +151,39 @@
 </style>
 
 <template>
-  <div>
+  <div class="u-fullHeight">
     <h1 class="project--headline">{{ project.name }}</h1>
-    <ul>
-      <li v-for="script in scripts">
-        <div class="script">
-          <div class="script--header">
-            <div class="script--info">
-              {{ script.name }}
-            </div>
-            <div class="script--actions">
-              <button type="button" class="script--infoBtn" @click="toggleVisibility( script )">
-                <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
-                </svg>
-              </button>
-              <button type="button" class="script--runBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
-                <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <div class="project--scriptsContainer">
+      <ul class="scrollContainer">
+        <li v-for="script in scripts">
+          <div class="script">
+            <div class="script--header">
+              <div class="script--info">
+                {{ script.name }}
+              </div>
+              <div class="script--actions">
+                <button type="button" class="script--infoBtn" @click="toggleVisibility( script )">
+                  <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                </svg>
-              </button>
+                    <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+                  </svg>
+                </button>
+                <button type="button" class="script--runBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
+                  <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="script--details" v-if="script.detailsVisible">
+              <code>
+                <pre class="script--code">$ {{ script.command }}</pre>
+              </code>
             </div>
           </div>
-          <div class="script--details" v-if="script.detailsVisible">
-            <code>
-              <pre class="script--code">$ {{ script.command }}</pre>
-            </code>
-          </div>
-        </div>
-    </ul>
+      </ul>
+    </div>
 
     <div class="script--output" v-if="process" transition="codeblock">
       <div class="script--output--header">

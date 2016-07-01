@@ -7,7 +7,7 @@
 
     border : none;
 
-    padding : 1em;
+    padding : .5em;
 
     color : #fff;
     font-size : inherit;

@@ -27,6 +27,7 @@
 
     &--description {
       font-style : italic;
+      font-weight : 300;
       font-size  : .8em;
     }
 

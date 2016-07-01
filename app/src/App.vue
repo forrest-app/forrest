@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import url(https://fonts.googleapis.com/css?family=Lato:300);
+  @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic);
 
   :root {
     --npm-red           : #cb3837;
@@ -43,7 +43,7 @@
   }
 
   main {
-    height   : calc( 100% - 3em );
+    height   : 100%;
     position : relative;
     overflow : hidden;
 
@@ -54,6 +54,8 @@
       right  : 0;
       bottom : 0;
       left   : 0;
+
+      overflow : auto;
     }
   }
 
@@ -65,7 +67,7 @@
   }
 
   li {
-    padding : .5em 1em;
+    padding : .5em .75em;
 
     background : var(--main-bg-color);
 
@@ -136,6 +138,10 @@
 
   .u-fillGreen {
     fill : var(--svg-fill-green);
+  }
+
+  .u-fullHeight {
+    height : 100%;
   }
 
   ::-webkit-scrollbar {
