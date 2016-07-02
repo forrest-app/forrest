@@ -1,18 +1,24 @@
-import { remote } from 'electron';
+import ElectronSettings from 'electron-settings';
 
-let settings = remote.getGlobal( 'settings' );
+let settings = new ElectronSettings( {
+  configFileName : 'npm-app'
+} );
+
 const state = {
-  repos : settings.repos,
-  app   : settings.app
+  repos : settings.get( 'repos' ) || [],
+  app   : settings.get( 'app' ) || {}
 };
 
 const mutations = {
-  UPDATED_REPOS ( state, repos ) {
-    state.repos = repos;
+  ADD_REPO ( state, repo ) {
+    state.repos = [ ...state.repos, repo ];
+
+    settings.set( 'repos', state.repos );
   },
 
-  UPDATED_SETTINGS ( state, settings ) {
-    state.app = settings;
+  UPDATE_APP_SETTING ( state, name, setting ) {
+    state.app[ name ] = setting;
+    settings.set( `app.${ name }` , setting );
   }
 };
 

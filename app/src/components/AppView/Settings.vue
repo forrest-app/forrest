@@ -60,7 +60,7 @@
 
 <script>
   import { updateAppSetting } from '../../vuex/actions';
-  import { getAppSettings } from '../../vuex/getters';
+  import { getAppSettings, getDefaults } from '../../vuex/getters';
 
   export default {
     methods : {
@@ -79,7 +79,8 @@
         updateAppSetting : updateAppSetting
       },
       getters : {
-        settings : getAppSettings
+        settings       : getAppSettings,
+        configSettings : getDefaults
       }
     }
   };
