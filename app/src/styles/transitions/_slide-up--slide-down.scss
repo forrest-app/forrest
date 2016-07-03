@@ -1,0 +1,14 @@
+.t-slideUp--slideDown-transition {
+  transition :
+    transform .275s ease-in-out,
+    opacity .3s ease-in-out;
+
+  will-change : transform;
+  transform   : translate( 0, 0 );
+  opacity     : 1;
+}
+
+.t-slideUp--slideDown-enter, .t-slideUp--slideDown-leave {
+  transform : translate( 0, 100% );
+  opacity   : .66;
+}

@@ -28,25 +28,10 @@
       padding : .5em;
     }
   }
-
-    /* always present */
-  .settings-transition {
-    transition :
-      transform .2s ease-in-out;
-
-    will-change : transform;
-    transform   : translate( 0, 0 );
-  }
-
-  /* .settings-enter defines the starting state for entering */
-  /* .settings-leave defines the ending state for leaving */
-  .settings-enter, .settings-leave {
-    transform : translate( 0, -100% );
-  }
 </style>
 
 <template>
-  <div class="settings" transition="settings">
+  <div class="settings" transition="t-slideDown--slideUp">
     <ul id="example-1" class="o-list">
       <li v-for="setting in configSettings" class="o-list--item">
         <label v-bind:class="{ 'u-flex u-flexSpaceBetween': setting.type === 'checkbox' }">
