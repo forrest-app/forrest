@@ -1,55 +1,7 @@
 <style lang="scss" scoped>
-  button {
-    background-color : var(--npm-red);
-    display : block;
-
-    width : 100%;
-
-    border : none;
-
-    padding : .5em;
-
-    color : #fff;
-
-    max-width : 15em;
-
-    margin-left  : auto;
-    margin-right : auto;
-  }
-
   .project {
     position      : relative;
     padding-right : 2em;
-
-    &--githubLink {
-      display        : inline-block;
-      vertical-align : bottom;
-
-      width  : 2em;
-      height : 2em;
-
-        padding       : .375em;
-        margin-bottom : -.375em;
-
-      svg {
-        width  : 100%;
-        height : 100%;
-
-      }
-
-      // TODO clean this svg handling up
-      &:hover {
-        svg {
-          fill : var(--npm-red);
-        }
-      }
-
-      &:active {
-        svg {
-          fill : var(--npm-red-dark);
-        }
-      }
-    }
 
     &--link {
       position : absolute;
@@ -108,7 +60,7 @@
         <div class="project">
           <div class="project--name">
             <span>{{ repo.name }}</span>
-            <a v-if="repo.url" href="{{ repo.url }}" class="project--githubLink" aria-label="Open project on GitHub" title="Open project on GitHub" @click="openExternalLink">
+            <button type="button" v-if="repo.url" v-open-external :url="repo.url" class="o-iconBtn" aria-label="Open project on GitHub" title="Open project on GitHub">
               <svg x="0px" y="0px" width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549">
                 <g>
                 	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
@@ -133,7 +85,7 @@
                 		C438.536,184.851,428.728,148.168,409.132,114.573z"/>
                 </g>
               </svg>
-            </a>
+            </button>
           </div>
           <small class="o-small u-marginTopSmall">{{ repo.description }}</small>
           <a class="project--link" v-link="{ path : `/repos/${ repo.name }` }">
@@ -151,13 +103,6 @@
   import { getRepos } from '../../vuex/getters';
 
   export default {
-    methods : {
-      openExternalLink( event ) {
-        this.$electron.shell.openExternal( event.currentTarget.href );
-
-        event.preventDefault();
-      }
-    },
     vuex : {
       getters : {
         repos : getRepos

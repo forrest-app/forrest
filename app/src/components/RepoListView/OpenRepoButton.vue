@@ -9,8 +9,9 @@
 
     padding : .5em;
 
-    color : #fff;
-    font-size : inherit;
+    color       : var(--main-bg-color);
+    font-size   : inherit;
+    font-family : inherit;
 
     margin-left  : auto;
     margin-right : auto;
@@ -31,7 +32,7 @@
       }
     },
     methods : {
-      openFileDialog : function() {
+      openFileDialog() {
         this.$electron.remote.dialog.showOpenDialog( {
           title      : 'Open project',
           properties : [ 'openDirectory' ]

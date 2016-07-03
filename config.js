@@ -9,7 +9,7 @@ let config = {
   devtron     : true,
   eslint      : true,
   port        : 9080,
-  vueDevTools : false,
+  vueDevTools : true,
   building    : {
     'app-version' : pkg.version,
     arch          : 'x64',

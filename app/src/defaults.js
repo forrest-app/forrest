@@ -3,17 +3,20 @@ export default {
     {
       name    : 'install',
       command : 'npm install',
-      flags   : [ '--save', '--save-dev' ]
+      flags   : [],
+      docs    : 'https://docs.npmjs.com/cli/install'
     },
     {
       name    : 'drop & install',
       command : 'rm -rf ./node_modules && npm install',
-      flags   : []
+      flags   : [],
+      docs    : 'https://docs.npmjs.com/cli/install'
     },
     {
       name    : 'list',
       command : 'npm ls',
-      flags   : []
+      flags   : [],
+      docs    : 'https://docs.npmjs.com/cli/ls'
     }
   ],
 
