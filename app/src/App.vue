@@ -1,5 +1,10 @@
 <style lang="scss">
   @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic);
+  @import './styles/utils';
+  @import './styles/objects/checkbox';
+  @import './styles/objects/lists';
+  @import './styles/objects/small';
+
 
   :root {
     --npm-red           : #cb3837;
@@ -59,27 +64,6 @@
     }
   }
 
-  ul {
-    list-style : none;
-
-    margin  : 0;
-    padding : 0;
-  }
-
-  li {
-    padding : .5em .75em;
-
-    background : var(--main-bg-color);
-
-    &:hover {
-      background : var(--dark-bg-color);
-    }
-
-    & + li {
-      border-top : 1px solid #ddd;
-    }
-  }
-
   svg {
     fill : var(--svg-fill);
   }
@@ -87,61 +71,6 @@
   .verticalDefaultMargin {
     margin-top : 1em;
     margin-bottom : 1em;
-  }
-
-  .paddingDefault {
-    padding : 1em;
-  }
-
-  .u-marginHorizontalSmall {
-    margin-left  : .5em;
-    margin-right : .5em;
-  }
-
-  .u-negativeMarginHorizontalSmall {
-    margin-left  : -.5em;
-    margin-right : -.5em;
-  }
-
-  .u-marginRightSmall {
-    margin-right : .5em;
-  }
-
-  .u-marginLeftSmall {
-    margin-left : .5em;
-  }
-
-  .u-marginLeftAuto {
-    margin-left : auto;
-  }
-
-  .u-flex {
-    display : flex;
-  }
-
-  .u-flexCenter {
-    display : flex;
-
-    align-items : center;
-    justify-content : center;
-  }
-
-  .u-flexVerticalCenter {
-    display : flex;
-
-    align-items : center;
-  }
-
-  .u-fillRed {
-    fill : var(--svg-fill-red);
-  }
-
-  .u-fillGreen {
-    fill : var(--svg-fill-green);
-  }
-
-  .u-fullHeight {
-    height : 100%;
   }
 
   ::-webkit-scrollbar {

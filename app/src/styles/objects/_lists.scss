@@ -1,0 +1,18 @@
+.o-list {
+  list-style : none;
+
+  margin  : 0;
+  padding : 0;
+
+  &--item {
+    padding : .5em .75em;
+
+    &:hover {
+      background : rgba( 0, 0, 0, .05 );
+    }
+
+    & + & {
+      border-top : 1px solid #ddd;
+    }
+  }
+}

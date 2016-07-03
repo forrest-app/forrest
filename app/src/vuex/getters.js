@@ -6,6 +6,6 @@ export function getAppSettings( state ) {
   return state.settings.app;
 }
 
-export function getDefaults( state ) {
-  return state.defaults;
+export function getConfigSettings( state ) {
+  return state.defaults.settings;
 }

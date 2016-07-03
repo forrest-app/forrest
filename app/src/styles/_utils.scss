@@ -1,0 +1,73 @@
+.u-paddingDefault {
+  padding : 1em;
+}
+
+.u-marginHorizontalSmall {
+  margin-left  : .5em;
+  margin-right : .5em;
+}
+
+.u-negativeMarginHorizontalSmall {
+  margin-left  : -.5em;
+  margin-right : -.5em;
+}
+
+.u-marginTopSmall {
+  margin-top : .5em;
+}
+
+.u-marginRightSmall {
+  margin-right : .5em;
+}
+
+.u-marginLeftSmall {
+  margin-left : .5em;
+}
+
+.u-marginLeftAuto {
+  margin-left : auto;
+}
+
+.u-flex {
+  display : flex;
+}
+
+.u-flexCenter {
+  display : flex;
+
+  align-items : center;
+  justify-content : center;
+}
+
+.u-flexVerticalCenter {
+  display : flex;
+
+  align-items : center;
+}
+
+.u-flexSpaceBetween {
+  justify-content : space-between;
+}
+
+.u-fillRed {
+  fill : var(--svg-fill-red);
+}
+
+.u-fillGreen {
+  fill : var(--svg-fill-green);
+}
+
+.u-fullHeight {
+  height : 100%;
+}
+
+.u-visuallyHidden {
+  border   : 0;
+  clip     : rect(0 0 0 0);
+  height   : 1px;
+  margin   : -1px;
+  overflow : hidden;
+  padding  : 0;
+  position : absolute;
+  width    : 1px;
+}

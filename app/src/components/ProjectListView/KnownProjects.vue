@@ -17,19 +17,9 @@
     margin-right : auto;
   }
 
-  ul {
-    list-style : none;
-  }
-
   .project {
     position      : relative;
     padding-right : 2em;
-
-    &--description {
-      font-style : italic;
-      font-weight : 300;
-      font-size  : .8em;
-    }
 
     &--githubLink {
       display        : inline-block;
@@ -113,12 +103,12 @@
       </svg>
       <div class="project--zeroText">repos so far</div>
     </div>
-    <ul v-if="repos.length">
-      <li v-for="( index, repo ) in repos" track-by="$index">
+    <ul v-if="repos.length" class="o-list">
+      <li v-for="( index, repo ) in repos" track-by="$index" class="o-list--item">
         <div class="project">
           <div class="project--name">
             <span>{{ repo.name }}</span>
-            <a v-if="repo.url" href="{{ repo.url }}" class="project--githubLink" aria-label="Open project on GitHub" @click="openExternalLink">
+            <a v-if="repo.url" href="{{ repo.url }}" class="project--githubLink" aria-label="Open project on GitHub" title="Open project on GitHub" @click="openExternalLink">
               <svg x="0px" y="0px" width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549">
                 <g>
                 	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
@@ -145,7 +135,7 @@
               </svg>
             </a>
           </div>
-          <small class="project--description">{{ repo.description }}</small>
+          <small class="o-small u-marginTopSmall">{{ repo.description }}</small>
           <a class="project--link" v-link="{ path : `/projects/${ index }` }">
             <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>

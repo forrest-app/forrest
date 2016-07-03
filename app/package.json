@@ -4,6 +4,7 @@
   "description": "",
   "main": "electron.js",
   "dependencies": {
+    "display-notification": "^2.0.0",
     "electron-settings": "^1.0.4",
     "vue": "^1.0.24",
     "vue-electron": "^1.0.0",

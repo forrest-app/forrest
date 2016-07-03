@@ -154,8 +154,8 @@
   <div class="u-fullHeight">
     <h1 class="project--headline">{{ project.name }}</h1>
     <div class="project--scriptsContainer">
-      <ul class="scrollContainer">
-        <li v-for="script in scripts">
+      <ul class="scrollContainer o-list">
+        <li v-for="script in scripts" class="o-list--item">
           <div class="script">
             <div class="script--header">
               <div class="script--info">
@@ -237,7 +237,8 @@
 </template>
 
 <script>
-  import { getRepos } from '../../vuex/getters';
+  import { getRepos, getAppSettings } from '../../vuex/getters';
+  import displayNotification from 'display-notification';
 
   export default {
     activate( done ) {
@@ -283,6 +284,16 @@
         this.process    = null;
         this.lastScript = null;
       },
+      handleScriptExit( code ) {
+        this.processStatus = code;
+
+        if ( this.settings.displayNotifications ) {
+          displayNotification( {
+            title : `'${ this.lastScript.name }' finished`,
+            text  : this.processStatus > 0 ? 'It failed.' : 'It succeeded'
+          } );
+        }
+      },
       runScript( script ) {
         this.output = '';
 
@@ -305,13 +316,8 @@
         } );
 
         // TODO clean this up.
-        this.process.on( 'close', ( code ) => {
-          this.processStatus = code;
-        } );
-
-        this.process.on( 'exit', ( code ) => {
-          this.processStatus = code;
-        } );
+        this.process.on( 'close', this.handleScriptExit );
+        this.process.on( 'exit', this.handleScriptExit );
       },
       killScript() {
         if ( this.process ) {
@@ -325,7 +331,8 @@
     props : [ 'projectIndex' ],
     vuex  : {
       getters : {
-        repos : getRepos
+        repos    : getRepos,
+        settings : getAppSettings
       }
     }
   };
