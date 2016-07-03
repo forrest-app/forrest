@@ -1,0 +1,23 @@
+.o-iconBtn {
+  width      : 2.5em;
+  height     : 2.5em;
+  border     : none;
+  background : none;
+  padding    : .25em;
+
+  svg {
+    fill : var(--svg-fill);
+  }
+
+  &:hover {
+    svg {
+      fill : var(--npm-red);
+    }
+  }
+
+  &:active {
+    svg {
+      fill : var(--npm-red-dark);
+    }
+  }
+}

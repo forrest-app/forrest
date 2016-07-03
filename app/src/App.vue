@@ -5,6 +5,7 @@
   @import './styles/objects/checkbox';
   @import './styles/objects/lists';
   @import './styles/objects/small';
+  @import './styles/transitions/slide-right--slide-left';
 
 
   :root {

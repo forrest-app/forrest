@@ -40,11 +40,26 @@
 <script>
   import OpenProjectsButton from './ProjectListView/OpenProjectsButton';
   import KnownProjects from './ProjectListView/KnownProjects';
+  import { getRepos } from '../vuex/getters';
 
   export default {
     components : {
       OpenProjectsButton,
       KnownProjects
+    },
+
+    vuex : {
+      getters : {
+        repos : getRepos
+      }
+    },
+
+    watch : {
+      repos( val, oldVal ) {
+        if ( oldVal.length < val.length ) {
+          this.$router.go( { 'path' : `/projects/${ val.length - 1 }` } );
+        }
+      }
     }
   };
 </script>

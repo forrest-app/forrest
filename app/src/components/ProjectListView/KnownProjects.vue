@@ -104,7 +104,7 @@
       <div class="project--zeroText">repos so far</div>
     </div>
     <ul v-if="repos.length" class="o-list">
-      <li v-for="( index, repo ) in repos" track-by="$index" class="o-list--item">
+      <li v-for="( index, repo ) in repos" track-by="$index" class="o-list--item" transition="t-slideRight--slideLeft">
         <div class="project">
           <div class="project--name">
             <span>{{ repo.name }}</span>
