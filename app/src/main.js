@@ -8,9 +8,12 @@ import routes from './routes';
 Vue.use( Electron );
 Vue.use( Router );
 
+// TODO make this generic
 import OpenExternal from './Directives/OpenExternal';
-
 Vue.directive( 'openExternal', OpenExternal );
+
+import StayDown from './Directives/StayDown';
+Vue.directive( 'stayDown', StayDown );
 
 Vue.config.debug = true;
 

@@ -130,7 +130,7 @@
       </div>
     </div>
     <code>
-      <pre class="script--output--pre script--code">{{ output }}</pre>
+      <pre class="script--output--pre script--code" v-stay-down>{{ output }}</pre>
     </code>
   </div>
 </template>
