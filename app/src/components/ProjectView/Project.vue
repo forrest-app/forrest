@@ -1,6 +1,21 @@
 <style lang="scss" scoped>
 
   .project {
+    &--header {
+      position : relative;
+
+      padding : 0 2.5em;
+
+      border-bottom : 1px solid #ddd;
+
+      &--btn {
+        position : absolute;
+
+        right : .75em;
+        top   : .75em;
+      }
+    }
+
     &--headline {
       font-size : 1.125em;
 
@@ -13,7 +28,6 @@
 
       line-height : 2.5em;
 
-      border-bottom : 1px solid #ddd;
     }
 
     &--scriptsContainer {
@@ -125,7 +139,16 @@
 
 <template>
   <div class="u-fullHeight">
-    <h1 class="project--headline">{{ project.name }}</h1>
+    <div class="project--header">
+      <h1 class="project--headline">{{ project.name }}</h1>
+
+      <button type="button" class="o-iconBtn project--header--btn" @click="removeRepo" aria-label="Remove project from app">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      </button>
+    </div>
     <div class="project--scriptsContainer">
       <ul class="scrollContainer o-list">
         <li v-for="script in scripts" class="o-list--item">
@@ -211,6 +234,7 @@
 
 <script>
   import { getRepos, getAppSettings } from '../../vuex/getters';
+  import { removeRepo as removeRepoAction } from '../../vuex/actions';
   import displayNotification from 'display-notification';
 
   export default {
@@ -267,6 +291,10 @@
           } );
         }
       },
+      removeRepo() {
+        this.removeRepoAction( this.project );
+        this.$router.go( { name : 'project-list-page' } );
+      },
       runScript( script ) {
         this.output = '';
 
@@ -303,6 +331,9 @@
     },
     props : [ 'projectIndex' ],
     vuex  : {
+      actions : {
+        removeRepoAction : removeRepoAction
+      },
       getters : {
         repos    : getRepos,
         settings : getAppSettings

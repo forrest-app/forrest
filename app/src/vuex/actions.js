@@ -36,3 +36,7 @@ export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
 export const updateAppSetting = function( { dispatch }, name, setting ) {
   dispatch( 'UPDATE_APP_SETTING', name, setting );
 };
+
+export const removeRepo = function( { dispatch, state }, project ) {
+  dispatch( 'REMOVE_REPO', project );
+};
