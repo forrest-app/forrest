@@ -1,11 +1,15 @@
 export function getRepos( state ) {
-  return state.settings.repos;
+  return state.repos.items;
 }
 
 export function getAppSettings( state ) {
-  return state.settings.app;
+  return state.app;
 }
 
 export function getConfigSettings( state ) {
   return state.defaults.settings;
+}
+
+export function getDefaultCommands( state ) {
+  return state.defaults.commands;
 }

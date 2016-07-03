@@ -1,4 +1,4 @@
-import defaultSettings from '../../settings';
+import defaultSettings from '../../defaults';
 
 const state = defaultSettings;
 

@@ -149,36 +149,78 @@
         </svg>
       </button>
     </div>
-    <div class="project--scriptsContainer">
-      <ul class="scrollContainer o-list">
-        <li v-for="script in scripts" class="o-list--item">
-          <div class="script">
-            <div class="script--header">
-              <div class="script--info">
-                {{ script.name }}
-              </div>
-              <div class="script--actions">
-                <button type="button" class="o-iconBtn" @click="toggleVisibility( script )">
-                  <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
-                  </svg>
-                </button>
-                <button type="button" class="o-iconBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
-                  <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <div class="project--scriptsContainer scrollContainer">
+      <details @toggle="handleToggleSection( 'defaultCommands' )">
+        <summary>Default scripts</summary>
+        <ul class="o-list">
+          <li v-for="script in commands" class="o-list--item">
+            <div class="script">
+              <div class="script--header">
+                <div class="script--info">
+                  {{ script.name }}
+                </div>
+                <div class="script--actions">
+                  <button type="button" class="o-iconBtn">
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6l-4 4h3v6h2v-6h3l-4-4z"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="o-iconBtn" @click="toggleVisibility( script )">
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="o-iconBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 0h24v24H0z" fill="none"/>
                       <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                  </svg>
-                </button>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="script--details" v-if="script.detailsVisible">
+                <code>
+                  <pre class="script--code">$ {{ script.command }}</pre>
+                </code>
               </div>
             </div>
-            <div class="script--details" v-if="script.detailsVisible">
-              <code>
-                <pre class="script--code">$ {{ script.command }}</pre>
-              </code>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Custom scripts</summary>
+        <ul class="o-list">
+          <li v-for="script in scripts" class="o-list--item">
+            <div class="script">
+              <div class="script--header">
+                <div class="script--info">
+                  {{ script.name }}
+                </div>
+                <div class="script--actions">
+                  <button type="button" class="o-iconBtn" @click="toggleVisibility( script )">
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="o-iconBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="script--details" v-if="script.detailsVisible">
+                <code>
+                  <pre class="script--code">$ {{ script.command }}</pre>
+                </code>
+              </div>
             </div>
-          </div>
-      </ul>
+        </ul>
+      </details>
     </div>
 
     <div class="script--output" v-if="process" transition="codeblock">
@@ -233,7 +275,7 @@
 </template>
 
 <script>
-  import { getRepos, getAppSettings } from '../../vuex/getters';
+  import { getRepos, getAppSettings, getDefaultCommands } from '../../vuex/getters';
   import { removeRepo as removeRepoAction } from '../../vuex/actions';
   import displayNotification from 'display-notification';
 
@@ -291,6 +333,9 @@
           } );
         }
       },
+      handleToggleSection( sectionName ) {
+        sectionName;
+      },
       removeRepo() {
         this.removeRepoAction( this.project );
         this.$router.go( { name : 'project-list-page' } );
@@ -336,7 +381,8 @@
       },
       getters : {
         repos    : getRepos,
-        settings : getAppSettings
+        settings : getAppSettings,
+        commands : getDefaultCommands
       }
     }
   };

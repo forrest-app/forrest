@@ -4,6 +4,16 @@ export default {
       name    : 'install',
       command : 'npm install',
       flags   : [ '--save', '--save-dev' ]
+    },
+    {
+      name    : 'drop & install',
+      command : 'rm -rf ./node_modules && npm install',
+      flags   : []
+    },
+    {
+      name    : 'list',
+      command : 'npm ls',
+      flags   : []
     }
   ],
 

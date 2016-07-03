@@ -3,7 +3,7 @@ import { remote } from 'electron';
 const fs = remote.require( 'fs' );
 
 export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
-  let repos = state.settings.repos;
+  let repos = state.repos.items;
 
   fs.readFile( `${ repoPath }/package.json`, ( error, data ) => {
     // TODO put error handling here
