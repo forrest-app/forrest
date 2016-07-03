@@ -21,7 +21,7 @@ module.exports = {
       2,
       {
         'singleLine' : {
-            'beforeColon' : false,
+            'beforeColon' : true,
             'afterColon'  : true
         },
         'multiLine': {
