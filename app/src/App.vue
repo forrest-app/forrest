@@ -1,6 +1,7 @@
 <style lang="scss">
   @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic);
   @import './styles/utils';
+  @import './styles/objects/btn';
   @import './styles/objects/checkbox';
   @import './styles/objects/lists';
   @import './styles/objects/small';

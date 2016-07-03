@@ -105,33 +105,6 @@
         border-radius : 0;
       }
     }
-
-    &--runBtn, &--infoBtn, &--outputCloseBtn {
-      width : 2.5em;
-      height : 2.5em;
-
-      border     : none;
-      background : none;
-
-      padding : .25em;
-
-      svg {
-        width : 100%;
-        height : 100%;
-      }
-
-      &:hover {
-        svg {
-          fill : var(--npm-red);
-        }
-      }
-
-      &:active {
-        svg {
-          fill : var(--npm-red-dark);
-        }
-      }
-    }
   }
 
   .codeblock-transition {
@@ -162,13 +135,13 @@
                 {{ script.name }}
               </div>
               <div class="script--actions">
-                <button type="button" class="script--infoBtn" @click="toggleVisibility( script )">
+                <button type="button" class="o-iconBtn" @click="toggleVisibility( script )">
                   <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 0h24v24H0z" fill="none"/>
                     <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
                   </svg>
                 </button>
-                <button type="button" class="script--runBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
+                <button type="button" class="o-iconBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
                   <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 0h24v24H0z" fill="none"/>
                       <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
@@ -221,7 +194,7 @@
 
         </div>
         <div class="u-marginLeftAuto">
-          <button type="button" class="script--outputCloseBtn" @click="closeScript">
+          <button type="button" class="o-iconBtn" @click="closeScript">
             <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                 <path d="M0 0h24v24H0z" fill="none"/>
