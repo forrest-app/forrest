@@ -1,10 +1,10 @@
 export default {
   '/' : {
-    component : require( './components/ProjectListView' ),
-    name      : 'project-list-page'
+    component : require( './components/RepoListView' ),
+    name      : 'repo-list-page'
   },
-  '/projects/:projectIndex' : {
-    component : require( './components/ProjectView' ),
-    name      : 'project-page'
+  '/repos/:repoName' : {
+    component : require( './components/RepoView' ),
+    name      : 'repo-page'
   }
 };

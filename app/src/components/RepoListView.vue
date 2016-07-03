@@ -32,20 +32,20 @@
 
 <template>
   <div class="projectList scrollContainer" transition="projectList">
-    <known-projects class="projectList--container"></known-projects>
-    <open-projects-button></open-projects-button>
+    <known-repos class="projectList--container"></known-repos>
+    <open-repo-button></open-repo-button>
   </div>
 </template>
 
 <script>
-  import OpenProjectsButton from './ProjectListView/OpenProjectsButton';
-  import KnownProjects from './ProjectListView/KnownProjects';
+  import OpenRepoButton from './RepoListView/OpenRepoButton';
+  import KnownRepos from './RepoListView/KnownRepos';
   import { getRepos } from '../vuex/getters';
 
   export default {
     components : {
-      OpenProjectsButton,
-      KnownProjects
+      OpenRepoButton,
+      KnownRepos
     },
 
     vuex : {

@@ -3,8 +3,6 @@ import { remote } from 'electron';
 const fs = remote.require( 'fs' );
 
 export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
-  let repos = state.repos.items;
-
   fs.readFile( `${ repoPath }/package.json`, ( error, data ) => {
     // TODO put error handling here
 
@@ -14,7 +12,7 @@ export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
       // TODO error handling
     }
 
-    if ( ! repos.some( repo => repo.path === repoPath ) ) {
+    if ( ! state.repos.some( repo => repo.path === repoPath ) ) {
       let url = packageJSON.repository &&
       packageJSON.repository.url &&
       packageJSON.repository.url.replace( /(git:\/\/|\.git)/g, '' );
@@ -33,10 +31,18 @@ export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
   } );
 };
 
-export const updateAppSetting = function( { dispatch }, name, setting ) {
-  dispatch( 'UPDATE_APP_SETTING', name, setting );
+export const removeRepo = function( { dispatch, state }, repo ) {
+  let repoIndex = state.repos.findIndex( savedRepo => savedRepo.name === repo.name );
+
+  if ( repoIndex !== -1 ) {
+    dispatch( 'REMOVE_REPO_WITH_INDEX', repoIndex );
+  }
 };
 
-export const removeRepo = function( { dispatch, state }, project ) {
-  dispatch( 'REMOVE_REPO', project );
+export const toggleVisibleRepoArea = function( { dispatch, state }, repo, area ) {
+  dispatch( 'TOGGLE_VISIBLE_REPO_AREA', repo, area );
+};
+
+export const updateAppSetting = function( { dispatch }, name, setting ) {
+  dispatch( 'UPDATE_APP_SETTING', name, setting );
 };

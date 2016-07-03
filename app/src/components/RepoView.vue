@@ -21,16 +21,16 @@
 
 <template>
   <div class="project" transition="project">
-    <project :project-index="$route.params.projectIndex"></project>
+    <repo :repo-name="$route.params.repoName"></repo>
   </div>
 </template>
 
 <script>
-  import Project from './ProjectView/Project';
+  import Repo from './RepoView/Repo';
 
   export default {
     components : {
-      Project
+      Repo
     }
   };
 </script>

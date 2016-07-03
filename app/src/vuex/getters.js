@@ -1,5 +1,5 @@
 export function getRepos( state ) {
-  return state.repos.items;
+  return state.repos;
 }
 
 export function getAppSettings( state ) {

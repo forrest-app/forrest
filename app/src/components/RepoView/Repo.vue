@@ -6,8 +6,6 @@
 
       padding : 0 2.5em;
 
-      border-bottom : 1px solid #ddd;
-
       &--btn {
         position : absolute;
 
@@ -33,6 +31,36 @@
     &--scriptsContainer {
       position : relative;
       height : calc( 100% - 2.8125em );
+    }
+
+    &--toggleBtn {
+      display : flex;
+
+      justify-content : space-between;
+      align-items     : center;
+      width : 100%;
+
+      padding : .5em;
+
+      background : #fff;
+      border     : none;
+      border-top    : 1px solid var(--dark-bg-color);
+      border-bottom : 1px solid var(--dark-bg-color);
+
+      font-size : inherit;
+      font-weight : normal;
+      font-family : inherit;
+
+
+      > svg {
+        transform : rotate( 270deg );
+      }
+
+      &.is-open {
+        > svg {
+          transform : rotate( 90deg );
+        }
+      }
     }
   }
 
@@ -140,7 +168,7 @@
 <template>
   <div class="u-fullHeight">
     <div class="project--header">
-      <h1 class="project--headline">{{ project.name }}</h1>
+      <h1 class="project--headline">{{ repo.name }}</h1>
 
       <button type="button" class="o-iconBtn project--header--btn" @click="removeRepo" aria-label="Remove project from app">
         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -150,9 +178,17 @@
       </button>
     </div>
     <div class="project--scriptsContainer scrollContainer">
-      <details @toggle="handleToggleSection( 'defaultCommands' )">
-        <summary>Default scripts</summary>
-        <ul class="o-list">
+      <div class="u-marginBottom">
+        <button type="button" @click="toggleSection( 'defaultCommands' )" class="project--toggleBtn" v-bind:class="{ 'is-open' : repo.openAreas.defaultCommands }">
+          Default commands
+
+          <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+              <path d="M0-.25h24v24H0z" fill="none"/>
+          </svg>
+        </button>
+
+        <ul v-if="repo.openAreas.defaultCommands" class="o-list">
           <li v-for="script in commands" class="o-list--item">
             <div class="script">
               <div class="script--header">
@@ -162,8 +198,8 @@
                 <div class="script--actions">
                   <button type="button" class="o-iconBtn">
                     <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6l-4 4h3v6h2v-6h3l-4-4z"/>
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6l-4 4h3v6h2v-6h3l-4-4z"/>
                     </svg>
                   </button>
                   <button type="button" class="o-iconBtn" @click="toggleVisibility( script )">
@@ -187,40 +223,46 @@
               </div>
             </div>
         </ul>
-      </details>
+      </div>
 
-      <details>
-        <summary>Custom scripts</summary>
-        <ul class="o-list">
-          <li v-for="script in scripts" class="o-list--item">
-            <div class="script">
-              <div class="script--header">
-                <div class="script--info">
-                  {{ script.name }}
-                </div>
-                <div class="script--actions">
-                  <button type="button" class="o-iconBtn" @click="toggleVisibility( script )">
-                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 0h24v24H0z" fill="none"/>
-                      <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
-                    </svg>
-                  </button>
-                  <button type="button" class="o-iconBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
-                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 0h24v24H0z" fill="none"/>
-                      <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                    </svg>
-                  </button>
-                </div>
+      <button type="button" @click="toggleSection( 'customCommands' )" class="project--toggleBtn" v-bind:class="{ 'is-open' : repo.openAreas.customCommands }">
+        Custom scripts
+
+        <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+            <path d="M0-.25h24v24H0z" fill="none"/>
+        </svg>
+      </button>
+
+      <ul v-if="repo.openAreas.customCommands" class="o-list">
+        <li v-for="script in scripts" class="o-list--item">
+          <div class="script">
+            <div class="script--header">
+              <div class="script--info">
+                {{ script.name }}
               </div>
-              <div class="script--details" v-if="script.detailsVisible">
-                <code>
-                  <pre class="script--code">$ {{ script.command }}</pre>
-                </code>
+              <div class="script--actions">
+                <button type="button" class="o-iconBtn" @click="toggleVisibility( script )">
+                  <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+                  </svg>
+                </button>
+                <button type="button" class="o-iconBtn" @click="runScript( script )" :disabled="process" aria-label="Run script">
+                  <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                  </svg>
+                </button>
               </div>
             </div>
-        </ul>
-      </details>
+            <div class="script--details" v-if="script.detailsVisible">
+              <code>
+                <pre class="script--code">$ {{ script.command }}</pre>
+              </code>
+            </div>
+          </div>
+      </ul>
     </div>
 
     <div class="script--output" v-if="process" transition="codeblock">
@@ -276,7 +318,7 @@
 
 <script>
   import { getRepos, getAppSettings, getDefaultCommands } from '../../vuex/getters';
-  import { removeRepo as removeRepoAction } from '../../vuex/actions';
+  import { removeRepo as removeRepoAction, toggleVisibleRepoArea } from '../../vuex/actions';
   import displayNotification from 'display-notification';
 
   export default {
@@ -284,7 +326,7 @@
       this.spawn = this.$electron.remote.require( 'child_process' ).spawn;
 
       this.$electron.remote.require( 'fs' ).readFile(
-        `${ this.project.path }/package.json`,
+        `${ this.repo.path }/package.json`,
         ( error, data ) => {
           try {
             let packageJSON = JSON.parse( data );
@@ -296,7 +338,7 @@
                 detailsVisible : false
               };
             } );
-            this.project.name = packageJSON.name;
+            this.repo.name = packageJSON.name;
           } catch( error ) {
             this.error = error;
           }
@@ -311,11 +353,8 @@
         spawn         : null,
         process       : null,
         processStatus : null,
-        project       : {
-          path : this.repos[ this.projectIndex ].path,
-          name : null
-        },
-        output : ''
+        repo          : this.repos.find( repo => repo.name === this.repoName ),
+        output        : ''
       };
     },
     methods : {
@@ -333,12 +372,12 @@
           } );
         }
       },
-      handleToggleSection( sectionName ) {
-        sectionName;
+      toggleSection( sectionName ) {
+        this.toggleVisibleRepoArea( this.repo, sectionName );
       },
       removeRepo() {
-        this.removeRepoAction( this.project );
-        this.$router.go( { name : 'project-list-page' } );
+        this.$router.go( { name : 'repo-list-page' } );
+        this.removeRepoAction( this.repo );
       },
       runScript( script ) {
         this.output = '';
@@ -349,7 +388,7 @@
           'npm',
           [ 'run', script.name ],
           {
-            cwd : this.project.path
+            cwd : this.repo.path
           }
         );
 
@@ -374,10 +413,11 @@
         script.detailsVisible = ! script.detailsVisible;
       }
     },
-    props : [ 'projectIndex' ],
+    props : [ 'repoName' ],
     vuex  : {
       actions : {
-        removeRepoAction : removeRepoAction
+        removeRepoAction      : removeRepoAction,
+        toggleVisibleRepoArea : toggleVisibleRepoArea
       },
       getters : {
         repos    : getRepos,
