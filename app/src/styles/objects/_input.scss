@@ -1,0 +1,12 @@
+.o-input {
+  display     : block;
+  width       : 100%;
+  padding     : .5em;
+  border      : 1px solid var(--npm-red-dark);
+  font-size   : 1em;
+  font-family : monospace;
+
+  &:focus {
+    outline : .1875em solid var(--npm-red-dark);
+  }
+}
