@@ -1,12 +1,11 @@
 'use strict'
 
-const path = require('path')
-const pkg = require('./app/package.json')
-const settings = require('./config.js')
-const webpack = require('webpack')
+const path     = require( 'path' );
+const settings = require( './config.js' );
+const webpack  = require( 'webpack' );
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
+const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
 let config = {
   devtool: '#eval-source-map',
@@ -14,7 +13,7 @@ let config = {
     formatter: require('eslint-friendly-formatter')
   },
   entry: {
-    build: [ path.join(__dirname, 'app/src/main.js') ]
+    build: [ path.join( __dirname, 'app/src/main.js' ) ]
   },
   module: {
     preLoaders: [],
@@ -28,9 +27,10 @@ let config = {
         loader: 'vue-html-loader'
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        test    : /\.js$/,
+        loader  : 'babel',
+        include : [ path.join( __dirname, 'app' ), /electron-settings/ ]
+        // exclude : /node_modules/
       },
       {
         test: /\.json$/,
@@ -92,7 +92,9 @@ let config = {
       sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
       scss: 'vue-style-loader!css-loader!sass-loader'
     }
-  }
+  },
+  // TODO check this
+  externals: [ 'app' ]
 }
 
 if (process.env.NODE_ENV !== 'production') {
@@ -148,11 +150,11 @@ if (process.env.NODE_ENV === 'production') {
       'process.env.NODE_ENV': '"production"'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
+    new webpack.optimize.UglifyJsPlugin( {
+      compress : {
+        warnings : false
       }
-    })
+    } )
   )
 }
 

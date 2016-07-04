@@ -5,7 +5,7 @@ const pkg = require('./app/package.json')
 const platform = process.env.PLATFORM_TARGET || 'all'
 
 let config = {
-  name        : 'npm app',
+  name        : pkg.name,
   devtron     : true,
   eslint      : true,
   port        : 9080,
