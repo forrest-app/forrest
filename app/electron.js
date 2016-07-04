@@ -16,6 +16,18 @@ if ( process.env.NODE_ENV === 'development' ) {
   config.url     = `file://${__dirname}/dist/index.html`;
 }
 
+ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
+  if ( key === 'path' ) {
+    process.env.PATH = value;
+  }
+
+  if ( key === 'alwaysOnTop' ) {
+    mainWindow.setAlwaysOnTop( value );
+  }
+} );
+
+
+
 function createWindow () {
   /**
    * Initial window options
