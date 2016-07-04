@@ -22,8 +22,8 @@ export default {
 
   settings : [
     {
-      label : 'Path to node',
-      desc  : 'In case you use something like NVM please define where your node version is located',
+      label : 'System path',
+      desc  : 'Please set your system path.',
       name  : 'path',
       type  : 'text'
     },
