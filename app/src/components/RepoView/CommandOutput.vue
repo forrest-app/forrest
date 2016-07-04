@@ -137,7 +137,6 @@
 </template>
 
 <script>
-  import displayNotification from 'display-notification';
   import { getAppSettings } from '../../vuex/getters';
 
   export default {
@@ -168,10 +167,12 @@
         this.$set( 'processStatus', code );
 
         if ( this.settings.displayNotifications ) {
-          displayNotification( {
-            title : `'${ this.currentCommand.script.name }' finished`,
-            text  : this.processStatus > 0 ? 'It failed.' : 'It succeeded'
-          } );
+          new Notification(
+            `'${ this.currentCommand.script.name }' finished`,
+            {
+              body : 'Lorem Ipsum Dolor Sit Amet'
+            }
+          );
         }
       },
       killScript() {
