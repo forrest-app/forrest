@@ -1,3 +1,4 @@
+
 <style lang="scss" scoped>
   .script {
     &--actions {

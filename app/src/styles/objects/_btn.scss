@@ -23,4 +23,10 @@
       fill : var(--npm-red-dark);
     }
   }
+
+  &:disabled {
+    svg {
+      fill : #ccc;
+    }
+  }
 }
