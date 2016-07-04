@@ -161,6 +161,9 @@
 
         this.$dispatch( 'close-script' );
       },
+      handleData( data ) {
+        this.$set( 'output', this.output + data );
+      },
       handleScriptExit( code ) {
         this.$set( 'processStatus', code );
 
@@ -184,22 +187,17 @@
            `npm run ${ this.currentCommand.script.name }` :
            this.currentCommand.script.command;
 
-        this.process = this.exec(
+        this.$set( 'process', this.exec(
           this.processCmd,
           {
             cwd : this.currentCommand.options.cwd
           }
-        );
+        ) );
 
-        this.process.stdout.on( 'data', ( data ) => {
-          this.$set( 'output', this.output + data );
-        } );
+        this.process.stdout.on( 'data', this.handleData );
+        this.process.stderr.on( 'data', this.handleData );
 
-        this.process.stderr.on( 'data', ( data ) => {
-          this.$set( 'output', this.output + data );
-        } );
-
-        // TODO clean this up.
+        this.process.on( 'error', this.handleScriptExit );
         this.process.on( 'close', this.handleScriptExit );
         this.process.on( 'exit', this.handleScriptExit );
       }
