@@ -64,7 +64,16 @@
   import { getAppSettings, getConfigSettings } from '../../vuex/getters';
 
   export default {
+    created() {
+      window.addEventListener( 'keyup', this.handleKeyStrokes );
+    },
+
     methods : {
+      handleKeyStrokes( event ) {
+        if ( event.keyCode === 27 ) {
+          this.$dispatch( 'toggle-settings', false );
+        }
+      },
       updateValue( event ) {
         let value = event.target.value;
 
@@ -74,6 +83,10 @@
 
         this.updateAppSetting( event.target.name, value );
       }
+    },
+
+    beforeDestroy() {
+      window.removeEventListener( 'keyup', this.handleKeyStrokes );
     },
     vuex : {
       actions : {
