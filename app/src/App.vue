@@ -1,6 +1,5 @@
 <style lang="scss">
   @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic);
-  @import './styles/utils';
   @import './styles/objects/btn';
   @import './styles/objects/checkbox';
   @import './styles/objects/input';
@@ -9,6 +8,7 @@
   @import './styles/transitions/slide-right--slide-left';
   @import './styles/transitions/slide-up--slide-down';
   @import './styles/transitions/slide-down--slide-up';
+  @import './styles/utils';
 
 
   :root {
