@@ -3,10 +3,17 @@
     position : relative;
     display  :block;
 
-    padding : .5em 2em .5em .75em;
+    padding : .5em 2em .5em .5em;
+
+    border-left : .25em solid transparent;
 
     color : inherit;
     text-decoration : none;
+
+    &:focus {
+      border-left-color : var(--npm-red);
+      outline : none;
+    }
 
     &--link {
       position : absolute;
@@ -108,6 +115,48 @@
   import { getRepos } from '../../vuex/getters';
 
   export default {
+    created() {
+      window.addEventListener( 'keyup', this.handleKeyStrokes );
+    },
+    methods : {
+      handleKeyStrokes( event ) {
+        if ( event.target.classList.contains( 'project' ) ) {
+          if ( event.keyCode === 39 ) {
+            event.target.click();
+          }
+
+          if (
+            event.keyCode === 40 &&
+            event.target.parentNode.nextSibling.tagName === 'LI'
+          ) {
+            event.target.parentNode.nextSibling.querySelector( 'a' ).focus();
+          }
+
+          if (
+            event.keyCode === 38 &&
+            event.target.parentNode.previousSibling.tagName === 'LI'
+          ) {
+            event.target.parentNode.previousSibling.querySelector( 'a' ).focus();
+          }
+        } else {
+          if ( document.activeElement.tagName === 'BODY' ) {
+            if ( event.keyCode === 40 ) {
+              this.$el.querySelector( '.project' ).focus();
+            }
+
+            if ( event.keyCode === 38 ) {
+              let projects = this.$el.querySelectorAll( '.project' );
+
+              projects[ projects.length - 1 ].focus();
+            }
+          }
+        }
+      }
+    },
+    beforeDestroy() {
+      window.removeEventListener( 'keyup', this.handleKeyStrokes );
+    },
+
     vuex : {
       getters : {
         repos : getRepos

@@ -49,7 +49,7 @@
 
 <template>
   <header class="u-paddingDefault">
-    <a v-link="{ name : 'repo-list-page' }" aria-label="Go home">
+    <a v-link="{ name : 'repo-list-page' }" aria-label="Go home" @click="toggleSettings( false )">
       <svg class="homeIcon" height="24" viewBox="0 0 24 24" width="24">
         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
@@ -70,8 +70,8 @@
 <script>
   export default {
     methods : {
-      toggleSettings() {
-        this.$dispatch( 'toggle-settings' );
+      toggleSettings( showSettings ) {
+        this.$dispatch( 'toggle-settings', showSettings );
       }
     }
   };

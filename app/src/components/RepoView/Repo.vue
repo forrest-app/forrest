@@ -150,6 +150,9 @@
         }
       );
     },
+    created() {
+      window.addEventListener( 'keyup', this.handleKeyStrokes );
+    },
     components : {
       Command,
       CommandOutput
@@ -167,6 +170,11 @@
       }
     },
     methods : {
+      handleKeyStrokes( event ) {
+        if ( event.keyCode === 37 ) {
+          this.$router.go( { name : 'repo-list-page' } );
+        }
+      },
       toggleSection( sectionName ) {
         this.toggleVisibleRepoArea( this.repo, sectionName );
       },
@@ -186,6 +194,9 @@
           }
         );
       }
+    },
+    beforeDestroy() {
+      window.removeEventListener( 'keyup', this.handleKeyStrokes );
     },
     props : [ 'repoName' ],
     vuex  : {
