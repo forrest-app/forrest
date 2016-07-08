@@ -153,7 +153,7 @@
       };
     },
     events : {
-      'toggle-settings' : function( event, toggleSettings ) {
+      'toggle-settings' : function( toggleSettings ) {
         this.toggleSettings( toggleSettings );
       }
     },
@@ -167,6 +167,7 @@
       }
     },
     ready() {
+      // do we still need this?
       this.$router.beforeEach( () => {
         this.toggleSettings( false );
       } );
