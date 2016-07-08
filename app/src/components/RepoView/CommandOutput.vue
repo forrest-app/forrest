@@ -167,9 +167,9 @@
 
         if ( this.settings.displayNotifications ) {
           new Notification(
-            `'${ this.currentCommand.script.name }' finished`,
+            `'${ this.currentCommand.script.name }' ${ code === 0 ? 'succeeded' : 'failed' }`,
             {
-              body : 'Lorem Ipsum Dolor Sit Amet'
+              body : `${ code === 0 ? '(•◡•)/' : `◔̯◔ Failure with code ${ code }` }`
             }
           );
         }
