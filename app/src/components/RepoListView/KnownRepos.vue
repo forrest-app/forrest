@@ -69,7 +69,7 @@
     </div>
     <ul v-if="repos && repos.length" class="o-list">
       <li v-for="repo in repos" track-by="path" class="o-list--item u-noPadding" transition="t-slideRight--slideLeft">
-        <a class="project" v-link="{ path : `/repos/${ repo.name }` }">
+        <a id="{{ repo.name }}" class="project" v-link="{ path : `/repos/${ repo.name }` }">
           <div class="project--name">
             <span>{{ repo.name }}</span>
             <button type="button" v-if="repo.url" v-open-external :url="repo.url" class="o-iconBtn" aria-label="Open project on GitHub" title="Open project on GitHub">
@@ -118,6 +118,12 @@
     created() {
       window.addEventListener( 'keyup', this.handleKeyStrokes );
     },
+
+    ready() {
+      if ( this.selected ) {
+        this.$el.querySelector( '#' + this.selected ).focus();
+      }
+    },
     methods : {
       handleKeyStrokes( event ) {
         if ( event.target.classList.contains( 'project' ) ) {
@@ -156,6 +162,8 @@
     beforeDestroy() {
       window.removeEventListener( 'keyup', this.handleKeyStrokes );
     },
+
+    props : [ 'selected' ],
 
     vuex : {
       getters : {

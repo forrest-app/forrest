@@ -172,7 +172,7 @@
     methods : {
       handleKeyStrokes( event ) {
         if ( event.keyCode === 37 ) {
-          this.$router.go( { name : 'repo-list-page' } );
+          this.$router.go( { name : 'repo-list-page', query : { selected : this.repo.name } } );
         }
       },
       toggleSection( sectionName ) {

@@ -32,7 +32,7 @@
 
 <template>
   <div class="projectList scrollContainer" transition="projectList">
-    <known-repos class="projectList--container"></known-repos>
+    <known-repos class="projectList--container" :selected="$route.query.selected"></known-repos>
     <open-repo-button></open-repo-button>
   </div>
 </template>
