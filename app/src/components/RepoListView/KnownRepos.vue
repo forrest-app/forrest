@@ -68,7 +68,7 @@
       <div class="project--zeroText">repos so far</div>
     </div>
     <ul v-if="repos && repos.length" class="o-list">
-      <li v-for="repo in repos" track-by="path" class="o-list--item u-noPadding" transition="t-slideRight--slideLeft">
+      <li v-for="repo in repos" track-by="path" class="o-list--item u-noPadding u-positionRelative" transition="t-slideRight--slideLeft">
         <a id="{{ repo.name }}" class="project" v-link="{ path : `/repos/${ repo.name }` }">
           <div class="project--name">
             <span>{{ repo.name }}</span>
