@@ -27,6 +27,8 @@
     --svg-fill       : #2a333c;
     --svg-fill-red   : var(--npm-red);
     --svg-fill-green : #399039;
+
+    --border-color : #ddd;
   }
 
   * {

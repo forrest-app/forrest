@@ -145,16 +145,14 @@
             event.target.parentNode.previousSibling.querySelector( 'a' ).focus();
           }
         } else {
-          if ( document.activeElement.tagName === 'BODY' ) {
-            if ( event.keyCode === 40 ) {
-              this.$el.querySelector( '.project' ).focus();
-            }
+          if ( event.keyCode === 40 ) {
+            this.$el.querySelector( '.project' ).focus();
+          }
 
-            if ( event.keyCode === 38 ) {
-              let projects = this.$el.querySelectorAll( '.project' );
+          if ( event.keyCode === 38 ) {
+            let projects = this.$el.querySelectorAll( '.project' );
 
-              projects[ projects.length - 1 ].focus();
-            }
+            projects[ projects.length - 1 ].focus();
           }
         }
       }

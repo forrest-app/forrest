@@ -1,12 +1,11 @@
-'use strict'
+'use strict';
 
 const { app, ipcMain, BrowserWindow } = require( 'electron' );
-const { spawn }                       = require( 'child_process' );
 const path                            = require( 'path' );
-const fs                              = require( 'fs' )
+const menu                            = require( './menu' );
 
-let mainWindow
-let config = {}
+let mainWindows = [];
+let config = {};
 
 if ( process.env.NODE_ENV === 'development' ) {
   config     = require( '../config' );
@@ -22,34 +21,56 @@ ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
   }
 
   if ( key === 'alwaysOnTop' ) {
-    mainWindow.setAlwaysOnTop( value );
+    mainWindows.forEach( window => {
+      window.setAlwaysOnTop( value );
+    } );
   }
 } );
 
+ipcMain.on( 'openNewWindow', () => {
+  createWindow();
+} );
 
 
-function createWindow () {
+function createWindow() {
   /**
    * Initial window options
    */
-  mainWindow = new BrowserWindow( {
+  let newWindow = new BrowserWindow( {
     height : 500,
     width  : 300
   } );
 
-  mainWindow.loadURL( config.url )
+  newWindow.loadURL( config.url );
+
   if ( process.env.NODE_ENV === 'development' ) {
-    mainWindow.webContents.openDevTools( { mode : 'undocked' } );
+    newWindow.webContents.openDevTools( { mode : 'undocked' } );
   }
 
-  mainWindow.on( 'closed', () => {
-    mainWindow = null;
+  newWindow.on( 'closed', () => {
+    mainWindows = mainWindows.reduce( ( windows, window ) => {
+      if ( window !== newWindow ) {
+        windows.push( window );
+      }
+
+      return windows;
+    }, [] );
+
+    console.log( mainWindows.length );
   } );
 
   if ( config.devtron ) {
     BrowserWindow.addDevToolsExtension( path.join( __dirname, '../node_modules/devtron') )
   } else {
     BrowserWindow.removeDevToolsExtension( 'devtron' );
+  }
+
+  mainWindows.push( newWindow );
+
+  if ( mainWindows.length === 1 ) {
+    menu.init( {
+      createWindow
+    } );
   }
 
   console.log( 'mainWindow opened' );
@@ -61,10 +82,10 @@ app.on( 'window-all-closed', () => {
   if ( process.platform !== 'darwin' ) {
     app.quit();
   }
-} )
+} );
 
 app.on( 'activate', () => {
-  if ( mainWindow === null ) {
+  if ( ! mainWindows.length ) {
     createWindow();
   }
-} )
+} );
