@@ -1,7 +1,7 @@
 {
-  "name": "forrest",
-  "version": "0.1.0",
-  "description": "An Electron & Vue.js quick starter",
+  "name": "Forrest",
+  "version": "1.0.0",
+  "description": "The npm script desktop client",
   "scripts": {
     "build": "node tasks/release.js",
     "build:clean": "del builds/* !.gitkeep",
@@ -16,7 +16,11 @@
     "vue:route": "node tasks/vue/route.js",
     "vuex:module": "node tasks/vuex/module.js"
   },
-  "author": "Greg Holguin <simulatedgreg@gmail.com>",
+  "author": "Stefan Judis <stefanjudis@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefanjudis/forrest.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.8.0",
