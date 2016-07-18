@@ -1,4 +1,4 @@
-.o-iconBtn {
+.o-icon {
   width      : 2.5em;
   height     : 2.5em;
   border     : none;
@@ -27,6 +27,20 @@
   &:disabled {
     svg {
       fill : #ccc;
+    }
+  }
+
+  & .o-pathNoFill {
+    fill : none;
+  }
+
+  &.o-icon__npm {
+    width : 4em;
+  }
+
+  &.o-icon__fillBright {
+    svg {
+      fill : var(--svg-fill-bright);
     }
   }
 }

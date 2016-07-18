@@ -1,6 +1,6 @@
 <style lang="scss">
   @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic);
-  @import './styles/objects/btn';
+  @import './styles/objects/icon';
   @import './styles/objects/checkbox';
   @import './styles/objects/input';
   @import './styles/objects/lists';
@@ -27,6 +27,8 @@
     --svg-fill       : #2a333c;
     --svg-fill-red   : var(--npm-red);
     --svg-fill-green : #399039;
+
+    --svg-fill-bright : var(--main-bg-color);
 
     --border-color : #ddd;
   }

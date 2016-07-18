@@ -72,7 +72,7 @@
         <a id="{{ repo.name }}" class="project" v-link="{ path : `/repos/${ repo.name }` }">
           <div class="project--name">
             <span>{{ repo.name }}</span>
-            <button type="button" v-if="repo.url" v-open-external :url="repo.url" class="o-iconBtn" aria-label="Open project on GitHub" title="Open project on GitHub">
+            <button type="button" v-if="repo.url" v-open-external :url="repo.url" class="o-icon" aria-label="Open project on GitHub" title="Open project on GitHub">
               <svg x="0px" y="0px" width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549">
                 <g>
                 	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
