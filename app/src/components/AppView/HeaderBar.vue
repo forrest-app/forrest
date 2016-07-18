@@ -12,11 +12,8 @@
   .logo {
     display : block;
     margin : 0 auto;
-    padding : .25em .5em;
 
     color : var(--main-bg-color);
-
-    border : 1px solid var(--main-bg-color);
 
     line-height    : 1;
     letter-spacing : 1px;
@@ -56,7 +53,12 @@
       </svg>
     </a>
     <div class="logo">
-      Forrest
+      <svg width="34" height="29" viewBox="0 0 34 29" xmlns="http://www.w3.org/2000/svg">
+        <title>Forrest logo</title>
+        <g fill="none" fill-rule="evenodd">
+          <path d="M8 7l7 14.545H1L8 7zM5.9 21.545h4.2V23H5.9v-1.455zM23.9 21.545h4.2V23h-4.2v-1.455zM26 7l7 14.545H19L26 7z" stroke="#F1F1F1"/><path d="M21 26h7L17 2 6 26h7v2.08h8V26z" stroke="#2A333C" fill="#CD3632"/>
+        </g>
+      </svg>
     </div>
     <button class="settingsBtn" aria-label="Go to settings" @click="toggleSettings()">
       <svg class="settingsIcon" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
