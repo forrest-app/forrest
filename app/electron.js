@@ -55,12 +55,10 @@ function createWindow() {
 
       return windows;
     }, [] );
-
-    console.log( mainWindows.length );
   } );
 
   if ( config.devtron ) {
-    BrowserWindow.addDevToolsExtension( path.join( __dirname, '../node_modules/devtron') )
+    BrowserWindow.addDevToolsExtension( path.join( __dirname, '../node_modules/devtron' ) );
   } else {
     BrowserWindow.removeDevToolsExtension( 'devtron' );
   }
@@ -73,7 +71,8 @@ function createWindow() {
     } );
   }
 
-  console.log( 'mainWindow opened' );
+  /* eslint-disable no-console */
+  console.log( 'window opened' );
 }
 
 app.on( 'ready', createWindow );
