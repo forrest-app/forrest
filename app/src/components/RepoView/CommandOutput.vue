@@ -142,6 +142,7 @@
     created() {
       this.runScript();
     },
+
     data() {
       return {
         exec          : this.$electron.remote.require( 'child_process' ).exec,
@@ -152,16 +153,20 @@
         output        : ''
       };
     },
-    props   : [ 'currentCommand' ],
+
+    props : [ 'currentCommand' ],
+
     methods : {
       close() {
         this.killScript();
 
         this.$dispatch( 'close-script' );
       },
+
       handleData( data ) {
         this.$set( 'output', this.output + data );
       },
+
       handleScriptExit( code ) {
         this.$set( 'processStatus', code );
 
@@ -174,16 +179,18 @@
           );
         }
       },
+
       killScript() {
         if ( this.process ) {
           this.process.kill( 'SIGTERM' );
         }
       },
+
       runScript() {
         this.$set( 'output', '' );
         this.$set( 'processStatus', null );
 
-        this.processCmd    = this.currentCommand.options.isCustom ?
+        this.processCmd = this.currentCommand.options.isCustom ?
            `npm run ${ this.currentCommand.script.name }` :
            this.currentCommand.script.command;
 
@@ -202,6 +209,7 @@
         this.process.on( 'exit', this.handleScriptExit );
       }
     },
+
     vuex : {
       getters : {
         settings : getAppSettings
