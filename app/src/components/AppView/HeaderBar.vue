@@ -6,7 +6,10 @@
     background-color : var(--header-background);
 
     margin : 0;
-    padding : .5em .5em;
+    padding : 1.5em .5em .5em;
+
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
   }
 
   .logo {

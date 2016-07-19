@@ -89,11 +89,13 @@
         detailsAreVisible : false
       };
     },
+
     methods : {
       toggleVisibility() {
         this.$set( 'detailsAreVisible', ! this.detailsAreVisible );
       }
     },
-    props : [ 'script', 'runScript', 'isCustom' ],
+
+    props : [ 'script', 'runScript', 'isCustom' ]
   };
 </script>

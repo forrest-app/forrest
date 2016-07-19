@@ -73,17 +73,24 @@ module.exports = {
         submenu : [
           {
             label : 'Learn More',
-            click() { require( 'electron' ).shell.openExternal( 'http://electron.atom.io' ); }
+            click() { electron.shell.openExternal( 'http://electron.atom.io' ); }
           }
         ]
       }
     ];
 
     if ( process.platform === 'darwin' ) {
-      const name = require( 'electron' ).app.getName();
+      const name = electron.app.getName();
       template.unshift( {
         label   : name,
         submenu : [
+          {
+            label : 'About Forrest',
+            click() { options.openAboutWindow(); }
+          },
+          {
+            type : 'separator'
+          },
           {
             label       : 'Open new window',
             accelerator : 'CmdOrCtrl+N',
@@ -92,7 +99,7 @@ module.exports = {
           {
             label       : 'Open settings',
             accelerator : 'CmdOrCtrl+,',
-            click() { require( 'electron' ).shell.openExternal( 'http://electron.atom.io' ); }
+            click() { electron.shell.openExternal( 'http://electron.atom.io' ); }
           },
           {
             type : 'separator'

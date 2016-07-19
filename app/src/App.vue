@@ -134,7 +134,7 @@
 </style>
 
 <template>
-  <header-bar></header-bar>
+  <header-bar v-if="$route.name !== 'about-page'"></header-bar>
   <main>
     <settings v-if="showSettings"></settings>
     <router-view v-on:activate="toggleSettings( false )"></router-view>
@@ -175,11 +175,6 @@
       this.$router.beforeEach( () => {
         this.toggleSettings( false );
       } );
-    },
-    route : {
-      activate() {
-        debugger;
-      }
     },
     store
   };

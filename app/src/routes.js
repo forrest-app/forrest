@@ -6,5 +6,9 @@ export default {
   '/repos/:repoName' : {
     component : require( './components/RepoView' ),
     name      : 'repo-page'
+  },
+  '/about' : {
+    component : require( './components/AboutView' ),
+    name      : 'about-page'
   }
 };

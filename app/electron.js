@@ -8,22 +8,20 @@ const fixPath                         = require( 'fix-path' );
 let mainWindows = [];
 let config = {};
 
-
+// fix path to guarantee that npm and node are available
 fixPath();
 
 if ( process.env.NODE_ENV === 'development' ) {
-  config     = require( '../config' ).config;
-  config.url = `http://localhost:${ config.port }`;
+  config          = require( '../config' ).config;
+  config.url      = `http://localhost:${ config.port }`;
+  config.aboutUrl = `http://localhost:${ config.port }#!/about`;
 } else {
-  config.devtron = false;
-  config.url     = `file://${ __dirname }/dist/index.html`;
+  config.devtron  = false;
+  config.url      = `file://${ __dirname }/dist/index.html`;
+  config.aboutUrl = `file://${ __dirname }/dist/index.html#!/about`;
 }
 
 ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
-  if ( key === 'path' ) {
-    // process.env.PATH = value;
-  }
-
   if ( key === 'alwaysOnTop' ) {
     mainWindows.forEach( window => {
       window.setAlwaysOnTop( value );
@@ -35,14 +33,28 @@ ipcMain.on( 'openNewWindow', () => {
   createWindow();
 } );
 
+function openAboutWindow() {
+  let aboutWindow = new BrowserWindow( {
+    height        : 400,
+    width         : 400,
+    titleBarStyle : 'hidden',
+    resizable     : false
+  } );
 
+  aboutWindow.loadURL( config.aboutUrl );
+}
+
+/**
+ *
+ */
 function createWindow() {
   /**
    * Initial window options
    */
   let newWindow = new BrowserWindow( {
-    height : 500,
-    width  : 300
+    height        : 500,
+    width         : 300,
+    titleBarStyle : 'hidden'
   } );
 
   newWindow.loadURL( config.url );
@@ -71,7 +83,8 @@ function createWindow() {
 
   if ( mainWindows.length === 1 ) {
     menu.init( {
-      createWindow
+      createWindow,
+      openAboutWindow
     } );
   }
 
