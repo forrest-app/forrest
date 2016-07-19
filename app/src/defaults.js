@@ -22,12 +22,6 @@ export default {
 
   settings : [
     {
-      label : 'System path',
-      desc  : 'Please set your system path.',
-      name  : 'path',
-      type  : 'text'
-    },
-    {
       label : 'Stay on top',
       desc  : 'Should Forrest stay on top of other windows',
       name  : 'alwaysOnTop',

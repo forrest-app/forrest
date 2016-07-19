@@ -132,6 +132,8 @@
       setTimeout( () => {
         this.$el.querySelector( '.c-script' ).focus();
       }, 200 );
+
+      this.$el.addEventListener( 'keyup', this.handleKeyStrokes );
     },
 
     components : {
@@ -167,13 +169,17 @@
           return;
         }
 
+        // #wtf not working
+        event.preventDefault();
+        event.stopPropagation();
+
+        debugger;
+
         if ( event.keyCode === 40 ) {
           let index = [].indexOf.call( this.scriptElements, event.target );
 
           if ( index < this.scriptElements.length - 1 ) {
-            this.scriptElements[ index + 1 ].focus();
-
-            event.preventDefault();
+            // this.scriptElements[ index + 1 ].focus();
           }
         }
 
@@ -185,10 +191,7 @@
           let index = [].indexOf.call( this.scriptElements, event.target );
 
           if ( index > 0 ) {
-            this.scriptElements[ index - 1 ].focus();
-
-            event.stopPropagation();
-            event.preventDefault();
+            // this.scriptElements[ index - 1 ].focus();
           }
         }
       },
@@ -212,7 +215,7 @@
     },
 
     beforeDestroy() {
-      window.removeEventListener( 'keyup', this.handleKeyStrokes );
+      this.$el.removeEventListener( 'keyup', this.handleKeyStrokes );
     },
 
     props : [ 'repoName' ],

@@ -3,8 +3,8 @@
  */
 'use strict'
 
-const config = require('../config')
-const exec = require('child_process').exec
+const config = require( '../config' ).config;
+const exec   = require( 'child_process' ).exec;
 
 let YELLOW = '\x1b[33m'
 let BLUE = '\x1b[34m'

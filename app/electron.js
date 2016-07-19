@@ -2,22 +2,26 @@
 
 const { app, ipcMain, BrowserWindow } = require( 'electron' );
 const path                            = require( 'path' );
-const menu                            = require( './menu' );
+const menu                            = require( './main/menu' );
+const fixPath                         = require( 'fix-path' );
 
 let mainWindows = [];
 let config = {};
 
+
+fixPath();
+
 if ( process.env.NODE_ENV === 'development' ) {
-  config     = require( '../config' );
-  config.url = `http://localhost:${config.port}`;
+  config     = require( '../config' ).config;
+  config.url = `http://localhost:${ config.port }`;
 } else {
   config.devtron = false;
-  config.url     = `file://${__dirname}/dist/index.html`;
+  config.url     = `file://${ __dirname }/dist/index.html`;
 }
 
 ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
   if ( key === 'path' ) {
-    process.env.PATH = value;
+    // process.env.PATH = value;
   }
 
   if ( key === 'alwaysOnTop' ) {
