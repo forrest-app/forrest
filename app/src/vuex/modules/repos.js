@@ -29,14 +29,6 @@ const mutations = {
     state.splice( repoIndex, 1 );
 
     settings.set( 'repos', state );
-  },
-
-  TOGGLE_VISIBLE_REPO_AREA ( state, repo, areaName ) {
-    let storedRepo = state.find( r => r.name === repo.name );
-
-    storedRepo.openAreas[ areaName ] = ! storedRepo.openAreas[ areaName ];
-
-    settings.set( 'repos', state );
   }
 };
 

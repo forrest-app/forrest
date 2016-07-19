@@ -39,10 +39,6 @@ export const removeRepo = function( { dispatch, state }, repo ) {
   }
 };
 
-export const toggleVisibleRepoArea = function( { dispatch, state }, repo, area ) {
-  dispatch( 'TOGGLE_VISIBLE_REPO_AREA', repo, area );
-};
-
 export const updateAppSetting = function( { dispatch }, name, setting ) {
   dispatch( 'UPDATE_APP_SETTING', name, setting );
 };
