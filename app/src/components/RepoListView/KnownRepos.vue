@@ -116,7 +116,7 @@
 
   export default {
     created() {
-      window.addEventListener( 'keyup', this.handleKeyStrokes );
+      document.addEventListener( 'keydown', this.handleKeyStrokes );
     },
 
     ready() {
@@ -155,10 +155,12 @@
             projects[ projects.length - 1 ].focus();
           }
         }
+
+        event.preventDefault();
       }
     },
     beforeDestroy() {
-      window.removeEventListener( 'keyup', this.handleKeyStrokes );
+      document.removeEventListener( 'keydown', this.handleKeyStrokes );
     },
 
     props : [ 'selected' ],
