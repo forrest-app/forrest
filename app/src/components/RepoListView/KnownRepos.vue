@@ -147,7 +147,9 @@
       },
 
       handleRight( target ) {
-        target.click();
+        if ( target.classList.contains( 'c-project' ) ) {
+          target.click();
+        }
       },
 
       handleDown( target ) {

@@ -20,7 +20,10 @@
 </style>
 
 <template>
-  <div class="c-settings" transition="t-slideDown--slideUp">
+  <div class="c-settings"
+        transition="t-slideDown--slideUp"
+        v-key-tracker
+        :on-esc="handleEsc">
     <ul class="o-list">
       <li class="o-list--item">
         <div class="u-marginBottomSmall">Detected node and npm versions</div>
@@ -75,7 +78,6 @@
 
   export default {
     created() {
-      window.addEventListener( 'keyup', this.handleKeyStrokes );
       this.evaluateSystemVersions();
 
       this.$watch( 'settings.path', () => this.evaluateSystemVersions() );
@@ -112,10 +114,8 @@
         );
       },
 
-      handleKeyStrokes( event ) {
-        if ( event.keyCode === 27 ) {
-          this.$dispatch( 'toggle-settings', false );
-        }
+      handleEsc() {
+        this.$dispatch( 'toggle-settings', false );
       },
 
       updateValue( event ) {
@@ -127,10 +127,6 @@
 
         this.updateAppSetting( event.target.name, value );
       }
-    },
-
-    beforeDestroy() {
-      window.removeEventListener( 'keyup', this.handleKeyStrokes );
     },
 
     vuex : {

@@ -87,7 +87,10 @@
 </style>
 
 <template>
-  <div class="script--output">
+  <div class="script--output"
+        v-key-tracker
+        :on-left="close"
+        :on-esc="close">
     <div class="script--output--header">
       <div class="u-flexVerticalCenter">
         <div v-if="processStatus === null" class="u-flexVerticalCenter" transition="trans-slideDown">

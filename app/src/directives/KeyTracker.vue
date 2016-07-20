@@ -1,42 +1,35 @@
 <script>
+  import WindowKeyManager from '../modules/WindowKeyManager';
+
   export default {
     bind() {
-      var onLeft  = this.params.onLeft;
-      var onUp    = this.params.onUp;
-      var onRight = this.params.onRight;
-      var onDown  = this.params.onDown;
-
-      this.handler = ( event ) => {
-        if ( onLeft && event.keyCode === 37 ) {
-          onLeft( event.target );
-
-          event.preventDefault();
-        }
-
-        if ( onUp && event.keyCode === 38 ) {
-          onUp( event.target );
-
-          event.preventDefault();
-        }
-
-        if ( onRight && event.keyCode === 39 ) {
-          onRight( event.target );
-
-          event.preventDefault();
-        }
-
-        if ( onDown && event.keyCode === 40 ) {
-          onDown( event.target );
-
-          event.preventDefault();
-        }
+      this.mapping = {
+        left  : 'onLeft',
+        up    : 'onUp',
+        right : 'onRight',
+        down  : 'onDown',
+        esc   : 'onEsc'
       };
 
-      document.addEventListener( 'keydown', this.handler );
+      this.attachedHandlers = [];
+
+      Object.keys( this.mapping ).forEach( ( key ) => {
+        if ( this.params[ this.mapping[ key ] ] ) {
+          WindowKeyManager.add( key, this.params[ this.mapping[ key ] ] );
+
+          this.attachedHandlers.push( {
+            key : key,
+            fn  : this.params[ this.mapping[ key ] ]
+          } );
+        }
+      }, this );
     },
+
     unbind() {
-      this.el.removeEventListener( 'keydown', this.handler );
+      this.attachedHandlers.forEach( handler => {
+        WindowKeyManager.remove( handler.key, handler.fn );
+      } );
     },
-    params : [ 'onDown', 'onRight', 'onLeft', 'onUp', 'onEsc', 'containerClass' ]
+    params : [ 'onDown', 'onRight', 'onLeft', 'onUp', 'onEsc' ]
   };
 </script>
