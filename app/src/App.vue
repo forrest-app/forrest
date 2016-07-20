@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import url(https://fonts.googleapis.com/css?family=Lato:300,800italic);
+  @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic);
   @import './styles/objects/buttons';
   @import './styles/objects/icon';
   @import './styles/objects/checkbox';
