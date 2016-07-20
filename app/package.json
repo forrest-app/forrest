@@ -1,5 +1,6 @@
 {
   "name": "forrest",
+  "productName": "Forrest",
   "version": "1.0.0",
   "description": "",
   "main": "electron.js",
