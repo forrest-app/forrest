@@ -59,7 +59,11 @@
 </style>
 
 <template>
-  <div v-bind:class="{ 'u-flexCenter' : ! repos || ! repos.length }" v-key-tracker :on-up="handleUp" :on-right="handleRight" :on-down="handleDown">
+  <div v-bind:class="{ 'u-flexCenter' : ! repos || ! repos.length }"
+        v-key-tracker
+        :on-up="handleUp"
+        :on-right="handleRight"
+        :on-down="handleDown">
     <div v-if="! repos || ! repos.length" class="c-project--zeroContainer">
       <svg class="c-project--zeroIcon" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0z" fill="none"/>

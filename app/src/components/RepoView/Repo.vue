@@ -50,7 +50,12 @@
 </style>
 
 <template>
-  <div class="u-fullHeight" v-key-tracker :on-up="handleUp" :on-right="handleRight" :on-down="handleDown" :on-left="handleLeft">
+  <div class="u-fullHeight"
+        v-key-tracker
+        :on-up="handleUp"
+        :on-right="handleRight"
+        :on-down="handleDown"
+        :on-left="handleLeft">
     <div class="c-project--header">
       <h1 class="c-project--headline">{{ repo.name }}</h1>
 
@@ -160,7 +165,9 @@
       },
 
       handleRight( target ) {
-        target.querySelector( '[data-run-script]' ).click();
+        if ( target.classList.contains( 'c-script' ) ) {
+          target.querySelector( '[data-run-script]' ).click();
+        }
       },
 
       handleDown( target ) {
