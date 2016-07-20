@@ -17,10 +17,7 @@
     "vuex:module": "node tasks/vuex/module.js"
   },
   "author": "Stefan Judis <stefanjudis@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/stefanjudis/forrest.git"
-  },
+  "repository": "stefanjudis/forrest",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.8.0",
