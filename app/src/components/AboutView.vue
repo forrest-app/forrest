@@ -1,14 +1,40 @@
 <style lang="scss">
   .c-about {
-    padding : 2em 1em;
+    position : relative;
+
+    padding : 1em;
 
     text-align : center;
+
+    &--dragHandle {
+      position : absolute;
+
+      top   : 0;
+      right : 0;
+      left  : 0;
+
+      height : 2em;
+
+      -webkit-user-select : none;
+      -webkit-app-region  : drag;
+    }
+
+    &--heartList {
+      padding    : 0 1em;
+      list-style : none;
+
+      &--item {
+        margin-bottom : .5em;
+      }
+    }
 
     &--logo {
       display : inline-block;
 
-      width  : 12.5em;
-      height : 12.5em;
+      width  : 5em;
+      height : 5em;
+
+      margin-bottom : .5em;
 
       svg {
         max-width  : 100%;
@@ -20,6 +46,8 @@
 
 <template>
   <div class="c-about">
+    <div class="c-about--dragHandle"></div>
+
     <div class="c-about--logo" transition="project">
       <svg width="330" height="330" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>Forrest logo</title>
@@ -66,7 +94,79 @@
         </g>
       </svg>
     </div>
-    <h1>Forrest</h1>
+    <div class="u-marginBottom">
+      <h1 class="o-headline-2">Forrest</h1>
+      <p class="o-paragraph u-marginTopSmall">Brought to you by Stefan Judis</p>
+
+      <p class="o-paragraph">Check out the project on <button class="o-linkBtn" type="button" v-open-external :url="'https://github.com/stefanjudis/forrest'">GitHub</button>.</p>
+    </div>
+
+    <h2 class="o-headline-3 u-marginBottomSmall">Shout out to these projects/people:</h2>
+
+    <ul class="c-about--heartList">
+      <li class="c-about--heartList--item">
+        <h3 class="o-headline-4">
+          <span>Evan You</span>
+          <button class="o-icon u-negativeBottomMarginTiny" type="button" v-open-external :url="'https://twitter.com/youyuxi'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
+              <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
+              <circle cx="59.292" cy="32.235" r="19.743"/>
+              <path d="M63.206 17.134L85.582 6.98 69.975 26.159"/>
+              <path d="M67.625 21.553L90 11.399l-15.606 19.18"/>
+            </svg>
+          </button>
+        </h3>
+        <p>for creation and maintenance of <button class="o-linkBtn" type="button" v-open-external :url="'https://vuejs.org/'">vue.js</button></p>
+      <li class="c-about--heartList--item">
+        <h3 class="o-headline-4">
+          <span>Greg Holguin</span>
+          <button class="o-icon u-negativeBottomMarginTiny" type="button" v-open-external :url="'https://twitter.com/simulatedgreg'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
+              <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
+              <circle cx="59.292" cy="32.235" r="19.743"/>
+              <path d="M63.206 17.134L85.582 6.98 69.975 26.159"/>
+              <path d="M67.625 21.553L90 11.399l-15.606 19.18"/>
+            </svg>
+          </button>
+        </h3>
+        <p>for creation of the <button class="o-linkBtn" type="button" v-open-external :url="'https://github.com/SimulatedGREG/electron-vue'">electron vue boilerplate</button></p>
+      <li class="c-about--heartList--item">
+        <h3 class="o-headline-4">
+          <span>Sindre Sorhus</span>
+          <button class="o-icon u-negativeBottomMarginTiny" type="button" v-open-external :url="'https://twitter.com/sindresorhus'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
+              <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
+              <circle cx="59.292" cy="32.235" r="19.743"/>
+              <path d="M63.206 17.134L85.582 6.98 69.975 26.159"/>
+              <path d="M67.625 21.553L90 11.399l-15.606 19.18"/>
+            </svg>
+          </button>
+        </h3>
+        <p>for all this great work and especially for solving the issues around environments and the holy PATH.
+      <li class="c-about--heartList--item">
+        <h3 class="o-headline-4">
+          <span>Michael Kühnel</span>
+          <button class="o-icon u-negativeBottomMarginTiny" type="button" v-open-external :url="'https://twitter.com/mkuehnel'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
+              <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
+              <circle cx="59.292" cy="32.235" r="19.743"/>
+              <path d="M63.206 17.134L85.582 6.98 69.975 26.159"/>
+              <path d="M67.625 21.553L90 11.399l-15.606 19.18"/>
+            </svg>
+          </button>
+        </h3>
+        <p>for giving Forrest its name</p>
+      <li class="c-about--heartList--item">
+        <h3 class="o-headline-4">Calvin Goodman</h3>
+        <p>for creation of the "Home" icon from the Noun Project
+      <li class="c-about--heartList--item">
+        <h3 class="o-headline-4">Michal Beno</h3>
+        <p>for creation of the "Settings" icon from the Noun Project
+    </ul>
   </div>
 </template>
 

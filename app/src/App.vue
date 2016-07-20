@@ -1,8 +1,11 @@
 <style lang="scss">
-  @import url(https://fonts.googleapis.com/css?family=Lato:300,300italic);
+  @import url(https://fonts.googleapis.com/css?family=Lato:300,800italic);
+  @import './styles/objects/buttons';
   @import './styles/objects/icon';
   @import './styles/objects/checkbox';
   @import './styles/objects/input';
+  @import './styles/objects/headlines';
+  @import './styles/objects/paragraphs';
   @import './styles/objects/lists';
   @import './styles/objects/small';
   @import './styles/transitions/slide-right--slide-left';
@@ -19,7 +22,9 @@
     --dark-bg-color : #e1e1e1;
 
     --header-background : #2a333c;
+    --header-color      : var(--main-bg-color);
     --header-height     : 10em;
+
 
     --code-background         : #2a333c;
     --code-color              : #f1f1f1;
@@ -34,8 +39,8 @@
   }
 
   * {
-    margin: 0;
-    padding: 0;
+    margin  : 0;
+    padding : 0;
 
     box-sizing : border-box;
   }

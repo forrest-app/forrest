@@ -6,6 +6,7 @@ const menu                            = require( './main/menu' );
 const fixPath                         = require( 'fix-path' );
 
 let mainWindows = [];
+let aboutWindow;
 let config = {};
 
 // fix path to guarantee that npm and node are available
@@ -34,14 +35,20 @@ ipcMain.on( 'openNewWindow', () => {
 } );
 
 function openAboutWindow() {
-  let aboutWindow = new BrowserWindow( {
-    height        : 400,
-    width         : 400,
-    titleBarStyle : 'hidden',
-    resizable     : false
-  } );
+  if ( ! aboutWindow ) {
+    aboutWindow = new BrowserWindow( {
+      height        : 600,
+      width         : 475,
+      titleBarStyle : 'hidden',
+      resizable     : false
+    } );
 
-  aboutWindow.loadURL( config.aboutUrl );
+    aboutWindow.loadURL( config.aboutUrl );
+
+    aboutWindow.on( 'closed', () => aboutWindow = null );
+  } else {
+    aboutWindow.focus();
+  }
 }
 
 /**
