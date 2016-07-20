@@ -61,6 +61,7 @@ function createWindow() {
   let newWindow = new BrowserWindow( {
     height        : 500,
     width         : 300,
+    minWidth      : 250,
     titleBarStyle : 'hidden'
   } );
 
