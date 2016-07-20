@@ -97,11 +97,6 @@ module.exports = {
             click() { options.createWindow(); }
           },
           {
-            label       : 'Open settings',
-            accelerator : 'CmdOrCtrl+,',
-            click() { electron.shell.openExternal( 'http://electron.atom.io' ); }
-          },
-          {
             type : 'separator'
           },
           {
