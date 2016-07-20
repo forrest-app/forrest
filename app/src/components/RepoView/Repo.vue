@@ -122,18 +122,8 @@
       );
     },
 
-    created() {
-      window.addEventListener( 'keyup', this.handleKeyStrokes );
-
-    },
-
     ready() {
-      // pre select the first script to run
-      setTimeout( () => {
-        this.$el.querySelector( '.c-script' ).focus();
-      }, 200 );
-
-      this.$el.addEventListener( 'keyup', this.handleKeyStrokes );
+      document.addEventListener( 'keydown', this.handleKeyStrokes );
     },
 
     components : {
@@ -165,19 +155,15 @@
           } );
         }
 
-        if ( ! event.target.classList.contains( 'c-script' ) ) {
-          return;
-        }
-
-        // #wtf not working
-        event.preventDefault();
-        event.stopPropagation();
-
         if ( event.keyCode === 40 ) {
-          let index = [].indexOf.call( this.scriptElements, event.target );
+          if ( ! event.target.classList.contains( 'c-script' ) ) {
+            this.scriptElements[ 0 ].focus();
+          } else {
+            let index = [].indexOf.call( this.scriptElements, event.target );
 
-          if ( index < this.scriptElements.length - 1 ) {
-            // this.scriptElements[ index + 1 ].focus();
+            if ( index < this.scriptElements.length - 1 ) {
+              this.scriptElements[ index + 1 ].focus();
+            }
           }
         }
 
@@ -186,12 +172,18 @@
         }
 
         if ( event.keyCode === 38 ) {
-          let index = [].indexOf.call( this.scriptElements, event.target );
+          if ( ! event.target.classList.contains( 'c-script' ) ) {
+            this.scriptElements[ this.scriptElements.length - 1 ].focus();
+          } else {
+            let index = [].indexOf.call( this.scriptElements, event.target );
 
-          if ( index > 0 ) {
-            // this.scriptElements[ index - 1 ].focus();
+            if ( index > 0 ) {
+              this.scriptElements[ index - 1 ].focus();
+            }
           }
         }
+
+        event.preventDefault();
       },
 
       removeRepo() {
@@ -213,7 +205,7 @@
     },
 
     beforeDestroy() {
-      this.$el.removeEventListener( 'keyup', this.handleKeyStrokes );
+      document.removeEventListener( 'keydown', this.handleKeyStrokes );
     },
 
     props : [ 'repoName' ],
