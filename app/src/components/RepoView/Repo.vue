@@ -50,7 +50,7 @@
 </style>
 
 <template>
-  <div class="u-fullHeight">
+  <div class="u-fullHeight" v-key-tracker :on-up="handleUp" :on-right="handleRight" :on-down="handleDown" :on-left="handleLeft">
     <div class="c-project--header">
       <h1 class="c-project--headline">{{ repo.name }}</h1>
 
@@ -147,43 +147,35 @@
     },
 
     methods : {
-      handleKeyStrokes( event ) {
-        if ( event.keyCode === 37 ) {
-          this.$router.go( {
-            name  : 'repo-list-page',
-            query : { selected : this.repo.name }
-          } );
+      handleUp( target ) {
+        let index = [].indexOf.call( this.scriptElements, target );
+
+        if ( index === -1 ) {
+          index = this.scriptElements.length;
         }
 
-        if ( event.keyCode === 40 ) {
-          if ( ! event.target.classList.contains( 'c-script' ) ) {
-            this.scriptElements[ 0 ].focus();
-          } else {
-            let index = [].indexOf.call( this.scriptElements, event.target );
-
-            if ( index < this.scriptElements.length - 1 ) {
-              this.scriptElements[ index + 1 ].focus();
-            }
-          }
+        if ( index > 0 ) {
+          this.scriptElements[ index - 1 ].focus();
         }
+      },
 
-        if ( event.keyCode === 39 ) {
-          event.target.querySelector( '[data-run-script]' ).click();
+      handleRight( target ) {
+        target.querySelector( '[data-run-script]' ).click();
+      },
+
+      handleDown( target ) {
+        let index = [].indexOf.call( this.scriptElements, target );
+
+        if ( index < this.scriptElements.length -1  ) {
+          this.scriptElements[ index + 1 ].focus();
         }
+      },
 
-        if ( event.keyCode === 38 ) {
-          if ( ! event.target.classList.contains( 'c-script' ) ) {
-            this.scriptElements[ this.scriptElements.length - 1 ].focus();
-          } else {
-            let index = [].indexOf.call( this.scriptElements, event.target );
-
-            if ( index > 0 ) {
-              this.scriptElements[ index - 1 ].focus();
-            }
-          }
-        }
-
-        event.preventDefault();
+      handleLeft() {
+        this.$router.go( {
+          name  : 'repo-list-page',
+          query : { selected : this.repo.name }
+        } );
       },
 
       removeRepo() {

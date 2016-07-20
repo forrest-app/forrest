@@ -15,6 +15,9 @@ Vue.directive( 'openExternal', OpenExternal );
 import StayDown from './Directives/StayDown';
 Vue.directive( 'stayDown', StayDown );
 
+import KeyTracker from './Directives/KeyTracker';
+Vue.directive( 'keyTracker', KeyTracker );
+
 Vue.config.debug = true;
 
 const router = new Router();

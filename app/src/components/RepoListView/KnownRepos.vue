@@ -59,7 +59,7 @@
 </style>
 
 <template>
-  <div v-bind:class="{ 'u-flexCenter' : ! repos || ! repos.length }">
+  <div v-bind:class="{ 'u-flexCenter' : ! repos || ! repos.length }" v-key-tracker :on-up="handleUp" :on-right="handleRight" :on-down="handleDown">
     <div v-if="! repos || ! repos.length" class="c-project--zeroContainer">
       <svg class="c-project--zeroIcon" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0z" fill="none"/>
@@ -115,52 +115,44 @@
   import { getRepos } from '../../vuex/getters';
 
   export default {
-    created() {
-      document.addEventListener( 'keydown', this.handleKeyStrokes );
-    },
-
     ready() {
+      this.$set( 'repoElements', this.$el.querySelectorAll( '.c-project' ) );
+
       if ( this.selected ) {
         this.$el.querySelector( '#' + this.selected ).focus();
       }
     },
+
+    data() {
+      return {
+        repoElements : null
+      };
+    },
+
     methods : {
-      handleKeyStrokes( event ) {
-        if ( event.target.classList.contains( 'c-project' ) ) {
-          if ( event.keyCode === 39 ) {
-            event.target.click();
-          }
+      handleUp( target ) {
+        let index = [].indexOf.call( this.repoElements, target );
 
-          if (
-            event.keyCode === 40 &&
-            event.target.parentNode.nextSibling.tagName === 'LI'
-          ) {
-            event.target.parentNode.nextSibling.querySelector( 'a' ).focus();
-          }
-
-          if (
-            event.keyCode === 38 &&
-            event.target.parentNode.previousSibling.tagName === 'LI'
-          ) {
-            event.target.parentNode.previousSibling.querySelector( 'a' ).focus();
-          }
-        } else {
-          if ( event.keyCode === 40 ) {
-            this.$el.querySelector( '.c-project' ).focus();
-          }
-
-          if ( event.keyCode === 38 ) {
-            let projects = this.$el.querySelectorAll( '.c-project' );
-
-            projects[ projects.length - 1 ].focus();
-          }
+        if ( index === -1 ) {
+          index = this.repoElements.length;
         }
 
-        event.preventDefault();
+        if ( index > 0 ) {
+          this.repoElements[ index - 1 ].focus();
+        }
+      },
+
+      handleRight( target ) {
+        target.click();
+      },
+
+      handleDown( target ) {
+        let index = [].indexOf.call( this.repoElements, target );
+
+        if ( index < this.repoElements.length -1  ) {
+          this.repoElements[ index + 1 ].focus();
+        }
       }
-    },
-    beforeDestroy() {
-      document.removeEventListener( 'keydown', this.handleKeyStrokes );
     },
 
     props : [ 'selected' ],
