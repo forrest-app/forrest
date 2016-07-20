@@ -173,8 +173,6 @@
         event.preventDefault();
         event.stopPropagation();
 
-        debugger;
-
         if ( event.keyCode === 40 ) {
           let index = [].indexOf.call( this.scriptElements, event.target );
 
