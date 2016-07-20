@@ -24,7 +24,6 @@
     <ul class="o-list">
       <li class="o-list--item">
         <div class="u-marginBottomSmall">Detected node and npm versions</div>
-        <small class="o-small u-marginBottomSmall">If these versions do not fit with your terminal session, please set your $PATH manually.</small>
         <div class="u-flexVerticalCenter">
           <div class="u-flexVerticalCenter">
             <div class="o-icon o-icon__fillBright u-marginRightSmall">
