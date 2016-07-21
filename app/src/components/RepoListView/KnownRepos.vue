@@ -73,7 +73,7 @@
     </div>
     <ul v-if="repos && repos.length" class="o-list">
       <li v-for="repo in repos" track-by="path" class="o-list--item u-noPadding u-positionRelative" transition="t-slideRight--slideLeft">
-        <a id="{{ repo.name }}" class="c-project" v-link="{ path : `/repos/${ encodeURIComponent( repo.name ) }` }">
+        <a id="{{ repo.name }}" class="c-project" v-link="{ path : `/repos/${ encodeURIComponent( repo.name ) }` }" @contextmenu="openContextMenu">
           <div class="c-project--name">
             <span>{{ repo.name }}</span>
             <button type="button" v-if="repo.url" v-open-external :url="repo.url" class="o-icon" aria-label="Open project on GitHub" title="Open project on GitHub">
@@ -112,11 +112,17 @@
           </div>
         </a>
     </ul>
+
+    <menu type="context" id="repoMenu">
+      <menuitem label="Menu Item 1">
+    </menu>
   </div>
 </template>
 
 <script>
   import { getRepos } from '../../vuex/getters';
+  import { removeRepo } from '../../vuex/actions';
+  import { getParentWithClass } from '../../modules/DomUtils';
 
   export default {
     ready() {
@@ -129,11 +135,42 @@
 
     data() {
       return {
+        menu         : null,
         repoElements : null
       };
     },
 
     methods : {
+      openContextMenu( event ) {
+        let repoElement = event.target.classList.contains( 'c-project' ) ?
+                          event.target :
+                          getParentWithClass( event.target, 'c-project' );
+
+        if ( repoElement ) {
+          const mainElectron = this.$electron.remote.require( 'electron' );
+          const menu         = new mainElectron.Menu();
+          const menuItem     = new mainElectron.MenuItem( {
+            label : 'Remove project',
+            click : () => {
+              let repoToDelete = this.repos.find(
+                repo => repo.name === repoElement.id
+              );
+
+              if ( repoToDelete ) {
+                this.removeRepo( repoToDelete );
+              }
+            }
+          } );
+
+          menu.append( menuItem );
+
+          menu.popup( this.$electron.remote.getCurrentWindow() );
+
+          event.preventDefault();
+          repoElement.blur();
+        }
+      },
+
       handleUp( target ) {
         let index = [].indexOf.call( this.repoElements, target );
 
@@ -164,6 +201,9 @@
     props : [ 'selected' ],
 
     vuex : {
+      actions : {
+        removeRepo : removeRepo
+      },
       getters : {
         repos : getRepos
       }

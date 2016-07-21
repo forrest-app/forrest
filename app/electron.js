@@ -12,6 +12,9 @@ let config = {};
 // fix path to guarantee that npm and node are available
 fixPath();
 
+// enable experimental feature to use context menus
+app.commandLine.appendSwitch( '--enable-experimental-web-platform-features' );
+
 if ( process.env.NODE_ENV === 'development' ) {
   config          = require( '../config' ).config;
   config.url      = `http://localhost:${ config.port }`;
@@ -59,10 +62,13 @@ function createWindow() {
    * Initial window options
    */
   let newWindow = new BrowserWindow( {
-    height        : 500,
-    width         : 300,
-    minWidth      : 250,
-    titleBarStyle : 'hidden'
+    height            : 500,
+    width             : 300,
+    minWidth          : 250,
+    titleBarStyle     : 'hidden',
+    'web-preferences' : {
+      plugins : true
+    }
   } );
 
   newWindow.loadURL( config.url );

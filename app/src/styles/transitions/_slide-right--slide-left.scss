@@ -5,7 +5,7 @@
       opacity .3s ease-in-out;
   }
 
-  &-enter, &.leave {
+  &-enter, &-leave {
     transform : translate( -100%, 0 );
     opacity   : .3;
   }
