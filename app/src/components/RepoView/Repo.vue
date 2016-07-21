@@ -31,6 +31,23 @@
 
     }
 
+    &--noScriptsMsg {
+      display         : flex;
+      align-items     : center;
+      justify-content : space-between;
+
+      > svg {
+        width : 3em;
+        height : 3em;
+
+        margin-left : .5em;
+
+        transform : rotate( .5turn );
+
+        fill : var(--npm-red);
+      }
+    }
+
     &--scriptsContainer {
       position : relative;
       height : calc( 100% - 2.8125em );
@@ -79,9 +96,20 @@
 
         <h2 class="c-project--commandHeadline">Custom scripts</h2>
 
-        <ul class="o-list">
-          <li v-for="script in scripts" class="o-list--item u-noPadding">
+        <ul class="o-list" >
+          <li v-if="scripts.length" v-for="script in scripts" class="o-list--item u-noPadding">
             <command :script="script" :run-script="runScript" :is-custom="true"></command>
+          <li v-if="! scripts.length" class="o-list--item">
+            <div class="c-project--noScriptsMsg">
+              <div>
+                <p class="o-paragraph">There are no custom scripts defined in your package.json.</p>
+                <p class="o-paragraph u-noMarginBottom">If you rely on installed globals, <button type="button" class="o-linkBtn" v-open-external :url="'http://4waisenkinder.de/blog/2014/10/18/npm-2-dot-0-and-the-much-better-star-npm-run-star-command/'">you might wanna change that</button>.</p>
+              </div>
+              <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+              </svg>
+            </div>
         </ul>
       </div>
     </div>
