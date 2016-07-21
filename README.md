@@ -30,3 +30,5 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) and [openopensource.org](http://openope
 - Michael Kühnel | *for giving Forrest its name*
 - Calvin Goodman | *for creation of the "Home" icon from the Noun Project*
 - Michal Beno | *for creation of the "Settings" icon from the Noun Project*
+
+Additionally Forrest relies on the work of a lot of open source maintainers. So I want to thank all these [people](./THANKS.md) for their great work, too.
