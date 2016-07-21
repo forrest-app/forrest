@@ -8,6 +8,7 @@
   @import './styles/objects/paragraphs';
   @import './styles/objects/lists';
   @import './styles/objects/small';
+  @import './styles/animations/move-down';
   @import './styles/transitions/slide-right--slide-left';
   @import './styles/transitions/slide-up--slide-down';
   @import './styles/transitions/slide-down--slide-up';

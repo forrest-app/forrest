@@ -1,0 +1,17 @@
+@keyframes moveDown {
+  0% {
+    transform : translate( 0, 0 );
+  }
+
+  50% {
+    transform : translate( 0, 25% );
+  }
+
+  100% {
+    transform : translate( 0, 0 );
+  }
+}
+
+.a-moveDown {
+  animation : .75s moveDown 0s 3 ease-in-out;
+}
