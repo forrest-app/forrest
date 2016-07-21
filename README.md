@@ -10,9 +10,21 @@
 
 ![image](./media/preview.jpg)
 
-## Overview
+## About
 
-TODO
+### Electron Packager is an [OPEN Open Source Project](http://openopensource.org/)
 
-### Contributing
-Wanting to submit a pull request? Make sure to read [this](docs/contributing.md) first.
+Individuals making significant and valuable contributions are given commit-access to the project to contribute as they see fit. This project is more like an open wiki than a standard guarded open source project.
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) and [openopensource.org](http://openopensource.org/) for more details.
+
+## Roadmap
+
+## Thanks
+
+- Evan You | *for creation and maintenance of vue.js*
+- Greg Holguin | *for creation of the electron vue boilerplate*
+- Sindre Sorhus | *for all this great work and especially for solving the issues around environments and the holy PATH*
+- Michael Kühnel | *for giving Forrest its name*
+- Calvin Goodman | *for creation of the "Home" icon from the Noun Project*
+- Michal Beno | *for creation of the "Settings" icon from the Noun Project*
