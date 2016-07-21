@@ -13,10 +13,22 @@ export default {
       docs    : 'https://docs.npmjs.com/cli/install'
     },
     {
+      name    : 'shrinkwrap',
+      command : 'npm shrinkwrap',
+      flags   : [],
+      docs    : 'https://docs.npmjs.com/cli/shrinkwrap'
+    },
+    {
       name    : 'list',
       command : 'npm ls',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/ls'
+    },
+    {
+      name    : 'prune',
+      command : 'npm prune',
+      flags   : [],
+      docs    : 'https://docs.npmjs.com/cli/prune'
     }
   ],
 
