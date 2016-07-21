@@ -29,6 +29,12 @@ export default {
       command : 'npm prune',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/prune'
+    },
+    {
+      name    : 'outdated',
+      command : 'npm outdated',
+      flags   : [],
+      docs    : 'https://docs.npmjs.com/cli/outdated'
     }
   ],
 
