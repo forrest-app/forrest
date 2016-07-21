@@ -13,7 +13,7 @@ const config = {
     'app-version'        : pkg.version,
     packagesToBeIncluded : [ 'fix-path' ],
     overwrite            : true,
-    asar                 : false
+    asar                 : true
   }
 };
 
