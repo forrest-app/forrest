@@ -23,7 +23,11 @@
   <div class="c-settings"
         transition="t-slideDown--slideUp"
         v-key-tracker
-        :on-esc="handleEsc">
+        :on-esc="handleEsc"
+        :on-up="noob"
+        :on-right="noob"
+        :on-down="noob"
+        :on-left="noob">
     <ul class="o-list">
       <li class="o-list--item">
         <div class="u-marginBottomSmall">Detected node and npm versions</div>
@@ -118,6 +122,11 @@
 
       handleEsc() {
         this.$dispatch( 'toggle-settings', false );
+      },
+
+      noob() {
+        // just to overwrite the other event listeners that
+        // might be attached already
       },
 
       updateValue( event ) {
