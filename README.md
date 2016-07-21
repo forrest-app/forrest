@@ -12,7 +12,7 @@
 
 ## About
 
-Forrest is an npm desktop client to deal with daily work flows. It lets you control common npm commands and all custom scripts defined in the `package.json`.
+Forrest is an npm desktop client to deal with daily work flows. It let’s you control common npm commands and all custom scripts defined in the `package.json`.
 
 It's still in early stages, but you can download the latest version at the [releases section](https://github.com/stefanjudis/forrest/releases). Feedback is more than welcome and contributions would be even better. :)
 
