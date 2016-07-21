@@ -150,6 +150,7 @@
 <script>
   import HeaderBar from './components/AppView/HeaderBar';
   import Settings from './components/AppView/Settings';
+  import { handleUpdatedRepos } from './vuex/actions';
   import store from 'src/vuex/store';
 
   export default {
@@ -157,16 +158,19 @@
       HeaderBar,
       Settings
     },
+
     data() {
       return {
         showSettings : false
       };
     },
+
     events : {
       'toggle-settings' : function( toggleSettings ) {
         this.toggleSettings( toggleSettings );
       }
     },
+
     methods : {
       toggleSettings( showSettings ) {
         if ( showSettings !== undefined ) {
@@ -181,6 +185,16 @@
       this.$router.beforeEach( () => {
         this.toggleSettings( false );
       } );
+
+      this.$electron.ipcRenderer.on( 'updatedRepos', ( event, reposString ) => {
+        this.handleUpdatedRepos( JSON.parse( reposString ) );
+      } );
+    },
+
+    vuex : {
+      actions : {
+        handleUpdatedRepos : handleUpdatedRepos
+      }
     },
     store
   };

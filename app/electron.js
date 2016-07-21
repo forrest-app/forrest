@@ -33,6 +33,12 @@ ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
   }
 } );
 
+ipcMain.on( 'updatedRepos', ( event, reposString ) => {
+  mainWindows.forEach(
+    window => window.webContents.send( 'updatedRepos', reposString )
+  );
+} );
+
 ipcMain.on( 'openNewWindow', () => {
   createWindow();
 } );

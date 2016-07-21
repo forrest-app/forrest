@@ -12,7 +12,7 @@ export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
       // TODO error handling
     }
 
-    if ( ! state.repos.some( repo => repo.path === repoPath ) ) {
+    if ( ! state.repos.all.some( repo => repo.path === repoPath ) ) {
       let url = packageJSON.repository &&
       packageJSON.repository.url &&
       packageJSON.repository.url.replace( /(git:\/\/|\.git)/g, '' );
@@ -32,7 +32,9 @@ export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
 };
 
 export const removeRepo = function( { dispatch, state }, repo ) {
-  let repoIndex = state.repos.findIndex( savedRepo => savedRepo.name === repo.name );
+  let repoIndex = state.repos.all.findIndex(
+    savedRepo => savedRepo.name === repo.name
+  );
 
   if ( repoIndex !== -1 ) {
     dispatch( 'REMOVE_REPO_WITH_INDEX', repoIndex );
@@ -41,4 +43,8 @@ export const removeRepo = function( { dispatch, state }, repo ) {
 
 export const updateAppSetting = function( { dispatch }, name, setting ) {
   dispatch( 'UPDATE_APP_SETTING', name, setting );
+};
+
+export const handleUpdatedRepos = function( { dispatch }, repos ) {
+  dispatch( 'UPDATED_REPOS', repos );
 };
