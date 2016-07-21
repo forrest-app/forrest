@@ -42,7 +42,7 @@
 
       position : absolute;
 
-      top    : 2.75em;
+      top    : 2.5em;
       right  : 0;
       bottom : 0;
       left   : 0;

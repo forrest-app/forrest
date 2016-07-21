@@ -11,7 +11,9 @@
         position : absolute;
 
         right : .75em;
-        top   : .75em;
+        top   : 50%;
+
+        transform : translate( 0, -50% );
       }
     }
 
@@ -19,13 +21,13 @@
       font-size : 1.125em;
 
       margin  : 0;
-      padding : 0;
+      padding : .5em 0;
 
       text-align : center;
 
       color : var(--npm-red);
 
-      line-height : 2.5em;
+      line-height : 1.25em;
 
     }
 
@@ -139,7 +141,7 @@
     data() {
       return {
         currentCommand : null,
-        repo           : this.repos.find( repo => repo.name === this.repoName ),
+        repo           : this.repos.find( repo => repo.name === decodeURIComponent( this.repoName ) ),
         scripts        : [],
         scriptElements : null
       };

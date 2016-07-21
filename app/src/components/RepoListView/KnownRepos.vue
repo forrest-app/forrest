@@ -73,7 +73,7 @@
     </div>
     <ul v-if="repos && repos.length" class="o-list">
       <li v-for="repo in repos" track-by="path" class="o-list--item u-noPadding u-positionRelative" transition="t-slideRight--slideLeft">
-        <a id="{{ repo.name }}" class="c-project" v-link="{ path : `/repos/${ repo.name }` }">
+        <a id="{{ repo.name }}" class="c-project" v-link="{ path : `/repos/${ encodeURIComponent( repo.name ) }` }">
           <div class="c-project--name">
             <span>{{ repo.name }}</span>
             <button type="button" v-if="repo.url" v-open-external :url="repo.url" class="o-icon" aria-label="Open project on GitHub" title="Open project on GitHub">
@@ -123,7 +123,7 @@
       this.$set( 'repoElements', this.$el.querySelectorAll( '.c-project' ) );
 
       if ( this.selected ) {
-        this.$el.querySelector( '#' + this.selected ).focus();
+        document.getElementById( this.selected ).focus();
       }
     },
 

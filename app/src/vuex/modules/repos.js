@@ -6,21 +6,9 @@ let settings = new ElectronSettings( {
 
 const state = settings.get( 'repos' ) || [];
 
-
-const repoMutation = function( state, newState = {} ) {
-  let base = {
-    openAreas : {
-      defaultCommands : false,
-      customCommands  : true
-    }
-  };
-
-  return Object.assign( base, state, newState );
-};
-
 const mutations = {
   ADD_REPO ( state, repo ) {
-    state.push( repoMutation( repo ) );
+    state.push( repo );
 
     settings.set( 'repos', state );
   },
