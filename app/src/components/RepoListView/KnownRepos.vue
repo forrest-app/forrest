@@ -183,6 +183,9 @@
               }
             },
             {
+              type : 'separator'
+            },
+            {
               label : 'Remove project',
               click : () => {
                 let repoToDelete = this.repos.find(
