@@ -172,21 +172,31 @@
 
         if ( repoElement ) {
           const mainElectron = this.$electron.remote.require( 'electron' );
-          const menu         = new mainElectron.Menu();
-          const menuItem     = new mainElectron.MenuItem( {
-            label : 'Remove project',
-            click : () => {
-              let repoToDelete = this.repos.find(
-                repo => repo.name === repoElement.id
-              );
+          const menuTemplate = [
+            {
+              label : 'Open in new window',
+              click : () => {
+                this.$electron.ipcRenderer.send(
+                  'openNewWindow',
+                  repoElement.hash
+                );
+              }
+            },
+            {
+              label : 'Remove project',
+              click : () => {
+                let repoToDelete = this.repos.find(
+                  repo => repo.name === repoElement.id
+                );
 
-              if ( repoToDelete ) {
-                this.removeRepo( repoToDelete );
+                if ( repoToDelete ) {
+                  this.removeRepo( repoToDelete );
+                }
               }
             }
-          } );
+          ];
 
-          menu.append( menuItem );
+          const menu = mainElectron.Menu.buildFromTemplate( menuTemplate );
 
           menu.popup( this.$electron.remote.getCurrentWindow() );
 

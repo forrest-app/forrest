@@ -39,9 +39,7 @@ ipcMain.on( 'updatedRepos', ( event, reposString ) => {
   );
 } );
 
-ipcMain.on( 'openNewWindow', () => {
-  createWindow();
-} );
+ipcMain.on( 'openNewWindow', createWindow );
 
 function openAboutWindow() {
   if ( ! aboutWindow ) {
@@ -63,7 +61,7 @@ function openAboutWindow() {
 /**
  *
  */
-function createWindow() {
+function createWindow( event, hash ) {
   /**
    * Initial window options
    */
@@ -77,7 +75,9 @@ function createWindow() {
     }
   } );
 
-  newWindow.loadURL( config.url );
+  let url = hash ? `${ config.url }${ hash }` : config.url;
+
+  newWindow.loadURL( url );
 
   if ( process.env.NODE_ENV === 'development' ) {
     newWindow.webContents.openDevTools( { mode : 'undocked' } );
