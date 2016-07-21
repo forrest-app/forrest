@@ -14,6 +14,8 @@
 
 Forrest is an npm desktop client to deal with daily work flows. It lets you control common npm commands and all custom scripts defined in the `package.json`.
 
+It's still in early stages, but you can download the latest version at the [releases section](https://github.com/stefanjudis/forrest/releases). Feedback is more than welcome and contributions would be even better. :)
+
 ### Forrest is an [OPEN Open Source Project](http://openopensource.org/)
 
 Individuals making significant and valuable contributions are given commit-access to the project to contribute as they see fit. This project is more like an open wiki than a standard guarded open source project.
