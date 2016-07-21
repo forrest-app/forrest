@@ -56,6 +56,8 @@
 
           <input v-if="setting.type === 'text'" name="{{ setting.name }}" :value="settings[ setting.name ]" @input="updateValue" class="o-input u-marginTopSmall">
 
+          <input v-if="setting.type === 'number'" name="{{ setting.name }}" type="{{ setting.type }}" :value="settings[ setting.name ]" @input="updateValue" class="o-input u-marginTopSmall">
+
           <div v-if="setting.type === 'checkbox'">
             <input name="{{ setting.name }}" :checked="settings[ setting.name ]" @change="updateValue" type="checkbox" class="u-visuallyHidden">
 

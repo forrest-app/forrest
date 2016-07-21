@@ -132,7 +132,7 @@
         </button>
       </div>
     </div>
-    <code>
+    <code v-bind:style="{ fontSize : `${ settings.terminalFontSize }px` || 'inherit'  }">
       <pre class="script--output--pre script--code" v-stay-down>{{ output }}</pre>
     </code>
   </div>

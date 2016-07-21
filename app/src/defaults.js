@@ -32,6 +32,12 @@ export default {
       desc  : 'Display notifications when a script exits',
       name  : 'displayNotifications',
       type  : 'checkbox'
+    },
+    {
+      label : 'Terminal output font size in px',
+      desc  : 'Increase or decrease the font size of the terminal output',
+      name  : 'terminalFontSize',
+      type  : 'number'
     }
   ]
 };
