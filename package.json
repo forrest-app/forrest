@@ -1,6 +1,5 @@
 {
   "name": "Forrest",
-  "version": "1.0.0",
   "scripts": {
     "build": "node tasks/release.js",
     "build:clean": "del dist/* !.gitkeep",
