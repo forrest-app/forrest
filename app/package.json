@@ -1,8 +1,8 @@
 {
   "name": "forrest",
   "productName": "Forrest",
+  "description": "The npm script desktop client",
   "version": "1.0.0",
-  "description": "",
   "main": "electron.js",
   "dependencies": {
     "electron-settings": "^1.0.4",
@@ -12,7 +12,6 @@
     "vue-router": "^0.7.13",
     "vuex": "^0.6.3"
   },
-  "devDependencies": {},
   "author": "stefan judis <stefanjudis@gmail.com>",
   "license": "MIT"
 }

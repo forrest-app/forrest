@@ -1,8 +1,6 @@
 'use strict';
 
-const path            = require( 'path' );
 const pkg             = require( './app/package.json' );
-const platform        = process.env.PLATFORM_TARGET || 'all';
 const getDependencies = require( 'dependency-list' );
 
 const config = {
@@ -11,27 +9,20 @@ const config = {
   eslint      : true,
   port        : 9080,
   vueDevTools : false,
-  building    : {
+  build       : {
     'app-version'        : pkg.version,
-    arch                 : 'x64',
-    asar                 : false,
-    dir                  : path.join( __dirname, 'app' ),
-    icon                 : path.join( __dirname, 'app/icons/icon' ),
     packagesToBeIncluded : [ 'fix-path' ],
-    out                  : path.join( __dirname, 'builds' ),
     overwrite            : true,
-    platform
+    asar                 : false
   }
 };
-config.building.name = config.name;
-
 
 /**
  *
  */
 function getPackConfig( callback ) {
 
-  let versionMap = getPackageVersionsFromApp( config.building.packagesToBeIncluded );
+  let versionMap = getPackageVersionsFromApp( config.build.packagesToBeIncluded );
 
   // that can be prettier
   getDependencies( versionMap, ( error, result ) => {
@@ -39,18 +30,14 @@ function getPackConfig( callback ) {
       return console.error( error );
     }
 
-    let shouldNotBeIgnored = new RegExp(
-      `^.*?(electron\.js|package\.json|main|dist|${ Object.keys( result ).join( '|' ) }).*$`
-    );
-
-    config.building.ignore = ( filePath ) => {
-      return filePath.length &&
-        filePath !== '/node_modules' &&
-        (
-          ! shouldNotBeIgnored.test( filePath ) ||
-          /src|main.ejs|icons/.test( filePath )
-        );
-    };
+    config.build.files = [
+      'electron.js',
+      'package.json',
+      'main/*',
+      'dist/*',
+      '!node_modules/*',
+      ...Object.keys( result ).map( dep => `node_modules/${ dep }` )
+    ];
 
     callback( null, config );
   } );

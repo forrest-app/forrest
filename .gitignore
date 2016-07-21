@@ -1,11 +1,8 @@
 .DS_Store
 app/dist/*
-builds/*
+dist/*
 node_modules
 npm-debug.log
 npm-debug.log.*
 thumbs.db
 !.gitkeep
-docs
-book.json
-SUMMARY.md
