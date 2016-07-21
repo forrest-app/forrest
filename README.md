@@ -1,6 +1,6 @@
 
 
-![image](./logo.jpg)
+![image](./media/logo.jpg)
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/makes-people-smile.svg)](http://forthebadge.com)
 
@@ -8,7 +8,7 @@
 
 > "Run Forrest, run!!!"
 
-![image](./preview.jpg)
+![image](./media/preview.jpg)
 
 ## Overview
 
