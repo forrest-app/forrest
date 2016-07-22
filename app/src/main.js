@@ -9,13 +9,13 @@ Vue.use( Electron );
 Vue.use( Router );
 
 // TODO make this generic
-import OpenExternal from './Directives/OpenExternal';
+import OpenExternal from './directives/OpenExternal';
 Vue.directive( 'openExternal', OpenExternal );
 
-import StayDown from './Directives/StayDown';
+import StayDown from './directives/StayDown';
 Vue.directive( 'stayDown', StayDown );
 
-import KeyTracker from './Directives/KeyTracker';
+import KeyTracker from './directives/KeyTracker';
 Vue.directive( 'keyTracker', KeyTracker );
 
 Vue.config.debug = true;
