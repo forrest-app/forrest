@@ -24,10 +24,10 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) and [openopensource.org](http://openope
 
 ## Thanks
 
-- Evan You | *for creation and maintenance of vue.js*
-- Greg Holguin | *for creation of the electron vue boilerplate*
-- Sindre Sorhus | *for all this great work and especially for solving the issues around environments and the holy PATH*
-- Michael Kühnel | *for giving Forrest its name*
+- [Evan You](https://github.com/yyx990803) | *for creation and maintenance of vue.js*
+- [Greg Holguin](https://github.com/SimulatedGREG) | *for creation of the electron vue boilerplate*
+- [Sindre Sorhus](https://github.com/sindresorhus) | *for all this great work and especially for solving the issues around environments and the holy PATH*
+- [Michael Kühnel](https://github.com/mischah) | *for giving Forrest its name*
 - Calvin Goodman | *for creation of the "Home" icon from the Noun Project*
 - Michal Beno | *for creation of the "Settings" icon from the Noun Project*
 
