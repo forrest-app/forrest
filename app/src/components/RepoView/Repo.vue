@@ -139,7 +139,7 @@
 
             this.$set(
               'scripts',
-              Object.keys( packageJSON.scripts ).map( ( key ) => {
+              Object.keys( packageJSON.scripts ).sort().map( ( key ) => {
                 return {
                   name           : key,
                   command        : packageJSON.scripts[ key ],
