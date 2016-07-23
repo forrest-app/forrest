@@ -192,8 +192,8 @@
       runScript() {
         this.$set( 'output', '' );
         this.$set( 'processStatus', null );
-        
-        const {options, script} = this.currentCommand;
+
+        const { options, script } = this.currentCommand;
 
         this.processCmd = options.isCustom ?
           `npm run ${ script.name }` :
