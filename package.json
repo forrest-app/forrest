@@ -7,6 +7,7 @@
     "dev": "node tasks/runner.js",
     "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter app",
     "pack": "cross-env NODE_ENV=production webpack -p --progress --colors",
+    "test": "npm run lint",
     "postinstall": "node tasks/postinstall.js",
     "vue:route": "node tasks/vue/route.js",
     "vuex:module": "node tasks/vuex/module.js"
