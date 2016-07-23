@@ -168,7 +168,7 @@
 
     data() {
       const repoName = decodeURIComponent( this.repoName );
-      
+
       return {
         currentCommand : null,
         repo           : this.repos.find( ( { name } ) => name === repoName ),
@@ -185,17 +185,15 @@
 
     methods : {
       handleUp( target ) {
-        if ( this.scriptElements.length < 1 ) {
-          return;
-        }
-        
         let index = [].indexOf.call( this.scriptElements, target );
 
         if ( index === -1 ) {
           index = this.scriptElements.length;
         }
-        
-        this.scriptElements[ index - 1 ].focus();
+
+        if ( index > 0 ) {
+          this.scriptElements[ index - 1 ].focus();
+        }
       },
 
       handleRight( target ) {
