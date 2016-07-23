@@ -167,9 +167,11 @@
     },
 
     data() {
+      const repoName = decodeURIComponent( this.repoName );
+      
       return {
         currentCommand : null,
-        repo           : this.repos.find( repo => repo.name === decodeURIComponent( this.repoName ) ),
+        repo           : this.repos.find( ( { name } ) => name === repoName ),
         scripts        : [],
         scriptElements : null
       };
@@ -183,15 +185,17 @@
 
     methods : {
       handleUp( target ) {
+        if ( this.scriptElements.length < 1 ) {
+          return;
+        }
+        
         let index = [].indexOf.call( this.scriptElements, target );
 
         if ( index === -1 ) {
           index = this.scriptElements.length;
         }
-
-        if ( index > 0 ) {
-          this.scriptElements[ index - 1 ].focus();
-        }
+        
+        this.scriptElements[ index - 1 ].focus();
       },
 
       handleRight( target ) {
@@ -203,7 +207,7 @@
       handleDown( target ) {
         let index = [].indexOf.call( this.scriptElements, target );
 
-        if ( index < this.scriptElements.length -1  ) {
+        if ( index < this.scriptElements.length - 1  ) {
           this.scriptElements[ index + 1 ].focus();
         }
       },
@@ -226,8 +230,8 @@
         this.$set(
           'currentCommand',
           {
-            script  : script,
-            options : options
+            script,
+            options
           }
         );
       }
@@ -241,7 +245,7 @@
 
     vuex : {
       actions : {
-        removeRepoAction : removeRepoAction
+        removeRepoAction
       },
 
       getters : {
