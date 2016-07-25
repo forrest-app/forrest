@@ -95,7 +95,7 @@
       </svg>
     </div>
     <div class="u-marginBottom">
-      <h1 class="o-headline-2">Forrest</h1>
+      <h1 class="o-headline-2">Forrest {{ version }}</h1>
       <p class="o-paragraph u-marginTopSmall">Brought to you by <button class="o-linkBtn" type="button" v-open-external="'https://twitter.com/stefanjudis'">Stefan Judis</button></p>
 
       <p class="o-paragraph">Check out the project on <button class="o-linkBtn" type="button" v-open-external="'https://github.com/stefanjudis/forrest'">GitHub</button>.</p>
@@ -171,5 +171,11 @@
 </template>
 
 <script>
-  export default {};
+  export default {
+    data() {
+      return {
+        version : this.$electron.remote.require( 'electron' ).app.getVersion()
+      };
+    }
+  };
 </script>
