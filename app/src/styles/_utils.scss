@@ -85,6 +85,10 @@
   fill : var(--svg-fill-green);
 }
 
+.u-fillWhite {
+  fill : var(--svg-fill-white);
+}
+
 .u-fullHeight {
   height : 100%;
 }
@@ -110,4 +114,8 @@
 
 .u-fontSizeSmall {
   font-size : .9em;
+}
+
+.u-textTransformUppercase {
+  text-transform : uppercase;
 }
