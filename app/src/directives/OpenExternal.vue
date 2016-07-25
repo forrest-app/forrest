@@ -1,20 +1,23 @@
 <script>
   export default {
-    bind() {
+    update( value ) {
+      if ( this.handler ) {
+        this.el.removeEventListener( 'click', this.handler );
+      }
+
       let openExternal = this.vm.$electron.shell.openExternal;
-      let url          = this.params.url;
 
       this.handler = ( event ) => {
-        openExternal( url );
+        openExternal( value );
 
         event.preventDefault();
       };
 
       this.el.addEventListener( 'click', this.handler );
     },
+
     unbind() {
       this.el.removeEventListener( 'click', this.handler );
-    },
-    params : [ 'url' ]
+    }
   };
 </script>

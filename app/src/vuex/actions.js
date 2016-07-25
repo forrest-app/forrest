@@ -1,34 +1,34 @@
-import { remote } from 'electron';
-
-const fs = remote.require( 'fs' );
+import { readRepoData } from '../modules/RepoUtils';
 
 export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
-  fs.readFile( `${ repoPath }/package.json`, ( error, data ) => {
-    // TODO put error handling here
+  let repoIsAlreadyAdded = state.repos.all.some( repo => repo.path === repoPath );
 
-    try {
-      var packageJSON = JSON.parse( data );
-    } catch( error ) {
-      // TODO error handling
-    }
+  if ( ! repoIsAlreadyAdded ) {
+    readRepoData( repoPath )
+      .then( repo => {
+        dispatch( 'ADD_REPO', repo );
+      } )
+      .catch( () => {
+        // TODO put error handling here
+      } );
+  } else {
+    new Notification(
+      'Project is already in the list',
+      {
+        body : `-> ${ repoPath }`
+      }
+    );
+  }
+};
 
-    if ( ! state.repos.all.some( repo => repo.path === repoPath ) ) {
-      let url = packageJSON.repository &&
-      packageJSON.repository.url &&
-      packageJSON.repository.url.replace( /(git:\/\/|\.git)/g, '' );
-
-      let repo = {
-        path        : repoPath,
-        name        : packageJSON.name,
-        description : packageJSON.description,
-        url         : url
-      };
-
-      dispatch( 'ADD_REPO', repo );
-    } else {
+export const reloadRepo = function( { dispatch, state }, repo ) {
+  readRepoData( repo.path )
+    .then( repo => {
+      dispatch( 'RELOAD_REPO', repo );
+    } )
+    .catch( () => {
       // TODO put error handling here
-    }
-  } );
+    } );
 };
 
 export const removeRepo = function( { dispatch, state }, repo ) {

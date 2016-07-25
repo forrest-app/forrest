@@ -17,6 +17,21 @@ const mutations = {
     ipcRenderer.send( 'updatedRepos', JSON.stringify( state.all ) );
   },
 
+  RELOAD_REPO ( state, repo ) {
+    state.all = state.all.reduce( ( all, savedRepo ) => {
+      if ( savedRepo.path === repo.path ) {
+        all.push( repo );
+      } else {
+        all.push( savedRepo );
+      }
+
+      return all;
+    }, [] );
+
+    settings.set( 'repos', state.all );
+    ipcRenderer.send( 'updatedRepos', JSON.stringify( state.all ) );
+  },
+
   REMOVE_REPO_WITH_INDEX ( state, repoIndex ) {
     state.all = state.all.filter( ( repo, index ) => index !== repoIndex );
 

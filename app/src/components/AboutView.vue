@@ -96,9 +96,9 @@
     </div>
     <div class="u-marginBottom">
       <h1 class="o-headline-2">Forrest</h1>
-      <p class="o-paragraph u-marginTopSmall">Brought to you by <button class="o-linkBtn" type="button" v-open-external :url="'https://twitter.com/stefanjudis'">Stefan Judis</button></p>
+      <p class="o-paragraph u-marginTopSmall">Brought to you by <button class="o-linkBtn" type="button" v-open-external="'https://twitter.com/stefanjudis'">Stefan Judis</button></p>
 
-      <p class="o-paragraph">Check out the project on <button class="o-linkBtn" type="button" v-open-external :url="'https://github.com/stefanjudis/forrest'">GitHub</button>.</p>
+      <p class="o-paragraph">Check out the project on <button class="o-linkBtn" type="button" v-open-external="'https://github.com/stefanjudis/forrest'">GitHub</button>.</p>
     </div>
 
     <h2 class="o-headline-3 u-marginBottomSmall">Shout out to these projects/people:</h2>
@@ -107,7 +107,7 @@
       <li class="c-about--heartList--item">
         <h3 class="o-headline-4 u-flexCenter">
           <span>Evan You</span>
-          <button class="o-icon" type="button" v-open-external :url="'https://twitter.com/youyuxi'">
+          <button class="o-icon" type="button" v-open-external="'https://twitter.com/youyuxi'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
               <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
               <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
@@ -117,11 +117,11 @@
             </svg>
           </button>
         </h3>
-        <p>for creation and maintenance of <button class="o-linkBtn" type="button" v-open-external :url="'https://vuejs.org/'">vue.js</button></p>
+        <p>for creation and maintenance of <button class="o-linkBtn" type="button" v-open-external="'https://vuejs.org/'">vue.js</button></p>
       <li class="c-about--heartList--item">
         <h3 class="o-headline-4 u-flexCenter">
           <span>Greg Holguin</span>
-          <button class="o-icon" type="button" v-open-external :url="'https://twitter.com/simulatedgreg'">
+          <button class="o-icon" type="button" v-open-external="'https://twitter.com/simulatedgreg'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
               <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
               <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
@@ -131,11 +131,11 @@
             </svg>
           </button>
         </h3>
-        <p>for creation of the <button class="o-linkBtn" type="button" v-open-external :url="'https://github.com/SimulatedGREG/electron-vue'">electron vue boilerplate</button></p>
+        <p>for creation of the <button class="o-linkBtn" type="button" v-open-external="'https://github.com/SimulatedGREG/electron-vue'">electron vue boilerplate</button></p>
       <li class="c-about--heartList--item">
         <h3 class="o-headline-4 u-flexCenter">
           <span>Sindre Sorhus</span>
-          <button class="o-icon" type="button" v-open-external :url="'https://twitter.com/sindresorhus'">
+          <button class="o-icon" type="button" v-open-external="'https://twitter.com/sindresorhus'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
               <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
               <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
@@ -149,7 +149,7 @@
       <li class="c-about--heartList--item">
         <h3 class="o-headline-4 u-flexCenter">
           <span>Michael Kühnel</span>
-          <button class="o-icon" type="button" v-open-external :url="'https://twitter.com/mkuehnel'">
+          <button class="o-icon" type="button" v-open-external="'https://twitter.com/mkuehnel'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
               <path d="M72.955 17.969l-22.41 22.41c5.637 11.592 3.65 25.958-5.978 35.585-9.45 9.451-23.469 11.543-34.946 6.285 17.658 17.15 45.87 17.003 63.333-.461 17.625-17.623 17.625-46.196.001-63.819z"/>
               <path d="M58.281 47.966c-12.855 3.768-26.293-3.047-31.006-15.339-7.596 6.311-11.149 16.751-8.194 26.831 3.966 13.531 18.151 21.284 31.682 17.317 13.53-3.967 21.284-18.15 17.317-31.682a25.574 25.574 0 0 0-.675-1.979 25.458 25.458 0 0 1-9.124 4.852z"/>
