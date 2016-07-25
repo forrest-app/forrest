@@ -103,7 +103,7 @@
             <div class="c-project--noScriptsMsg">
               <div>
                 <p class="o-paragraph">There are no custom scripts defined in your package.json.</p>
-                <p class="o-paragraph u-noMarginBottom">If you rely on installed globals, <button type="button" class="o-linkBtn" v-open-external :url="'http://4waisenkinder.de/blog/2014/10/18/npm-2-dot-0-and-the-much-better-star-npm-run-star-command/'">you might wanna change that</button>.</p>
+                <p class="o-paragraph u-noMarginBottom">If you rely on installed globals, <button type="button" class="o-linkBtn" v-open-external="'http://4waisenkinder.de/blog/2014/10/18/npm-2-dot-0-and-the-much-better-star-npm-run-star-command/'">you might wanna change that</button>.</p>
               </div>
               <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
