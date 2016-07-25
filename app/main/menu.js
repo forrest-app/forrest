@@ -72,6 +72,11 @@ module.exports = {
         role    : 'help',
         submenu : [
           {
+            label       : 'Keyboard Shortcuts',
+            accelerator : 'CmdOrCtrl+/',
+            click() { options.openHelpWindow(); }
+          },
+          {
             label : 'Learn More',
             click() { electron.shell.openExternal( 'http://electron.atom.io' ); }
           }

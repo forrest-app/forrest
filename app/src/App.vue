@@ -8,6 +8,8 @@
   @import './styles/objects/paragraphs';
   @import './styles/objects/lists';
   @import './styles/objects/small';
+  @import './styles/components/drag-handle';
+  @import './styles/components/logo';
   @import './styles/animations/move-down';
   @import './styles/transitions/slide-right--slide-left';
   @import './styles/transitions/slide-up--slide-down';
@@ -138,7 +140,9 @@
 </style>
 
 <template>
-  <header-bar v-if="$route.name !== 'about-page'"></header-bar>
+  <header-bar
+    v-if="$route.name !== 'about-page' && $route.name !== 'help-page'">
+  </header-bar>
   <main>
     <settings v-if="showSettings"></settings>
     <router-view v-on:activate="toggleSettings( false )"></router-view>

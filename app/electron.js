@@ -8,6 +8,7 @@ const windowStateKeeper               = require( 'electron-window-state' );
 
 let mainWindows = [];
 let aboutWindow;
+let helpWindow;
 let config = {};
 
 // fix path to guarantee that npm and node are available
@@ -20,10 +21,12 @@ if ( process.env.NODE_ENV === 'development' ) {
   config          = require( '../config' ).config;
   config.url      = `http://localhost:${ config.port }`;
   config.aboutUrl = `http://localhost:${ config.port }#!/about`;
+  config.helpUrl  = `http://localhost:${ config.port }#!/help`;
 } else {
   config.devtron  = false;
   config.url      = `file://${ __dirname }/dist/index.html`;
   config.aboutUrl = `file://${ __dirname }/dist/index.html#!/about`;
+  config.helpUrl  = `file://${ __dirname }/dist/index.html#!/help`;
 }
 
 ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
@@ -56,6 +59,23 @@ function openAboutWindow() {
     aboutWindow.on( 'closed', () => aboutWindow = null );
   } else {
     aboutWindow.focus();
+  }
+}
+
+function openHelpWindow() {
+  if ( ! helpWindow ) {
+    helpWindow = new BrowserWindow( {
+      height        : 500,
+      width         : 475,
+      titleBarStyle : 'hidden',
+      resizable     : false
+    } );
+
+    helpWindow.loadURL( config.helpUrl );
+
+    helpWindow.on( 'closed', () => helpWindow = null );
+  } else {
+    helpWindow.focus();
   }
 }
 
@@ -114,7 +134,8 @@ function createWindow( event, hash ) {
   if ( mainWindows.length === 1 ) {
     menu.init( {
       createWindow,
-      openAboutWindow
+      openAboutWindow,
+      openHelpWindow
     } );
   }
 
