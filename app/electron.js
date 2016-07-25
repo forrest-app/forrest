@@ -64,8 +64,8 @@ function openAboutWindow() {
  */
 function createWindow( event, hash ) {
   let mainWindowState = windowStateKeeper( {
-    defaultWidth  : 500,
-    defaultHeight : 300
+    defaultWidth  : 300,
+    defaultHeight : 500
   } );
 
   /**
