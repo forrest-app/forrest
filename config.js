@@ -13,7 +13,28 @@ const config = {
     'app-version'        : pkg.version,
     packagesToBeIncluded : [ 'fix-path', 'electron-window-state' ],
     overwrite            : true,
-    asar                 : true
+    asar                 : true,
+    dmg                  : {
+      'background-color' : '#E1E1E1',
+      contents           : [
+        {
+          x    : 485,
+          y    : 240,
+          type : 'link',
+          path : '/Applications'
+        },
+        {
+          x    : 120,
+          y    : 240,
+          type : 'file'
+        }
+      ],
+      'icon-size' : 100,
+      window      : {
+        width  : 600,
+        height : 500
+      }
+    },
   }
 };
 
