@@ -13,6 +13,12 @@
     color : #fff;
     height : 100%;
 
+    &--number {
+      display : flex;
+
+      align-items : center;
+    }
+
     &--version {
       font-size : 1.25em
     }
@@ -60,7 +66,10 @@
 
           <input v-if="setting.type === 'text'" name="{{ setting.name }}" :value="settings[ setting.name ]" @input="updateValue" class="o-input u-marginTopSmall">
 
-          <input v-if="setting.type === 'number'" name="{{ setting.name }}" type="{{ setting.type }}" :value="settings[ setting.name ]" @input="updateValue" class="o-input u-marginTopSmall">
+          <div v-if="setting.type === 'number'" class="c-settings--number">
+            <input name="{{ setting.name }}" type="{{ setting.type }}" :value="settings[ setting.name ]" @input="updateValue" @keydown="updateValue" class="o-input u-marginTopSmall">
+            <span class="u-marginLeftSmall">{{ setting.unit }}</span>
+          </div>
 
           <div v-if="setting.type === 'checkbox'">
             <input name="{{ setting.name }}" :checked="settings[ setting.name ]" @change="updateValue" type="checkbox" class="u-visuallyHidden">
@@ -81,6 +90,7 @@
 <script>
   import { updateAppSetting } from '../../vuex/actions';
   import { getAppSettings, getConfigSettings } from '../../vuex/getters';
+  import { keyCodes } from '../../modules/WindowKeyManager';
 
   export default {
     created() {
@@ -93,7 +103,8 @@
       return {
         exec        : this.$electron.remote.require( 'child_process' ).exec,
         nodeVersion : null,
-        npmVersion  : null
+        npmVersion  : null,
+        keyCodes    : keyCodes
       };
     },
 
@@ -134,6 +145,16 @@
 
         if ( event.target.type === 'checkbox' ) {
           value = event.target.checked;
+        }
+
+        if ( event.target.type === 'number' ) {
+          if ( event.keyCode === this.keyCodes.up ) {
+            value = ++value;
+          }
+
+          if ( event.keyCode === this.keyCodes.down ) {
+            value = --value;
+          }
         }
 
         this.updateAppSetting( event.target.name, value );
