@@ -6,19 +6,6 @@
 
     text-align : center;
 
-    &--dragHandle {
-      position : absolute;
-
-      top   : 0;
-      right : 0;
-      left  : 0;
-
-      height : 2em;
-
-      -webkit-user-select : none;
-      -webkit-app-region  : drag;
-    }
-
     &--heartList {
       padding    : 0 1em;
       list-style : none;
@@ -27,28 +14,14 @@
         margin-bottom : .5em;
       }
     }
-
-    &--logo {
-      display : inline-block;
-
-      width  : 5em;
-      height : 5em;
-
-      margin-bottom : .5em;
-
-      svg {
-        max-width  : 100%;
-        max-height : 100%;
-      }
-    }
   }
 </style>
 
 <template>
   <div class="c-about">
-    <div class="c-about--dragHandle"></div>
+    <div class="c-dragHandle"></div>
 
-    <div class="c-about--logo" transition="project">
+    <div class="c-logo" transition="project">
       <svg width="330" height="330" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>Forrest logo</title>
         <defs>
