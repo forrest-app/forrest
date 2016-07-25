@@ -4,6 +4,7 @@ const { app, ipcMain, BrowserWindow } = require( 'electron' );
 const path                            = require( 'path' );
 const menu                            = require( './main/menu' );
 const fixPath                         = require( 'fix-path' );
+const windowStateKeeper               = require( 'electron-window-state' );
 
 let mainWindows = [];
 let aboutWindow;
@@ -62,18 +63,27 @@ function openAboutWindow() {
  *
  */
 function createWindow( event, hash ) {
+  let mainWindowState = windowStateKeeper( {
+    defaultWidth  : 500,
+    defaultHeight : 300
+  } );
+
   /**
    * Initial window options
    */
   let newWindow = new BrowserWindow( {
-    height            : 500,
-    width             : 300,
+    height            : mainWindowState.height,
+    width             : mainWindowState.width,
+    x                 : mainWindowState.x,
+    y                 : mainWindowState.y,
     minWidth          : 250,
     titleBarStyle     : 'hidden',
     'web-preferences' : {
       plugins : true
     }
   } );
+
+  mainWindowState.manage( newWindow );
 
   let url = hash ? `${ config.url }${ hash }` : config.url;
 
