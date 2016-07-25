@@ -8,12 +8,12 @@
  */
 export function getParentWithClass( el, className ) {
   let parent = null;
-  let p      = el.parentNode;
+  let p      = el.parentElement;
 
   while ( p !== null ) {
     var o = p;
 
-    if ( o.classList.contains( className ) ) {
+    if ( o.classList && o.classList.contains( className ) ) {
       parent = o;
       break;
     }

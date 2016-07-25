@@ -48,12 +48,12 @@
 </style>
 
 <template>
-  <div class="c-script" tabindex="0">
-    <div class="c-script--header">
-      <div class="c-script--info">
+  <div class="{{ scriptClass }}" tabindex="0">
+    <div class="{{ scriptClass }}--header">
+      <div class="{{ scriptClass }}--info">
         {{ script.name }}
       </div>
-      <div class="c-script--actions">
+      <div class="{{ scriptClass }}--actions">
         <button type="button" class="o-icon" v-if="script.docs" v-open-external="script.docs">
           <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none"/>
@@ -74,9 +74,9 @@
         </button>
       </div>
     </div>
-    <div class="c-script--details" v-if="detailsAreVisible">
+    <div class="{{ scriptClass }}--details" v-if="detailsAreVisible">
       <code>
-        <pre class="c-script--code">$ {{ script.command }}</pre>
+        <pre class="{{ scriptClass }}--code">$ {{ script.command }}</pre>
       </code>
     </div>
   </div>
@@ -96,6 +96,6 @@
       }
     },
 
-    props : [ 'script', 'runScript', 'isCustom' ]
+    props : [ 'script', 'scriptClass', 'runScript', 'isCustom' ]
   };
 </script>

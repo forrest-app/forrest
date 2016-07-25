@@ -92,7 +92,7 @@
     </div>
     <ul v-if="repos && repos.length" class="o-list">
       <li v-for="repo in repos" track-by="path" class="o-list--item u-noPadding u-positionRelative" transition="t-slideRight--slideLeft">
-        <a id="{{ repo.name }}" class="c-project" v-link="{ path : `/repos/${ encodeURIComponent( repo.name ) }` }" @contextmenu="openContextMenu">
+        <a id="{{ repo.name }}" class="{{ projectClass }}" v-link="{ path : `/repos/${ encodeURIComponent( repo.name ) }` }" @contextmenu="openContextMenu">
           <div class="c-project--name">
             <span>{{ repo.name }}</span>
             <button type="button" v-if="repo.url" v-open-external="repo.url" class="o-icon" aria-label="Open project on GitHub" title="Open project on GitHub">
@@ -160,15 +160,16 @@
     data() {
       return {
         menu         : null,
-        repoElements : null
+        repoElements : null,
+        projectClass : 'c-project'
       };
     },
 
     methods : {
       openContextMenu( event ) {
-        let repoElement = event.target.classList.contains( 'c-project' ) ?
+        let repoElement = event.target.classList.contains( this.projectClass ) ?
                           event.target :
-                          getParentWithClass( event.target, 'c-project' );
+                          getParentWithClass( event.target, this.projectClass );
 
         if ( repoElement ) {
           const mainElectron = this.$electron.remote.require( 'electron' );
@@ -221,7 +222,11 @@
       },
 
       handleUp( target ) {
-        let index = [].indexOf.call( this.repoElements, target );
+        let focusedRepo = target.classList.contains( this.projectClass ) ?
+                          target :
+                          getParentWithClass( target, this.projectClass );
+
+        let index = [].indexOf.call( this.repoElements, focusedRepo );
 
         if ( index === -1 ) {
           index = this.repoElements.length;
@@ -233,13 +238,17 @@
       },
 
       handleRight( target ) {
-        if ( target.classList.contains( 'c-project' ) ) {
+        if ( target.classList.contains( this.projectClass ) ) {
           target.click();
         }
       },
 
       handleDown( target ) {
-        let index = [].indexOf.call( this.repoElements, target );
+        let focusedRepo = target.classList.contains( this.projectClass ) ?
+                          target :
+                          getParentWithClass( target, this.projectClass );
+
+        let index = [].indexOf.call( this.repoElements, focusedRepo );
 
         if ( index < this.repoElements.length -1  ) {
           this.repoElements[ index + 1 ].focus();

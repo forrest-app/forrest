@@ -91,14 +91,14 @@
 
         <ul class="o-list">
           <li v-for="script in commands" class="o-list--item u-noPadding">
-            <command :script="script" :run-script="runScript" :is-custom="false"></command>
+            <command :script="script" :script-class="scriptClass" :run-script="runScript" :is-custom="false"></command>
         </ul>
 
         <h2 class="c-project--commandHeadline">Custom scripts</h2>
 
         <ul class="o-list" >
           <li v-if="scripts.length" v-for="script in scripts" class="o-list--item u-noPadding">
-            <command :script="script" :run-script="runScript" :is-custom="true"></command>
+            <command :script="script" :script-class="scriptClass" :run-script="runScript" :is-custom="true"></command>
           <li v-if="! scripts.length" class="o-list--item">
             <div class="c-project--noScriptsMsg">
               <div>
@@ -123,11 +123,12 @@
   import CommandOutput from './CommandOutput';
   import { getRepos, getDefaultCommands } from '../../vuex/getters';
   import { removeRepo as removeRepoAction } from '../../vuex/actions';
+  import { getParentWithClass } from '../../modules/DomUtils';
 
   export default {
     activate( done ) {
       this.$watch( 'scripts', () => {
-        this.$set( 'scriptElements', this.$el.querySelectorAll( '.c-script' ) );
+        this.$set( 'scriptElements', this.$el.querySelectorAll( `.${ this.scriptClass }` ) );
       } );
 
       this.$electron.remote.require( 'fs' ).readFile(
@@ -170,6 +171,7 @@
       const repoName = decodeURIComponent( this.repoName );
 
       return {
+        scriptClass    : 'c-script',
         currentCommand : null,
         repo           : this.repos.find( ( { name } ) => name === repoName ),
         scripts        : [],
@@ -185,7 +187,11 @@
 
     methods : {
       handleUp( target ) {
-        let index = [].indexOf.call( this.scriptElements, target );
+        let focusedCommand = target.classList.contains( this.scriptClass ) ?
+                          target :
+                          getParentWithClass( target, this.scriptClass );
+
+        let index = [].indexOf.call( this.scriptElements, focusedCommand );
 
         if ( index === -1 ) {
           index = this.scriptElements.length;
@@ -197,13 +203,17 @@
       },
 
       handleRight( target ) {
-        if ( target.classList.contains( 'c-script' ) ) {
+        if ( target.classList.contains( this.scriptClass ) ) {
           target.querySelector( '[data-run-script]' ).click();
         }
       },
 
       handleDown( target ) {
-        let index = [].indexOf.call( this.scriptElements, target );
+        let focusedCommand = target.classList.contains( this.scriptClass ) ?
+                          target :
+                          getParentWithClass( target, this.scriptClass );
+
+        let index = [].indexOf.call( this.scriptElements, focusedCommand );
 
         if ( index < this.scriptElements.length - 1  ) {
           this.scriptElements[ index + 1 ].focus();
