@@ -140,7 +140,7 @@
 
 <script>
   import { getRepos } from '../../vuex/getters';
-  import { removeRepo } from '../../vuex/actions';
+  import { removeRepo, reloadRepo } from '../../vuex/actions';
   import { getParentWithClass } from '../../modules/DomUtils';
 
   export default {
@@ -180,6 +180,18 @@
                   'openNewWindow',
                   repoElement.hash
                 );
+              }
+            },
+            {
+              label : 'Reload project meta',
+              click : () => {
+                let repoToReload = this.repos.find(
+                  repo => repo.name === repoElement.id
+                );
+
+                if ( repoToReload ) {
+                  this.reloadRepo( repoToReload );
+                }
               }
             },
             {
@@ -239,7 +251,8 @@
 
     vuex : {
       actions : {
-        removeRepo : removeRepo
+        removeRepo,
+        reloadRepo
       },
       getters : {
         repos : getRepos
