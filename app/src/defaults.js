@@ -52,10 +52,11 @@ export default {
       type  : 'checkbox'
     },
     {
-      label : 'Terminal output font size in px',
-      desc  : 'Increase or decrease the font size of the terminal output',
+      label : 'Terminal output font size',
+      desc  : 'Increase/decrease the font size of the terminal output',
       name  : 'terminalFontSize',
-      type  : 'number'
+      type  : 'number',
+      unit  : 'px'
     }
   ]
 };
