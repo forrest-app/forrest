@@ -45,7 +45,7 @@ ipcMain.on( 'openNewWindow', createWindow );
 function openAboutWindow() {
   if ( ! aboutWindow ) {
     aboutWindow = new BrowserWindow( {
-      height        : 600,
+      height        : 625,
       width         : 475,
       titleBarStyle : 'hidden',
       resizable     : false

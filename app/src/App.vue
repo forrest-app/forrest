@@ -93,8 +93,6 @@
     width: .75rem;
 }
   ::-webkit-scrollbar-thumb {
-    // background-clip  : padding-box;
-    // background-color : var(--npm-red-dark);
     box-shadow   : inset 0 0 0 .5rem var(--npm-red);
     border           : .25rem solid transparent;
   }

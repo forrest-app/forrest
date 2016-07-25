@@ -160,12 +160,15 @@
           </button>
         </h3>
         <p>for giving Forrest its name</p>
-      <li class="c-about--heartList--item">
+      <li class="c-about--heartList--item u-fontSizeSmall u-marginTopSmall">
         <h3 class="o-headline-4">Calvin Goodman</h3>
         <p>for creation of the "Home" icon from the Noun Project
-      <li class="c-about--heartList--item">
+      <li class="c-about--heartList--item u-fontSizeSmall">
         <h3 class="o-headline-4">Michal Beno</h3>
         <p>for creation of the "Settings" icon from the Noun Project
+      <li class="c-about--heartList--item u-fontSizeSmall">
+        <h3 class="o-headline-4">Danin Polshin</h3>
+        <p>for creation of the "Running man" icon from the Noun Project
     </ul>
   </div>
 </template>
