@@ -11,12 +11,12 @@
 
       dt {
         clear   : both;
-        width   : 20%;
+        width   : 25%;
         padding : .5em 0;
       }
 
       dd {
-        width      : 80%;
+        width      : 75%;
         text-align : left;
 
         padding : .5em 0 .5em .5em;
@@ -100,48 +100,59 @@
       <h1 class="o-headline-2">Keyboard Shortcuts</h1>
     </div>
 
-    <dl class="c-help--definitionList">
-      <dt aria-label="Left and right keys">
-        <span class="c-help--key">&#8592;</span>
-        <span class="c-help--key">&#8594;</span>
-      </dt>
-      <dd>Navigate between the home and project screens</dd>
+    <div class="u-flex">
+      <div>
+        <h4 class="o-headline-4">Home & Projects</h4>
 
-      <dt aria-label="Up and down keys">
-        <span class="c-help--key">&#8593;</span>
-        <span class="c-help--key">&#8595;</span>
-      </dt>
-      <dd>Navigate between the available projects and commands</dd>
+        <dl class="c-help--definitionList u-marginTopSmall">
+          <dt aria-label="Left and right keys">
+            <span class="c-help--key">&#8592;</span>
+            <span class="c-help--key">&#8594;</span>
+          </dt>
+          <dd>Navigate between the home and project panels</dd>
 
-      <dt aria-label="Tab key">
-        <span class="c-help--key">tab</span>
-      </dt>
-      <dd>Focus on the next action</dd>
+          <dt aria-label="Up and down keys">
+            <span class="c-help--key">&#8593;</span>
+            <span class="c-help--key">&#8595;</span>
+          </dt>
+          <dd>Navigate between the available projects and commands</dd>
 
-      <dt aria-label="Shift plus tab key combination">
-        <span class="c-help--key">shift + tab</span>
-      </dt>
-      <dd>Focus on the previous action</dd>
+          <dt aria-label="Tab key">
+            <span class="c-help--key">tab</span>
+          </dt>
+          <dd>Focus on the next action</dd>
 
-      <dt aria-label="Escape key">
-        <span class="c-help--key">esc</span>
-      </dt>
-      <dd>Close a running command</dd>
+          <dt aria-label="Shift plus tab key combination">
+            <span class="c-help--key">shift + tab</span>
+          </dt>
+          <dd>Focus on the previous action</dd>
 
-      <dt aria-label="Right arrow key">
-        <span class="c-help--key">&#8594;</span>
-      </dt>
-      <dd>Run a given command when in project panel</dd>
+          <dt aria-label="Right mouse button">
+            <span class="c-help--key">right mouse click</span>
+          </dt>
+          <dd>Display more options when click on a project</dd>
+        </dl>
+      </div>
+      <div class="">
+        <h4 class="o-headline-4">Commands</h4>
 
-      <dt aria-label="Left arrow key">
-        <span class="c-help--key">&#8592;</span>
-      </dt>
-      <dd>Terminate a running command</dd>
+        <dl class="c-help--definitionList u-marginTopSmall">
+          <dt aria-label="Escape key">
+            <span class="c-help--key">esc</span>
+          </dt>
+          <dd>Close a running command</dd>
 
-      <dt aria-label="Right mouse button">
-        <span class="c-help--key">right mouse click</span>
-      </dt>
-      <dd>Display more options when click on project</dd>
-    </dl>
+          <dt aria-label="Right arrow key">
+            <span class="c-help--key">&#8594;</span>
+          </dt>
+          <dd>Run a given command when in project panel</dd>
+
+          <dt aria-label="Left arrow key">
+            <span class="c-help--key">&#8592;</span>
+          </dt>
+          <dd>Terminate a running command</dd>
+        </dl>
+      </div>
+    </div>
   </div>
 </template>
