@@ -10,20 +10,22 @@ const windowStateKeeper               = require( 'electron-window-state' );
 const staticWindows = {
   about : {
     config : {
-      height        : 625,
-      width         : 475,
-      titleBarStyle : 'hidden',
-      resizable     : false
+      height          : 625,
+      width           : 475,
+      backgroundColor : '#f1f1f1',
+      titleBarStyle   : 'hidden',
+      resizable       : false
     },
     hash : '#!/about',
     initializedWindow : null
   },
   help : {
     config : {
-      height        : 625,
-      width         : 725,
-      titleBarStyle : 'hidden',
-      resizable     : false
+      height          : 625,
+      width           : 725,
+      backgroundColor : '#f1f1f1',
+      titleBarStyle   : 'hidden',
+      resizable       : false
     },
     hash : '#!/help',
     initializedWindow : null
@@ -111,6 +113,7 @@ function createWindow( event, hash ) {
     width             : mainWindowState.width,
     x                 : mainWindowState.x,
     y                 : mainWindowState.y,
+    backgroundColor   : '#f1f1f1',
     minWidth          : 250,
     titleBarStyle     : 'hidden',
     'web-preferences' : {
