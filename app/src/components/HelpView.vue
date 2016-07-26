@@ -7,8 +7,6 @@
     text-align : center;
 
     &--definitionList {
-      font-size : .9em;
-
       dt {
         clear   : both;
         width   : 25%;
@@ -16,6 +14,8 @@
       }
 
       dd {
+        font-size  : .9em;
+        
         width      : 75%;
         text-align : left;
 
@@ -31,17 +31,12 @@
     &--key {
       display :  inline-block;
 
-      background-color : var(--header-background);
-      border-radius    : 2px;
+      font-size   : 1em;
+      font-weight : bold;
+      color       : var(--header-background);
+      text-align  : center;
 
-      color : var( --code-color );
-
-      padding : .25em .5em;
-
-      text-align : center;
-
-      min-width  : 2em;
-      min-height : 2em;
+      min-height  : 2em;
     }
   }
 </style>
@@ -97,62 +92,78 @@
       </svg>
     </div>
     <div class="u-marginBottom">
-      <h1 class="o-headline-2">Keyboard Shortcuts</h1>
+      <h1 class="o-headline-2">Shortcuts</h1>
     </div>
 
-    <div class="u-flex">
+    <div class="u-flexCenter u-marginBottom">
       <div>
-        <h4 class="o-headline-4">Home & Projects</h4>
+        <h4 class="o-headline-4">Home</h4>
 
         <dl class="c-help--definitionList u-marginTopSmall">
-          <dt aria-label="Left and right keys">
-            <span class="c-help--key">&#8592;</span>
-            <span class="c-help--key">&#8594;</span>
+          <dt aria-label="Right mouse button">
+            <svg class="u-fillWhite" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 1.56 4 4.92 4 9h7V1.07z" stroke="#2a333c" />
+              <path d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93z" fill="#cb3837" />
+            </svg>
           </dt>
-          <dd>Navigate between the home and project panels</dd>
+          <dd>Show more project options</dd>
+
+          <dt aria-label="Right arrow key">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+            </svg>
+          </dt>
+          <dd>Open project</dd>
 
           <dt aria-label="Up and down keys">
-            <span class="c-help--key">&#8593;</span>
-            <span class="c-help--key">&#8595;</span>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" fill="#010101" />
+            </svg>
           </dt>
-          <dd>Navigate between the available projects and commands</dd>
-
-          <dt aria-label="Tab key">
-            <span class="c-help--key">tab</span>
-          </dt>
-          <dd>Focus on the next action</dd>
-
-          <dt aria-label="Shift plus tab key combination">
-            <span class="c-help--key">shift + tab</span>
-          </dt>
-          <dd>Focus on the previous action</dd>
-
-          <dt aria-label="Right mouse button">
-            <span class="c-help--key">right mouse click</span>
-          </dt>
-          <dd>Display more options when click on a project</dd>
+          <dd>Navigate through projects</dd>
         </dl>
       </div>
-      <div class="">
-        <h4 class="o-headline-4">Commands</h4>
+      <div>
+        <h4 class="o-headline-4">Projects</h4>
 
         <dl class="c-help--definitionList u-marginTopSmall">
           <dt aria-label="Escape key">
-            <span class="c-help--key">esc</span>
+            <span class="c-help--key u-textTransformUppercase">esc</span>
           </dt>
-          <dd>Close a running command</dd>
-
-          <dt aria-label="Right arrow key">
-            <span class="c-help--key">&#8594;</span>
-          </dt>
-          <dd>Run a given command when in project panel</dd>
+          <dd>Terminate running command</dd>
 
           <dt aria-label="Left arrow key">
-            <span class="c-help--key">&#8592;</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
           </dt>
-          <dd>Terminate a running command</dd>
+          <dd>Go Home / Terminate running command</dd>
+
+          <dt aria-label="Up and down keys">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" fill="#010101" />
+            </svg>
+          </dt>
+          <dd>Navigate through commands</dd>
         </dl>
       </div>
     </div>
+
+    <p class="u-marginTop">
+      To reach other actions use the <span class="c-help--key u-textTransformUppercase">tab</span> key when needed.
+    </p>
   </div>
 </template>

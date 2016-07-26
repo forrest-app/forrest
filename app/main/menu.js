@@ -1,4 +1,5 @@
 const electron = require( 'electron' );
+const shell    = electron.shell;
 const Menu     = electron.Menu;
 
 module.exports = {
@@ -72,9 +73,13 @@ module.exports = {
         role    : 'help',
         submenu : [
           {
-            label       : 'Keyboard Shortcuts',
+            label       : 'Shortcuts',
             accelerator : 'CmdOrCtrl+/',
             click() { options.openStaticWindow( 'help' ); }
+          },
+          {
+            label       : 'Report an Issue',
+            click() { shell.openExternal( 'https://github.com/stefanjudis/forrest/issues' ) }
           }
         ]
       }
@@ -93,7 +98,7 @@ module.exports = {
             type : 'separator'
           },
           {
-            label       : 'Open new window',
+            label       : 'Open New Window',
             accelerator : 'CmdOrCtrl+N',
             click() { options.createWindow(); }
           },

@@ -16,28 +16,26 @@ const staticWindows = {
       titleBarStyle   : 'hidden',
       resizable       : false
     },
-    hash : '#!/about',
+    hash              : '#!/about',
     initializedWindow : null
   },
   help : {
     config : {
       height          : 625,
-      width           : 725,
+      width           : 625,
       backgroundColor : '#f1f1f1',
       titleBarStyle   : 'hidden',
       resizable       : false
     },
-    hash : '#!/help',
+    hash              : '#!/help',
     initializedWindow : null
   }
 };
 
 let mainWindows = [];
-let aboutWindow;
-let helpWindow;
 let config  = {};
 let baseUrl = {
-  development : ``,
+  development : '',
   production  : `file://${ __dirname }/dist/index.html`
 };
 
