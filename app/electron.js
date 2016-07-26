@@ -45,10 +45,11 @@ ipcMain.on( 'openNewWindow', createWindow );
 function openAboutWindow() {
   if ( ! aboutWindow ) {
     aboutWindow = new BrowserWindow( {
-      height        : 625,
-      width         : 475,
-      titleBarStyle : 'hidden',
-      resizable     : false
+      height          : 625,
+      width           : 475,
+      backgroundColor : '#f1f1f1',
+      titleBarStyle   : 'hidden',
+      resizable       : false
     } );
 
     aboutWindow.loadURL( config.aboutUrl );
@@ -76,6 +77,7 @@ function createWindow( event, hash ) {
     width             : mainWindowState.width,
     x                 : mainWindowState.x,
     y                 : mainWindowState.y,
+    backgroundColor   : '#f1f1f1',
     minWidth          : 250,
     titleBarStyle     : 'hidden',
     'web-preferences' : {
