@@ -78,8 +78,8 @@ module.exports = {
             click() { options.openStaticWindow( 'help' ); }
           },
           {
-            label       : 'Report an Issue',
-            click() { shell.openExternal( 'https://github.com/stefanjudis/forrest/issues' ) }
+            label : 'Report an Issue',
+            click() { shell.openExternal( 'https://github.com/stefanjudis/forrest/issues' ); }
           }
         ]
       }
