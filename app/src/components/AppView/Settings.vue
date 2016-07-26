@@ -26,7 +26,7 @@
 </style>
 
 <template>
-  <div class="c-settings"
+  <div class="c-settings scrollContainer"
         transition="t-slideDown--slideUp"
         v-key-tracker
         :on-esc="handleEsc"
