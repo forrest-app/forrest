@@ -74,11 +74,7 @@ module.exports = {
           {
             label       : 'Keyboard Shortcuts',
             accelerator : 'CmdOrCtrl+/',
-            click() { options.openHelpWindow(); }
-          },
-          {
-            label : 'Learn More',
-            click() { electron.shell.openExternal( 'http://electron.atom.io' ); }
+            click() { options.openStaticWindow( 'help' ); }
           }
         ]
       }
@@ -91,7 +87,7 @@ module.exports = {
         submenu : [
           {
             label : 'About Forrest',
-            click() { options.openAboutWindow(); }
+            click() { options.openStaticWindow( 'about' ); }
           },
           {
             type : 'separator'

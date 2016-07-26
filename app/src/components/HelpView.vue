@@ -7,7 +7,7 @@
     text-align : center;
 
     &--definitionList {
-      font-size : .9em; 
+      font-size : .9em;
 
       dt {
         clear   : both;
@@ -40,8 +40,8 @@
 
       text-align : center;
 
-      min-width : 2em;
-      height    : 2em;
+      min-width  : 2em;
+      min-height : 2em;
     }
   }
 </style>
@@ -101,27 +101,47 @@
     </div>
 
     <dl class="c-help--definitionList">
-      <dt>
+      <dt aria-label="Left and right keys">
         <span class="c-help--key">&#8592;</span>
         <span class="c-help--key">&#8594;</span>
       </dt>
       <dd>Navigate between the home and project screens</dd>
 
-      <dt>
+      <dt aria-label="Up and down keys">
         <span class="c-help--key">&#8593;</span>
         <span class="c-help--key">&#8595;</span>
       </dt>
       <dd>Navigate between the available projects and commands</dd>
 
-      <dt>
+      <dt aria-label="Tab key">
         <span class="c-help--key">tab</span>
       </dt>
       <dd>Focus on the next action</dd>
 
-      <dt>
+      <dt aria-label="Shift plus tab key combination">
         <span class="c-help--key">shift + tab</span>
       </dt>
       <dd>Focus on the previous action</dd>
+
+      <dt aria-label="Escape key">
+        <span class="c-help--key">esc</span>
+      </dt>
+      <dd>Close a running command</dd>
+
+      <dt aria-label="Right arrow key">
+        <span class="c-help--key">&#8594;</span>
+      </dt>
+      <dd>Run a given command when in project panel</dd>
+
+      <dt aria-label="Left arrow key">
+        <span class="c-help--key">&#8592;</span>
+      </dt>
+      <dd>Terminate a running command</dd>
+
+      <dt aria-label="Right mouse button">
+        <span class="c-help--key">right mouse click</span>
+      </dt>
+      <dd>Display more options when click on project</dd>
     </dl>
   </div>
 </template>

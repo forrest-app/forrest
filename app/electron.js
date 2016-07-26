@@ -6,10 +6,38 @@ const menu                            = require( './main/menu' );
 const fixPath                         = require( 'fix-path' );
 const windowStateKeeper               = require( 'electron-window-state' );
 
+// configuration for the available static windows
+const staticWindows = {
+  about : {
+    config : {
+      height        : 625,
+      width         : 475,
+      titleBarStyle : 'hidden',
+      resizable     : false
+    },
+    hash : '#!/about',
+    initializedWindow : null
+  },
+  help : {
+    config : {
+      height        : 625,
+      width         : 475,
+      titleBarStyle : 'hidden',
+      resizable     : false
+    },
+    hash : '#!/help',
+    initializedWindow : null
+  }
+};
+
 let mainWindows = [];
 let aboutWindow;
 let helpWindow;
-let config = {};
+let config  = {};
+let baseUrl = {
+  development : ``,
+  production  : `file://${ __dirname }/dist/index.html`
+};
 
 // fix path to guarantee that npm and node are available
 fixPath();
@@ -18,15 +46,13 @@ fixPath();
 app.commandLine.appendSwitch( '--enable-experimental-web-platform-features' );
 
 if ( process.env.NODE_ENV === 'development' ) {
-  config          = require( '../config' ).config;
-  config.url      = `http://localhost:${ config.port }`;
-  config.aboutUrl = `http://localhost:${ config.port }#!/about`;
-  config.helpUrl  = `http://localhost:${ config.port }#!/help`;
+  config              = require( '../config' ).config;
+  baseUrl.development = `http://localhost:${ config.port }`;
+
+  config.url      = `${ baseUrl.development }`;
 } else {
   config.devtron  = false;
-  config.url      = `file://${ __dirname }/dist/index.html`;
-  config.aboutUrl = `file://${ __dirname }/dist/index.html#!/about`;
-  config.helpUrl  = `file://${ __dirname }/dist/index.html#!/help`;
+  config.url      = `${ baseUrl.production }`;
 }
 
 ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
@@ -45,37 +71,26 @@ ipcMain.on( 'updatedRepos', ( event, reposString ) => {
 
 ipcMain.on( 'openNewWindow', createWindow );
 
-function openAboutWindow() {
-  if ( ! aboutWindow ) {
-    aboutWindow = new BrowserWindow( {
-      height        : 625,
-      width         : 475,
-      titleBarStyle : 'hidden',
-      resizable     : false
-    } );
+/**
+ * Open a selected static window
+ *
+ * @param {String} type - name of the selected window type
+ */
+function openStaticWindow( type ) {
+  if ( ! staticWindows[ type ].initializedWindow ) {
+    staticWindows[ type ].initializedWindow = new BrowserWindow(
+      staticWindows[ type ].config
+    );
 
-    aboutWindow.loadURL( config.aboutUrl );
+    staticWindows[ type ].initializedWindow.loadURL(
+      `${ config.url }` + staticWindows[ type ].hash
+    );
 
-    aboutWindow.on( 'closed', () => aboutWindow = null );
+    staticWindows[ type ].initializedWindow.on(
+      'closed', () => staticWindows[ type ].initializedWindow = null
+    );
   } else {
-    aboutWindow.focus();
-  }
-}
-
-function openHelpWindow() {
-  if ( ! helpWindow ) {
-    helpWindow = new BrowserWindow( {
-      height        : 500,
-      width         : 475,
-      titleBarStyle : 'hidden',
-      resizable     : false
-    } );
-
-    helpWindow.loadURL( config.helpUrl );
-
-    helpWindow.on( 'closed', () => helpWindow = null );
-  } else {
-    helpWindow.focus();
+    staticWindows[ type ].initializedWindow.focus();
   }
 }
 
@@ -134,8 +149,7 @@ function createWindow( event, hash ) {
   if ( mainWindows.length === 1 ) {
     menu.init( {
       createWindow,
-      openAboutWindow,
-      openHelpWindow
+      openStaticWindow
     } );
   }
 
