@@ -21,8 +21,8 @@ const staticWindows = {
   },
   help : {
     config : {
-      height          : 625,
-      width           : 625,
+      height          : 400,
+      width           : 550,
       backgroundColor : '#f1f1f1',
       titleBarStyle   : 'hidden',
       resizable       : false
