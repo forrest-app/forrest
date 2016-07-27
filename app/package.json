@@ -8,6 +8,7 @@
     "electron-settings": "^1.0.4",
     "electron-window-state": "^3.0.3",
     "fix-path": "^2.0.0",
+    "ps-tree": "^1.1.0",
     "vue": "^1.0.24",
     "vue-electron": "^1.0.0",
     "vue-router": "^0.7.13",

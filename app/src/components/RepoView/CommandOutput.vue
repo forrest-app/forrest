@@ -149,6 +149,7 @@
     data() {
       return {
         exec          : this.$electron.remote.require( 'child_process' ).exec,
+        psTree        : this.$electron.remote.require( 'ps-tree' ),
         process       : null,
         processStatus : null,
         processCmd    : null,
@@ -185,7 +186,11 @@
 
       killScript() {
         if ( this.process ) {
-          this.process.kill( 'SIGTERM' );
+          // make sure also child processes
+          // of child processes get killed
+          this.psTree( this.process.pid, ( err, children ) => {
+            this.exec( `kill -9 ${ children.map( p => p.PID ).join( ' ' ) }` );
+          } );
         }
       },
 
