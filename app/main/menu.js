@@ -1,4 +1,5 @@
 const electron = require( 'electron' );
+const shell    = electron.shell;
 const Menu     = electron.Menu;
 
 module.exports = {
@@ -72,8 +73,13 @@ module.exports = {
         role    : 'help',
         submenu : [
           {
-            label : 'Learn More',
-            click() { electron.shell.openExternal( 'http://electron.atom.io' ); }
+            label       : 'Shortcuts',
+            accelerator : 'CmdOrCtrl+/',
+            click() { options.openStaticWindow( 'help' ); }
+          },
+          {
+            label : 'Report an Issue',
+            click() { shell.openExternal( 'https://github.com/stefanjudis/forrest/issues' ); }
           }
         ]
       }
@@ -86,13 +92,13 @@ module.exports = {
         submenu : [
           {
             label : 'About Forrest',
-            click() { options.openAboutWindow(); }
+            click() { options.openStaticWindow( 'about' ); }
           },
           {
             type : 'separator'
           },
           {
-            label       : 'Open new window',
+            label       : 'Open New Window',
             accelerator : 'CmdOrCtrl+N',
             click() { options.createWindow(); }
           },
