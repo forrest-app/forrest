@@ -145,8 +145,10 @@
   <header-bar
     v-if="$route.name !== 'about-page' && $route.name !== 'help-page'">
   </header-bar>
-  <main>
-    <settings v-if="showSettings"></settings>
+  <main
+    v-key-tracker
+    :on-cmd-comma="handleCommandComma">
+    <settings v-if="showSettings && $route.name !== 'about-page' && $route.name !== 'help-page'"></settings>
     <router-view v-on:activate="toggleSettings( false )"></router-view>
   </main>
 </template>
@@ -176,6 +178,10 @@
     },
 
     methods : {
+      handleCommandComma() {
+        this.toggleSettings();
+      },
+
       toggleSettings( showSettings ) {
         if ( showSettings !== undefined ) {
           this.showSettings = showSettings;

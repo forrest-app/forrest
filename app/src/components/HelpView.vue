@@ -92,7 +92,29 @@
       <h1 class="o-headline-2">Shortcuts</h1>
     </div>
 
-    <div class="u-flex-50-50 u-marginBottom">
+    <div class="u-flex-33-33-33 u-marginBottom">
+      <div>
+        <h4 class="o-headline-4">General</h4>
+
+        <dl class="c-help--definitionList u-marginTopSmall">
+          <dt aria-label="Command Character n">
+            ⌘ <span class="u-widthTwoChar u-fontWeightBold">n</span>
+          </dt>
+          <dd>Open another Forrest window</dd>
+          <dt aria-label="Command Character q">
+            ⌘ <span class="u-widthTwoChar u-fontWeightBold">w</span>
+          </dt>
+          <dd>Close current window</dd>
+          <dt aria-label="Command Character q">
+            ⌘ <span class="u-widthTwoChar u-fontWeightBold">q</span>
+          </dt>
+          <dd>Quit forrest</dd>
+          <dt aria-label="Command Comma">
+            ⌘ <span class="u-widthTwoChar u-fontWeightBold">,</span>
+          </dt>
+          <dd>Toggle settings</dd>
+        </dl>
+      </div>
       <div>
         <h4 class="o-headline-4">Home</h4>
 

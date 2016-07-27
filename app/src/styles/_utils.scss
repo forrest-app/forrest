@@ -89,6 +89,14 @@
   }
 }
 
+.u-flex-33-33-33 {
+  display : flex;
+
+  > * {
+    width : 33.333%;
+  }
+}
+
 .u-fillRed {
   fill : var(--svg-fill-red);
 }
@@ -103,6 +111,11 @@
 
 .u-fullHeight {
   height : 100%;
+}
+
+.u-widthTwoChar {
+  display : inline-block;
+  width : 2ch;
 }
 
 .u-visuallyHidden {
