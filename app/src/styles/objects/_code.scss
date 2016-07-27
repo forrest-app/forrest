@@ -1,0 +1,16 @@
+.o-code {
+  font-size : .8em;
+
+  padding : .5em;
+
+  background-color : var(--code-background);
+  color            : var(--code-color);
+
+  border-radius : .25em;
+
+  overflow      : auto;
+
+  &, & > code {
+    display : block;
+  }
+}

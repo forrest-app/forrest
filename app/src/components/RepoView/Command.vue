@@ -15,19 +15,6 @@
       display : flex;
     }
 
-    &--code {
-      font-size : .8em;
-
-      padding : .5em;
-
-      background-color : var(--code-background);
-      color            : var(--code-color);
-
-      border-radius : .25em;
-
-      overflow : auto;
-    }
-
     &--details {
       margin-top : .5em;
     }
@@ -75,9 +62,7 @@
       </div>
     </div>
     <div class="{{ scriptClass }}--details" v-if="detailsAreVisible">
-      <code>
-        <pre class="{{ scriptClass }}--code">$ {{ script.command }}</pre>
-      </code>
+      <code class="o-code"><pre >$ {{ script.command }}</pre></code>
     </div>
   </div>
 </template>

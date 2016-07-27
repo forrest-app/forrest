@@ -3,6 +3,7 @@
   @import './styles/objects/buttons';
   @import './styles/objects/icon';
   @import './styles/objects/checkbox';
+  @import './styles/objects/code';
   @import './styles/objects/input';
   @import './styles/objects/headlines';
   @import './styles/objects/paragraphs';
