@@ -1,0 +1,12 @@
+.c-dragHandle {
+  position : absolute;
+
+  top   : 0;
+  right : 0;
+  left  : 0;
+
+  height : 2em;
+
+  -webkit-user-select : none;
+  -webkit-app-region  : drag;
+}

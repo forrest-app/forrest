@@ -52,6 +52,10 @@
   margin-top : 1em;
 }
 
+.u-marginTopLarge {
+  margin-top : 2em;
+}
+
 .u-marginLeftAuto {
   margin-left : auto;
 }
@@ -77,12 +81,24 @@
   justify-content : space-between;
 }
 
+.u-flex-50-50 {
+  display : flex;
+
+  > * {
+    width : 50%;
+  }
+}
+
 .u-fillRed {
   fill : var(--svg-fill-red);
 }
 
 .u-fillGreen {
   fill : var(--svg-fill-green);
+}
+
+.u-fillNone {
+  fill : none;
 }
 
 .u-fullHeight {
@@ -110,4 +126,12 @@
 
 .u-fontSizeSmall {
   font-size : .9em;
+}
+
+.u-fontWeightBold {
+  font-weight : bold;
+}
+
+.u-textTransformUppercase {
+  text-transform : uppercase;
 }

@@ -10,5 +10,9 @@ export default {
   '/about' : {
     component : require( './components/AboutView' ),
     name      : 'about-page'
+  },
+  '/help' : {
+    component : require( './components/HelpView' ),
+    name      : 'help-page'
   }
 };
