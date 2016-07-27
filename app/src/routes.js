@@ -9,10 +9,17 @@ export default {
   },
   '/about' : {
     component : require( './components/AboutView' ),
-    name      : 'about-page'
+    name      : 'about-page',
+    isStatic  : true
   },
   '/help' : {
     component : require( './components/HelpView' ),
-    name      : 'help-page'
+    name      : 'help-page',
+    isStatic  : true
+  },
+  '/update-available' : {
+    component : require( './components/UpdateAvailableView' ),
+    name      : 'update-available-page',
+    isStatic  : true
   }
 };

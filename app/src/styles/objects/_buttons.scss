@@ -13,3 +13,18 @@
   border : none;
   display : inline-block;
 }
+
+.o-primaryBtn {
+  display : block;
+  width : 100%;
+
+  padding : .5em;
+
+  color      : var(--main-bg-color);
+  background : var(--npm-red);
+
+  border : none;
+
+  font-size : 1em;
+  font-family : inherit;
+}

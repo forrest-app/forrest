@@ -5,14 +5,24 @@ const path                            = require( 'path' );
 const menu                            = require( './main/menu' );
 const fixPath                         = require( 'fix-path' );
 const windowStateKeeper               = require( 'electron-window-state' );
+const GitHubApi                       = require( 'github' );
+const github                          = new GitHubApi( {
+  protocol : 'https',
+  headers  : {
+    'user-agent' : 'Forrest - npm desktop client'
+  },
+  timeout : 5000
+} );
+
 
 // configuration for the available static windows
-const staticWindows = {
+const initialBgColor = '#f1f1f1';
+const staticWindows  = {
   about : {
     config : {
       height          : 625,
       width           : 475,
-      backgroundColor : '#f1f1f1',
+      backgroundColor : initialBgColor,
       titleBarStyle   : 'hidden',
       resizable       : false
     },
@@ -23,11 +33,22 @@ const staticWindows = {
     config : {
       height          : 400,
       width           : 800,
-      backgroundColor : '#f1f1f1',
+      backgroundColor : initialBgColor,
       titleBarStyle   : 'hidden',
       resizable       : false
     },
     hash              : '#!/help',
+    initializedWindow : null
+  },
+  updateAvailable : {
+    config : {
+      height          : 300,
+      width           : 300,
+      backgroundColor : initialBgColor,
+      titleBarStyle   : 'hidden',
+      resizable       : false
+    },
+    hash              : '#!/update-available',
     initializedWindow : null
   }
 };
@@ -112,7 +133,7 @@ function createWindow( event, hash ) {
     width             : mainWindowState.width,
     x                 : mainWindowState.x,
     y                 : mainWindowState.y,
-    backgroundColor   : '#f1f1f1',
+    backgroundColor   : initialBgColor,
     minWidth          : 250,
     titleBarStyle     : 'hidden',
     'web-preferences' : {
@@ -157,6 +178,21 @@ function createWindow( event, hash ) {
 
   /* eslint-disable no-console */
   console.log( 'window opened' );
+}
+
+if ( process.env.NODE_ENV !== 'development' ) {
+  github.repos.getReleases(
+    { user : 'stefanjudis', repo : 'forrest' },
+    ( error, releases ) => {
+      if ( error ) {
+        return;
+      }
+
+      if ( releases.length && releases[ 0 ].tag_name !== `v${ app.getVersion() }` ) {
+        openStaticWindow( 'updateAvailable' );
+      }
+    }
+  );
 }
 
 app.on( 'ready', createWindow );

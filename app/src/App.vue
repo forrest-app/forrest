@@ -143,12 +143,12 @@
 
 <template>
   <header-bar
-    v-if="$route.name !== 'about-page' && $route.name !== 'help-page'">
+    v-if="! $route.isStatic">
   </header-bar>
   <main
     v-key-tracker
     :on-cmd-comma="handleCommandComma">
-    <settings v-if="showSettings && $route.name !== 'about-page' && $route.name !== 'help-page'"></settings>
+    <settings v-if="showSettings && ! $route.isStatic"></settings>
     <router-view v-on:activate="toggleSettings( false )"></router-view>
   </main>
 </template>
