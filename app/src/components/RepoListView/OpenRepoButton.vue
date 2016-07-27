@@ -1,25 +1,5 @@
-<style scoped>
-  button {
-    background-color : var(--npm-red);
-    display : block;
-
-    width : 100%;
-
-    border : none;
-
-    padding : .5em;
-
-    color       : var(--main-bg-color);
-    font-size   : inherit;
-    font-family : inherit;
-
-    margin-left  : auto;
-    margin-right : auto;
-  }
-</style>
-
 <template>
-  <button type="button" v-on:click="openFileDialog">Add new Project</button>
+  <button class="o-primaryBtn" type="button" v-on:click="openFileDialog">Add new Project</button>
 </template>
 
 <script>

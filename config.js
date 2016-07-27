@@ -11,7 +11,7 @@ const config = {
   vueDevTools : false,
   build       : {
     'app-version'        : pkg.version,
-    packagesToBeIncluded : [ 'fix-path', 'electron-window-state', 'ps-tree' ],
+    packagesToBeIncluded : [ 'fix-path', 'electron-window-state', 'ps-tree', 'github' ],
     overwrite            : true,
     asar                 : true,
     dmg                  : {
