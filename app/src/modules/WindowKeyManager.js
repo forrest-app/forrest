@@ -5,13 +5,18 @@ export const keyCodes = {
   left  : 37,
   up    : 38,
   right : 39,
-  down  : 40
+  down  : 40,
+  comma : 188
 };
 
-const handlerKeys = Object.keys( keyCodes );
+const customCommands = [ 'cmdComma' ];
+
+const handlerKeys = [ ...Object.keys( keyCodes ), ...customCommands ];
 const handlers    = handlerKeys.reduce( ( handlers, key ) => {
   handlers[ key ] = {
-    keyCode  : keyCodes[ key ],
+    keyCode : /^cmd.*$/.test( key ) ?
+                keyCodes[ key.replace( 'cmd', '' ).toLowerCase() ] :
+                keyCodes[ key ],
     handlers : []
   };
 
@@ -27,6 +32,10 @@ const handlers    = handlerKeys.reduce( ( handlers, key ) => {
  */
 function keyDownHandler( event ) {
   handlerKeys.forEach( key => {
+    if ( /^cmd.*$/.test( key ) && ! event.metaKey ) {
+      return;
+    }
+
     if (
       handlers[ key ].keyCode === event.keyCode &&
       handlers[ key ].handlers.length

@@ -4,11 +4,12 @@
   export default {
     bind() {
       this.mapping = {
-        left  : 'onLeft',
-        up    : 'onUp',
-        right : 'onRight',
-        down  : 'onDown',
-        esc   : 'onEsc'
+        left     : 'onLeft',
+        up       : 'onUp',
+        right    : 'onRight',
+        down     : 'onDown',
+        esc      : 'onEsc',
+        cmdComma : 'onCmdComma'
       };
 
       this.attachedHandlers = [];
@@ -30,6 +31,6 @@
         WindowKeyManager.remove( handler.key, handler.fn );
       } );
     },
-    params : [ 'onDown', 'onRight', 'onLeft', 'onUp', 'onEsc' ]
+    params : [ 'onDown', 'onRight', 'onLeft', 'onUp', 'onEsc', 'onCmdComma' ]
   };
 </script>
