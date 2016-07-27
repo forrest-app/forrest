@@ -52,6 +52,12 @@ export default {
       type  : 'checkbox'
     },
     {
+      label : 'Show project path',
+      desc  : 'Display project path in list view',
+      name  : 'showProjectPath',
+      type  : 'checkbox'
+    },
+    {
       label : 'Terminal output font size',
       desc  : 'Increase/decrease the font size of the terminal output',
       name  : 'terminalFontSize',

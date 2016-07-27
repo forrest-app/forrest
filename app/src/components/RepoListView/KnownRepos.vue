@@ -123,6 +123,7 @@
             </button>
           </div>
           <small class="o-small u-marginTopSmall">{{ repo.description }}</small>
+          <pre v-if="settings.showProjectPath" class="o-code u-marginTopSmall"><code>{{ repo.path.split().reverse().join('') }}</code></pre>
           <div class="c-project--link">
             <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
@@ -141,6 +142,7 @@
 <script>
   import { getRepos } from '../../vuex/getters';
   import { removeRepo, reloadRepo } from '../../vuex/actions';
+  import { getAppSettings } from '../../vuex/getters';
   import { getParentWithClass } from '../../modules/DomUtils';
 
   export default {
@@ -264,7 +266,8 @@
         reloadRepo
       },
       getters : {
-        repos : getRepos
+        repos    : getRepos,
+        settings : getAppSettings
       }
     }
   };
