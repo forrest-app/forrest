@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <command-output v-if="currentCommand" :current-command="currentCommand" transition="t-slideUp--slideDown"></command-output>
+    <command-output v-if="currentCommand" :current-command="currentCommand" :repo-name="repo.name" transition="t-slideUp--slideDown"></command-output>
   </div>
 </template>
 

@@ -158,7 +158,7 @@
       };
     },
 
-    props : [ 'currentCommand' ],
+    props : [ 'currentCommand', 'repoName' ],
 
     methods : {
       close() {
@@ -176,9 +176,9 @@
 
         if ( this.settings.displayNotifications ) {
           new Notification(
-            `'${ this.currentCommand.script.name }' ${ code === 0 ? 'succeeded' : 'failed' }`,
+            `${ this.currentCommand.script.name } - ${ code === 0 ? 'succeeded (•◡•)/' : `failed (${ code }) ◔̯◔` }`,
             {
-              body : `${ code === 0 ? '(•◡•)/' : `◔̯◔ Failure with code ${ code }` }`
+              body : `-> ${ this.repoName }`
             }
           );
         }
