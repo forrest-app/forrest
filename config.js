@@ -55,7 +55,7 @@ function getPackConfig( callback ) {
       'electron.js',
       'package.json',
       'main/*',
-      'dist/*',
+      'dist/**/*',
       '!node_modules/*',
       ...Object.keys( result ).map( dep => `node_modules/${ dep }` )
     ];
