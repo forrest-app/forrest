@@ -14,7 +14,7 @@ function getRepoUrl( repoData ) {
 
   if ( repo ) {
     if ( repo.url ) {
-      return repo.url.replace( /(git:\/\/|\.git)/g, '' );
+      return `https://${ repo.url.replace( /((git)?\+?(https)?:\/\/|\.git)/g, '' ) }`;
     }
 
     if ( /^.*?\/.*?$/.test( repo ) ) {
