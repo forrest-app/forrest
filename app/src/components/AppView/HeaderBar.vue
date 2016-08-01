@@ -35,7 +35,7 @@
       height : 2em;
       display : block;
 
-
+      padding : .125em;
     }
 
     &--settingsBtn {
@@ -83,7 +83,7 @@
       </svg>
     </a>
     <div class="c-header--logo">
-      <svg width="34" height="29" viewBox="0 0 34 29" xmlns="http://www.w3.org/2000/svg">
+      <svg width="45" height="40" viewBox="0 0 34 29" xmlns="http://www.w3.org/2000/svg">
         <title>Forrest logo</title>
         <g fill="none" fill-rule="evenodd">
           <path d="M8 7l7 14.545H1L8 7zM5.9 21.545h4.2V23H5.9v-1.455zM23.9 21.545h4.2V23h-4.2v-1.455zM26 7l7 14.545H19L26 7z" stroke="#F1F1F1"/><path d="M21 26h7L17 2 6 26h7v2.08h8V26z" stroke="#2A333C" fill="#CD3632"/>
