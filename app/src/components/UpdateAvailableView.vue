@@ -59,7 +59,7 @@
     <h1 class="o-headline-2">Forrest {{ version }}</h1>
 
     <p class="o-paragraph u-marginTopSmall">There is a new version available.</p>
-    <p class="o-paragraph u-marginTopSmall">We're working on the auto update but for now you have to grab the new version at the <button class="o-linkBtn" type="button" v-open-external="'https://github.com/stefanjudis/forrest/releases'">releases page</button> yourself. :)</p>
+    <p class="o-paragraph u-marginTopSmall">We're working on the auto update but for now you have to get the new version at the <button class="o-linkBtn" type="button" v-open-external="'https://github.com/stefanjudis/forrest/releases'">releases page</button> yourself. :)</p>
 
     <button class="o-primaryBtn u-marginTop" type="button" v-open-external="'https://github.com/stefanjudis/forrest/releases'">Download</button>
   </div>
