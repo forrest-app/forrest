@@ -24,7 +24,7 @@ const initialBgColor = '#f1f1f1';
 const staticWindows  = {
   about : {
     config : {
-      height          : 625,
+      height          : 700,
       width           : 475,
       backgroundColor : initialBgColor,
       titleBarStyle   : 'hidden',
