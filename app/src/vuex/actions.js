@@ -57,3 +57,9 @@ export const clearSessionData = function( { dispatch, state }, data ) {
 export const updateSessionOutput = function( { dispatch }, data ) {
   dispatch( 'UPDATE_SESSION_OUTPUT', data );
 };
+
+export const setTerminalSize = function( { dispatch, state }, cols, rows ) {
+  window.rpc.emit(
+    'set terminal size', { uid : state.session.uid, cols, rows }
+  );
+};

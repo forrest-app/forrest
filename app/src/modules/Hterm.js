@@ -2,6 +2,7 @@ import { hterm, lib } from 'hterm-umdjs';
 
 hterm.defaultStorage = new lib.Storage.Memory();
 
+hterm.Terminal.prototype.overlaySize = function () {};
 
 // passthrough all the commands that are meant to control
 // hyperterm and not the terminal itself

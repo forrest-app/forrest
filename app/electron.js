@@ -245,6 +245,10 @@ function createWindow( event, hash ) {
 
       emitAll( 'repos updated', repos );
     } );
+
+    rpc.on( 'set terminal size', ( { uid, cols, rows } ) => {
+      sessions.get( uid ).resize( { cols, rows } );
+    } );
   } );
 
 
@@ -255,6 +259,7 @@ function createWindow( event, hash ) {
       rpc.removeAllListeners( 'add repo' );
       rpc.removeAllListeners( 'update repo' );
       rpc.removeAllListeners( 'remove repo' );
+      rpc.removeAllListeners( 'set terminal size' );
 
       session.removeAllListeners();
       session.destroy();
