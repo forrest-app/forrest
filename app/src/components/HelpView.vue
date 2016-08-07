@@ -153,11 +153,6 @@
         <h4 class="o-headline-4">Projects</h4>
 
         <dl class="c-help--definitionList u-marginTopSmall">
-          <dt aria-label="Escape key">
-            <span class="u-fontWeightBold u-textTransformUppercase">esc</span>
-          </dt>
-          <dd>Terminate running command</dd>
-
           <dt aria-label="Left arrow key">
             <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
               <path d="M0 0h24v24H0z" fill="none"/>
