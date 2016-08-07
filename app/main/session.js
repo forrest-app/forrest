@@ -14,9 +14,6 @@ module.exports = class Session extends EventEmitter {
     } );
 
     this.pty = spawn( defaultShell, [ '--login' ], {
-      // columns,
-      // rows,
-      // cwd,
       env : baseEnv
     } );
 
