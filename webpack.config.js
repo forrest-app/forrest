@@ -29,7 +29,7 @@ let config = {
       {
         test    : /\.js$/,
         loader  : 'babel',
-        include : [ path.join( __dirname, 'app' ), /electron-settings/ ]
+        exclude : /node_modules/
       },
       {
         test   : /\.json$/,

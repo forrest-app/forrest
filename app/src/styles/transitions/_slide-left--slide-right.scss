@@ -1,0 +1,12 @@
+.t-slideLeft--slideRight {
+  &-transition {
+    transition :
+      transform .275s ease-in-out,
+      opacity .3s ease-in-out;
+  }
+
+  &-enter, &-leave {
+    transform : translate( 100%, 0 );
+    opacity   : .3;
+  }
+}

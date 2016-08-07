@@ -91,7 +91,7 @@
       </svg>
     </div>
     <ul v-if="repos && repos.length" class="o-list">
-      <li v-for="repo in repos" track-by="path" class="o-list--item u-noPadding u-positionRelative" transition="t-slideRight--slideLeft">
+      <li v-for="repo in repos" track-by="$index" class="o-list--item u-noPadding u-positionRelative" transition="t-slideRight--slideLeft">
         <a id="{{ repo.name }}" class="{{ projectClass }}" v-link="{ path : `/repos/${ encodeURIComponent( repo.name ) }` }" @contextmenu="openContextMenu">
           <div class="c-project--name">
             <span>{{ repo.name }}</span>

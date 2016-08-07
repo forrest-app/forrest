@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Electron from 'vue-electron';
 import Router from 'vue-router';
-
 import App from './App';
 import routes from './routes';
 

@@ -3,7 +3,11 @@ export function getRepos( state ) {
 }
 
 export function getAppSettings( state ) {
-  return state.app;
+  return state.app.settings;
+}
+
+export function isAppReady( state ) {
+  return state.app.ready;
 }
 
 export function getConfigSettings( state ) {
@@ -12,4 +16,8 @@ export function getConfigSettings( state ) {
 
 export function getDefaultCommands( state ) {
   return state.defaults.commands;
+}
+
+export function getSessionOutput( state ) {
+  return state.session.output;
 }
