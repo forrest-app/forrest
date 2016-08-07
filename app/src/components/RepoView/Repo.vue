@@ -50,7 +50,7 @@
 
     &--scriptsContainer {
       position : relative;
-      height : calc( 100% - 2.8125em );
+      height : calc( 100% - 2.5em );
     }
 
     &--commandHeadline {
@@ -122,7 +122,7 @@
   import Command from './Command';
   import CommandOutput from './CommandOutput';
   import { getRepos, getDefaultCommands } from '../../vuex/getters';
-  import { removeRepo as removeRepoAction } from '../../vuex/actions';
+  import { execSessionCmd, removeRepo as removeRepoAction } from '../../vuex/actions';
   import { getParentWithClass } from '../../modules/DomUtils';
 
   export default {
@@ -156,10 +156,11 @@
           }
         }
       );
-    },
 
-    ready() {
-      document.addEventListener( 'keydown', this.handleKeyStrokes );
+
+      this.execSessionCmd(
+        `cd ${ this.repo.path }`
+      );
     },
 
     components : {
@@ -245,14 +246,11 @@
       }
     },
 
-    beforeDestroy() {
-      document.removeEventListener( 'keydown', this.handleKeyStrokes );
-    },
-
     props : [ 'repoName' ],
 
     vuex : {
       actions : {
+        execSessionCmd,
         removeRepoAction
       },
 

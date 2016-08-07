@@ -13,6 +13,7 @@
   @import './styles/components/logo';
   @import './styles/animations/move-down';
   @import './styles/transitions/slide-right--slide-left';
+  @import './styles/transitions/slide-left--slide-right';
   @import './styles/transitions/slide-up--slide-down';
   @import './styles/transitions/slide-down--slide-up';
   @import './styles/utils';
@@ -146,6 +147,7 @@
     v-if="! $route.isStatic">
   </header-bar>
   <main
+    v-if="$route.isStatic || ( ! $route.isStatic && isAppReady )"
     v-key-tracker
     :on-cmd-comma="handleCommandComma">
     <settings v-if="showSettings && ! $route.isStatic"></settings>
@@ -157,7 +159,8 @@
   import HeaderBar from './components/AppView/HeaderBar';
   import Settings from './components/AppView/Settings';
   import { handleUpdatedRepos } from './vuex/actions';
-  import store from 'src/vuex/store';
+  import { isAppReady } from './vuex/getters';
+  import store from './vuex/store';
 
   export default {
     components : {
@@ -167,7 +170,7 @@
 
     data() {
       return {
-        showSettings : false
+        showSettings : false,
       };
     },
 
@@ -190,20 +193,13 @@
         }
       }
     },
-    ready() {
-      // do we still need this?
-      this.$router.beforeEach( () => {
-        this.toggleSettings( false );
-      } );
-
-      this.$electron.ipcRenderer.on( 'updatedRepos', ( event, reposString ) => {
-        this.handleUpdatedRepos( JSON.parse( reposString ) );
-      } );
-    },
 
     vuex : {
       actions : {
         handleUpdatedRepos : handleUpdatedRepos
+      },
+      getters : {
+        isAppReady : isAppReady
       }
     },
     store

@@ -1,5 +1,5 @@
 
-<style lang="scss" scoped>
+<style lang="scss">
   .script {
     &--actions {
       flex : 0 0;
@@ -8,16 +8,18 @@
     }
 
     &--code {
-      font-size : .8em;
+      position : relative;
+      height : 100%;
 
-      padding : .5em;
+      padding : 0 1em;
 
-      background-color : var(--code-background);
-      color            : var(--code-color);
+      > iframe {
+        width : calc( 100% - 2em ) !important;
+      }
 
-      border-radius : .25em;
-
-      overflow : auto;
+      &.is-hidden {
+        display : none;
+      }
     }
 
     &--details {
@@ -47,9 +49,21 @@
       bottom : 0;
       left   : 0;
 
-      padding-top : 2.5em;
+      padding : 2.5em 0 3em;
+
+      overflow : hidden;
+
+      background : var(--code-background);
 
       color : var(--code-color);
+
+      &--footer {
+        position : absolute;
+
+        bottom : 0;
+        left   : 0;
+        right  : 0;
+      }
 
       &--header {
         position : absolute;
@@ -81,6 +95,10 @@
       &--pre {
         height : 100%;
         border-radius : 0;
+
+        padding : .5em;
+
+        background-color : var(--code-background);
       }
     }
   }
@@ -93,35 +111,22 @@
         :on-esc="close">
     <div class="script--output--header">
       <div class="u-flexVerticalCenter">
-        <div v-if="processStatus === null" class="u-flexVerticalCenter" transition="trans-slideDown">
+        <div v-if="commandStatus === 'running'" class="u-flexVerticalCenter" transition="trans-slideDown">
           <svg class="anim-infiniteSpinning" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
               <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
-
-          <button type="button" class="script--output--btn u-marginLeftSmall" @click="killScript" aria-label="Cancel script">Kill it!</button>
         </div>
 
-        <div v-if="processStatus === 0" class="u-flexVerticalCenter" transition="trans-slideDown">
-          <svg  class="u-fillGreen" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"/>
-          </svg>
-
-          <button type="button" class="script--output--btn u-marginLeftSmall" @click="runScript( lastScript )" aria-label="Run script again">Run again!</button>
-        </div>
-
-        <div v-if="processStatus > 0" class="u-flexVerticalCenter" transition="trans-slideDown">
-          <svg class="u-fillRed" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v1.91l.01.01L1 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/>
-          </svg>
-
-          <span class="u-marginLeftSmall">(Code {{ processStatus }})</span>
-
-          <button type="button" class="script--output--btn u-marginLeftSmall" @click="runScript( lastScript )" aria-label="Run script again">Run again!</button>
-        </div>
-
+        <!--<div v-if="terminationStatus">
+          <div v-if="terminationStatus === 'killed'" class="u-flexVerticalCenter">
+            <svg class="u-fillRed" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm4.18-12.24l-1.06 1.06-1.06-1.06L13 8.82l1.06 1.06L13 10.94 14.06 12l1.06-1.06L16.18 12l1.06-1.06-1.06-1.06 1.06-1.06zM7.82 12l1.06-1.06L9.94 12 11 10.94 9.94 9.88 11 8.82 9.94 7.76 8.88 8.82 7.82 7.76 6.76 8.82l1.06 1.06-1.06 1.06zM12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z"/>
+                <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+            <span class="u-marginLeftSmall">Killed.</span> <button type="button" class="script--output--btn u-marginLeftSmall" @click="runScript( lastScript )">Run again!</button>
+          </div>
+        </div>-->
       </div>
       <div class="u-marginLeftAuto">
         <button type="button" class="o-icon" @click="close()">
@@ -132,29 +137,65 @@
         </button>
       </div>
     </div>
-    <code v-bind:style="{ fontSize : `${ settings.terminalFontSize }px` || 'inherit'  }">
-      <pre class="script--output--pre script--code" v-stay-down>{{ output }}</pre>
-    </code>
+    <div id="terminal" class="script--code" v-bind:class="{ 'is-hidden': ! showHTerm }"></div>
+    <div class="script--output--footer">
+      <button v-if="commandStatus === 'running'" type="button" class="o-primaryBtn" @click="killScript">Kill it!</button>
+      <button v-if="commandStatus === 'finished'" type="button" class="o-primaryBtn" @click="runScript()">Run again!</button>
+    </div>
   </div>
 </template>
 
 <script>
-  import { getAppSettings } from '../../vuex/getters';
+  import { getAppSettings, getSessionOutput } from '../../vuex/getters';
+  import { clearSessionData, execSessionCmd, writeSessionData } from '../../vuex/actions';
+  import hterm from '../../modules/HTerm';
 
   export default {
-    created() {
-      this.runScript();
+    ready() {
+      this.term.onTerminalReady = function() {
+        var io = this.term.io.push();
+
+        io.sendString = io.onVTKeystroke = ( key ) => {
+          if ( key === '[D' ) {
+            return this.close();
+          }
+
+        };
+      }.bind( this );
+
+      this.term.prefs_.set( 'background-color', '#2a333c' );
+      this.term.prefs_.set( 'foreground-color', '#f1f1f1' );
+      this.term.prefs_.set( 'cursor-color', 'rgba(100, 100, 10, 0)' );
+      this.term.prefs_.set( 'send-encoding', 'raw' );
+      this.term.prefs_.set( 'receive-encoding', 'raw' );
+      this.term.prefs_.set( 'font-size', this.settings.terminalFontSize );
+      this.term.prefs_.set( 'audible-bell-sound', '' );
+
+      this.term.decorate( document.querySelector( '#terminal' ) );
+      this.term.installKeyboard();
+
+      this.$watch(
+        'settings.terminalFontSize',
+        ( value ) => this.term.prefs_.set( 'font-size', value )
+      );
+
+      // workaround some weird rendering transform/translate bug
+      setTimeout( () => {
+        this.$set( 'showHTerm', true );
+        this.runScript();
+      }, 50 );
     },
 
     data() {
       return {
-        exec          : this.$electron.remote.require( 'child_process' ).exec,
-        psTree        : this.$electron.remote.require( 'ps-tree' ),
-        process       : null,
-        processStatus : null,
-        processCmd    : null,
-        lastCommand   : null,
-        output        : ''
+        process           : null,
+        processExitStatus : null,
+        processCmd        : null,
+        lastCommand       : null,
+
+        commandStatus : false,
+        showHTerm     : false,
+        term          : this.term = new hterm.Terminal()
       };
     },
 
@@ -168,61 +209,81 @@
       },
 
       handleData( data ) {
-        this.$set( 'output', this.output + data );
+        this.term.io.writeUTF8( data );
       },
 
       handleScriptExit( code ) {
-        this.$set( 'processStatus', code );
+        if ( ! this.terminationStatus ) {
+          this.$set( 'processExitStatus', code );
 
-        if ( this.settings.displayNotifications ) {
-          new Notification(
-            `${ this.currentCommand.script.name } - ${ code === 0 ? 'succeeded (•◡•)/' : `failed (${ code }) ◔̯◔` }`,
-            {
-              body : `-> ${ this.repoName }`
-            }
-          );
+
         }
       },
 
       killScript() {
-        if ( this.process ) {
-          // make sure also child processes
-          // of child processes get killed
-          this.psTree( this.process.pid, ( err, children ) => {
-            this.exec( `kill -9 ${ children.map( p => p.PID ).join( ' ' ) }` );
-          } );
-        }
+        this.writeSessionData(
+          '\u0003'
+        );
+        this.writeSessionData(
+          '\u0003'
+        );
       },
 
       runScript() {
-        this.$set( 'output', '' );
-        this.$set( 'processStatus', null );
-
         const { options, script } = this.currentCommand;
+        const command = options.isCustom ?
+                        `npm run ${ script.name }` :
+                        `${script.command}`;
 
-        this.processCmd = options.isCustom ?
-          `npm run ${ script.name }` :
-          script.command;
+        this.term.wipeContents();
 
-        this.$set( 'process', this.exec(
-          this.processCmd,
-          {
-            cwd : options.cwd
-          }
-        ) );
-
-        this.process.stdout.on( 'data', this.handleData );
-        this.process.stderr.on( 'data', this.handleData );
-
-        this.process.on( 'error', this.handleScriptExit );
-        this.process.on( 'close', this.handleScriptExit );
-        this.process.on( 'exit', this.handleScriptExit );
+        this.execSessionCmd( command );
+        this.$set( 'commandStatus', 'running' );
       }
     },
 
     vuex : {
+      actions : {
+        clearSessionData,
+        execSessionCmd,
+        writeSessionData
+      },
       getters : {
-        settings : getAppSettings
+        settings : getAppSettings,
+        output   : getSessionOutput
+      }
+    },
+
+    watch : {
+      output : function ( value, oldValue ) {
+        let newData = value.substr( oldValue.length );
+
+        if ( /__FORREST_START__/.test( newData ) ) {
+          if ( this.commandStatus === 'running' ) {
+            newData = newData.replace(
+              /__FORREST_START__/g,
+              '\nFinished command.'
+            );
+
+            this.$set( 'commandStatus', 'finished' );
+
+            if ( this.settings.displayNotifications ) {
+              new Notification(
+                `${ this.currentCommand.script.name } finished`,
+                {
+                  body : `-> ${ this.repoName }`
+                }
+              );
+            }
+          } else {
+            newData = newData.replace(
+              /__FORREST_START__/g,
+              ''
+            );
+          }
+        }
+
+        this.handleData( newData );
       }
     }
   };

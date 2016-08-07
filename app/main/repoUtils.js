@@ -1,6 +1,4 @@
-import { remote } from 'electron';
-
-const fs = remote.require( 'fs' );
+const fs = require( 'fs' );
 
 /**
  * Evaluate repo url from a read package data
@@ -33,7 +31,7 @@ function getRepoUrl( repoData ) {
  *
  * @returns {Promise}
  */
-export const readRepoData = function( repoPath ) {
+function readRepoData( repoPath ) {
   return new Promise( ( resolve, reject ) => {
     fs.readFile( `${ repoPath }/package.json`, ( error, data ) => {
       if ( error ) {
@@ -56,4 +54,8 @@ export const readRepoData = function( repoPath ) {
       resolve( repo );
     } );
   } );
+}
+
+module.exports = {
+  readRepoData
 };

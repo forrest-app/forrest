@@ -1,16 +1,11 @@
-import { readRepoData } from '../modules/RepoUtils';
-
 export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
   let repoIsAlreadyAdded = state.repos.all.some( repo => repo.path === repoPath );
 
   if ( ! repoIsAlreadyAdded ) {
-    readRepoData( repoPath )
-      .then( repo => {
-        dispatch( 'ADD_REPO', repo );
-      } )
-      .catch( () => {
-        // TODO put error handling here
-      } );
+    window.rpc.emit(
+      'add repo',
+      repoPath
+    );
   } else {
     new Notification(
       'Project is already in the list',
@@ -22,29 +17,43 @@ export const addRepoWithPath = function( { dispatch, state }, repoPath ) {
 };
 
 export const reloadRepo = function( { dispatch, state }, repo ) {
-  readRepoData( repo.path )
-    .then( repo => {
-      dispatch( 'RELOAD_REPO', repo );
-    } )
-    .catch( () => {
-      // TODO put error handling here
-    } );
+  window.rpc.emit(
+    'update repo',
+    repo.path
+  );
 };
 
 export const removeRepo = function( { dispatch, state }, repo ) {
-  let repoIndex = state.repos.all.findIndex(
-    savedRepo => savedRepo.name === repo.name
+  window.rpc.emit(
+    'remove repo',
+    repo.path
   );
-
-  if ( repoIndex !== -1 ) {
-    dispatch( 'REMOVE_REPO_WITH_INDEX', repoIndex );
-  }
 };
 
 export const updateAppSetting = function( { dispatch }, name, setting ) {
-  dispatch( 'UPDATE_APP_SETTING', name, setting );
+  window.rpc.emit(
+    'update app settings',
+    { name, setting }
+  );
 };
 
 export const handleUpdatedRepos = function( { dispatch }, repos ) {
   dispatch( 'UPDATED_REPOS', repos );
+};
+
+export const writeSessionData = function( { dispatch, state }, data ) {
+  window.rpc.emit( 'data', { uid : state.session.uid, data } );
+};
+
+export const execSessionCmd = function( { dispatch, state }, data ) {
+  data = `${ data }\n`;
+  window.rpc.emit( 'data', { uid : state.session.uid, data } );
+};
+
+export const clearSessionData = function( { dispatch, state }, data ) {
+  dispatch( 'CLEAR_SESSION_OUTPUT', data );
+};
+
+export const updateSessionOutput = function( { dispatch }, data ) {
+  dispatch( 'UPDATE_SESSION_OUTPUT', data );
 };

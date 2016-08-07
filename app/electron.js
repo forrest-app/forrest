@@ -2,10 +2,14 @@
 
 const { app, ipcMain, BrowserWindow } = require( 'electron' );
 const path                            = require( 'path' );
-const menu                            = require( './main/menu' );
-const fixPath                         = require( 'fix-path' );
+const ElectronSettings                = require( 'electron-settings' );
 const windowStateKeeper               = require( 'electron-window-state' );
+const uuid                            = require( 'uuid' );
 const GitHubApi                       = require( 'github' );
+const menu                            = require( './main/menu' );
+const Session                         = require( './main/session' );
+const repoUtils                       = require( './main/repoUtils' );
+const createRPC                       = require( './main/rpc' );
 const github                          = new GitHubApi( {
   protocol : 'https',
   headers  : {
@@ -53,15 +57,14 @@ const staticWindows  = {
   }
 };
 
-let mainWindows = [];
+const windowSet = new Set( [] );
+const rpcSet    = new Set( [] );
+
 let config  = {};
 let baseUrl = {
   development : '',
   production  : `file://${ __dirname }/dist/index.html`
 };
-
-// fix path to guarantee that npm and node are available
-fixPath();
 
 // enable experimental feature to use context menus
 app.commandLine.appendSwitch( '--enable-experimental-web-platform-features' );
@@ -76,21 +79,13 @@ if ( process.env.NODE_ENV === 'development' ) {
   config.url      = `${ baseUrl.production }`;
 }
 
-ipcMain.on( 'updatedAppSetting', ( event, key, value ) => {
-  if ( key === 'alwaysOnTop' ) {
-    mainWindows.forEach( window => {
-      window.setAlwaysOnTop( value );
-    } );
-  }
-} );
-
-ipcMain.on( 'updatedRepos', ( event, reposString ) => {
-  mainWindows.forEach(
-    window => window.webContents.send( 'updatedRepos', reposString )
-  );
-} );
-
 ipcMain.on( 'openNewWindow', createWindow );
+
+ipcMain.on( 'shellWrite', () => console.log( arguments ) );
+
+let settings = new ElectronSettings( {
+  configFileName : 'npm-app'
+} );
 
 
 /**
@@ -134,6 +129,7 @@ function createWindow( event, hash ) {
     x                 : mainWindowState.x,
     y                 : mainWindowState.y,
     backgroundColor   : initialBgColor,
+    alwaysOnTop       : settings.get( 'app.alwaysOnTop' ),
     minWidth          : 250,
     titleBarStyle     : 'hidden',
     'web-preferences' : {
@@ -147,19 +143,11 @@ function createWindow( event, hash ) {
 
   newWindow.loadURL( url );
 
+  windowSet.add( newWindow );
+
   if ( process.env.NODE_ENV === 'development' ) {
     newWindow.webContents.openDevTools( { mode : 'undocked' } );
   }
-
-  newWindow.on( 'closed', () => {
-    mainWindows = mainWindows.reduce( ( windows, window ) => {
-      if ( window !== newWindow ) {
-        windows.push( window );
-      }
-
-      return windows;
-    }, [] );
-  } );
 
   if ( config.devtron ) {
     BrowserWindow.addDevToolsExtension( path.join( __dirname, '../node_modules/devtron' ) );
@@ -167,9 +155,126 @@ function createWindow( event, hash ) {
     BrowserWindow.removeDevToolsExtension( 'devtron' );
   }
 
-  mainWindows.push( newWindow );
+  const rpc      = createRPC( newWindow );
+  const sessions = new Map();
 
-  if ( mainWindows.length === 1 ) {
+  rpcSet.add( rpc );
+
+  rpc.on( 'create session', () => {
+    initSession( { /* rows, cols, cwd, shell */ }, ( uid, session ) => {
+      sessions.set( uid, session );
+
+      console.log( 'sesstion created', uid );
+      rpc.emit( 'session set', {
+        uid,
+        shell : session.shell,
+        pid   : session.pty.pid
+      } );
+
+      rpc.emit( 'settings loaded', settings.get( 'app' ) || {} );
+      rpc.emit( 'repos loaded', settings.get( 'repos' ) || [] );
+
+      session.on( 'data', ( data ) => {
+        rpc.emit( 'session data', { uid, data } );
+      } );
+
+      session.on( 'exit', () => {
+        rpc.emit( 'session exit', { uid } );
+        sessions.delete( uid );
+      } );
+    } );
+
+    rpc.on( 'data', ( { uid, data } ) => {
+      sessions.get( uid ).write( data );
+    } );
+
+    rpc.on( 'update app settings', ( { name, setting } ) => {
+      settings.set( `app.${ name }`, setting );
+
+      // TODO save on loop here
+      windowSet.forEach( ( window ) => {
+        if ( name === 'alwaysOnTop' ) {
+          window.setAlwaysOnTop( setting );
+        }
+      } );
+
+      rpcSet.forEach( rpc => rpc.emit( 'setting set', { name, setting } ) );
+    } );
+
+    rpc.on( 'add repo', ( repoPath ) => {
+      repoUtils.readRepoData( repoPath )
+        .then( repo => {
+          const repos = [ ...settings.get( 'repos' ), repo ];
+          settings.set( 'repos', repos );
+
+          emitAll( 'repos updated', repos );
+        } )
+        .catch( () => {
+          // TODO put error handling here
+        } );
+    } );
+
+    rpc.on( 'update repo', ( repoPath ) => {
+      Promise.all( settings.get( 'repos' ).map( ( repo ) => {
+        if ( repo.path === repoPath ) {
+          return repoUtils.readRepoData( repoPath );
+        }
+
+        return repo;
+      } ) )
+        .then( repos => {
+          settings.set( 'repos', repos );
+
+          emitAll( 'repos updated', repos );
+        } )
+        .catch( () => {
+          // TODO put error handling here
+        } );
+    } );
+
+    rpc.on( 'remove repo', ( repoPath ) => {
+      const repos = settings.get( 'repos' ).reduce( ( repos, storedRepo ) => {
+        if ( storedRepo.path !== repoPath ) {
+          repos.push( storedRepo );
+        }
+
+        return repos;
+      }, [] );
+
+      settings.set( 'repos', repos );
+
+      emitAll( 'repos updated', repos );
+    } );
+  } );
+
+
+  const deleteSessions = () => {
+    sessions.forEach( ( session, key ) => {
+      rpc.removeAllListeners( 'data' );
+      rpc.removeAllListeners( 'update app settings' );
+      rpc.removeAllListeners( 'add repo' );
+      rpc.removeAllListeners( 'update repo' );
+      rpc.removeAllListeners( 'remove repo' );
+
+      session.removeAllListeners();
+      session.destroy();
+      sessions.delete( key );
+    } );
+  };
+
+  newWindow.on( 'close', () => {
+    windowSet.delete( newWindow );
+    rpcSet.delete( rpc );
+
+    rpc.destroy();
+    deleteSessions();
+  } );
+
+  // we reset the rpc channel only upon
+  // subsequent refreshes (ie: F5)
+  newWindow.webContents.on( 'did-navigate', deleteSessions );
+
+  if ( windowSet.size === 1 ) {
     menu.init( {
       createWindow,
       openStaticWindow
@@ -178,6 +283,14 @@ function createWindow( event, hash ) {
 
   /* eslint-disable no-console */
   console.log( 'window opened' );
+}
+
+function emitAll() {
+  rpcSet.forEach( rpc => rpc.emit.apply( rpc, arguments ) );
+}
+
+function initSession( opts, fn ) {
+  fn( uuid.v4(), new Session( opts ) );
 }
 
 if ( process.env.NODE_ENV !== 'development' ) {
@@ -204,7 +317,7 @@ app.on( 'window-all-closed', () => {
 } );
 
 app.on( 'activate', () => {
-  if ( ! mainWindows.length ) {
+  if ( ! windowSet.size ) {
     createWindow();
   }
 } );

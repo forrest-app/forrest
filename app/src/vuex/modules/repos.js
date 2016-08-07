@@ -1,45 +1,13 @@
-import ElectronSettings from 'electron-settings';
-import { ipcRenderer } from 'electron';
-
-let settings = new ElectronSettings( {
-  configFileName : 'npm-app'
-} );
-
 const state = {
-  all : settings.get( 'repos' ) || []
+  all : []
 };
 
 const mutations = {
-  ADD_REPO ( state, repo ) {
-    state.all = [ ...state.all, repo ];
-
-    settings.set( 'repos', state.all );
-    ipcRenderer.send( 'updatedRepos', JSON.stringify( state.all ) );
+  REPOS_LOADED ( state, repos ) {
+    state.all = repos;
   },
 
-  RELOAD_REPO ( state, repo ) {
-    state.all = state.all.reduce( ( all, savedRepo ) => {
-      if ( savedRepo.path === repo.path ) {
-        all.push( repo );
-      } else {
-        all.push( savedRepo );
-      }
-
-      return all;
-    }, [] );
-
-    settings.set( 'repos', state.all );
-    ipcRenderer.send( 'updatedRepos', JSON.stringify( state.all ) );
-  },
-
-  REMOVE_REPO_WITH_INDEX ( state, repoIndex ) {
-    state.all = state.all.filter( ( repo, index ) => index !== repoIndex );
-
-    settings.set( 'repos', state.all );
-    ipcRenderer.send( 'updatedRepos', JSON.stringify( state.all ) );
-  },
-
-  UPDATED_REPOS( state, repos ) {
+  REPOS_UPDATED ( state, repos ) {
     state.all = repos;
   }
 };

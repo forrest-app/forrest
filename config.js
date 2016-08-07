@@ -11,9 +11,9 @@ const config = {
   vueDevTools : false,
   build       : {
     'app-version'        : pkg.version,
-    packagesToBeIncluded : [ 'fix-path', 'electron-window-state', 'ps-tree', 'github' ],
+    packagesToBeIncluded : [ 'electron-settings', 'electron-window-state', 'github', 'default-shell', 'child_pty', 'uuid' ],
     overwrite            : true,
-    asar                 : true,
+    asar                 : false,
     dmg                  : {
       'background-color' : '#E1E1E1',
       contents           : [
