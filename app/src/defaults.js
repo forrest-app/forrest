@@ -2,36 +2,42 @@ export default {
   commands : [
     {
       name    : 'install',
+      slug    : 'default-install',
       command : 'npm install',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/install'
     },
     {
       name    : 'drop & install',
+      slug    : 'default-drop-&-install',
       command : 'rm -rf ./node_modules && npm install',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/install'
     },
     {
       name    : 'shrinkwrap',
+      slug    : 'default-shrinkwrap',
       command : 'npm shrinkwrap',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/shrinkwrap'
     },
     {
       name    : 'list',
+      slug    : 'default-list',
       command : 'npm ls',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/ls'
     },
     {
       name    : 'prune',
+      slug    : 'default-prune',
       command : 'npm prune',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/prune'
     },
     {
       name    : 'outdated',
+      slug    : 'default-outdated',
       command : 'npm outdated',
       flags   : [],
       docs    : 'https://docs.npmjs.com/cli/outdated'

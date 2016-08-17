@@ -35,7 +35,7 @@
 </style>
 
 <template>
-  <div class="{{ scriptClass }}" tabindex="0">
+  <div id="{{ script.slug }}" class="{{ scriptClass }}" tabindex="0">
     <div class="{{ scriptClass }}--header">
       <div class="{{ scriptClass }}--info">
         {{ script.name }}

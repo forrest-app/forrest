@@ -181,10 +181,7 @@
 
     data() {
       return {
-        process           : null,
         processExitStatus : null,
-        processCmd        : null,
-        lastCommand       : null,
 
         commandStatus : false,
         showHTerm     : false,
@@ -198,7 +195,7 @@
       close() {
         this.killScript();
 
-        this.$dispatch( 'close-script' );
+        this.$dispatch( 'close-script', this.currentCommand );
       },
 
       handleData( data ) {
@@ -208,8 +205,6 @@
       handleScriptExit( code ) {
         if ( ! this.terminationStatus ) {
           this.$set( 'processExitStatus', code );
-
-
         }
       },
 
