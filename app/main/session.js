@@ -28,7 +28,7 @@ module.exports = class Session extends EventEmitter {
       }
     } );
 
-    this.write( 'PS1=__FORREST_START__\nRPROMPT=\'\'\n' );
+    this.write( ' PS1=__FORREST_START__\n RPROMPT=\'\'\n' );
 
     this.shell = defaultShell;
   }
