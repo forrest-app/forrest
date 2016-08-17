@@ -98,7 +98,7 @@
 
         <ul class="o-list" >
           <li v-if="scripts.length" v-for="script in scripts" class="o-list--item u-noPadding">
-            <command :script="script" :script-class="scriptClass" :run-script="runScript" :is-custom="true"></command>
+            <command id="foo" :script="script" :script-class="scriptClass" :run-script="runScript" :is-custom="true"></command>
           <li v-if="! scripts.length" class="o-list--item">
             <div class="c-project--noScriptsMsg">
               <div>
@@ -144,6 +144,7 @@
                 return {
                   name           : key,
                   command        : packageJSON.scripts[ key ],
+                  slug           : key.replace( /\s/g, '-' ),
                   detailsVisible : false
                 };
               } )
@@ -181,7 +182,8 @@
     },
 
     events : {
-      'close-script' : function() {
+      'close-script' : function( command ) {
+        this.$el.querySelector( `#${ command.script.slug }` ).focus();
         this.$set( 'currentCommand', null );
       }
     },
