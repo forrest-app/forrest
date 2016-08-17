@@ -46,7 +46,9 @@ export const writeSessionData = function( { dispatch, state }, data ) {
 };
 
 export const execSessionCmd = function( { dispatch, state }, data ) {
-  data = `${ data }\n`;
+  // by starting with a space
+  // we keep it out of the history
+  data = ` ${ data }\n`;
   window.rpc.emit( 'data', { uid : state.session.uid, data } );
 };
 
