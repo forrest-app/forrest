@@ -213,7 +213,7 @@ function createWindow( event, hash ) {
         } )
         .catch( ( error ) => {
           /* eslint-disable no-console */
-          console.log( error )
+          console.log( error );
         } );
     } );
 
@@ -232,7 +232,7 @@ function createWindow( event, hash ) {
         } )
         .catch( ( error ) => {
           /* eslint-disable no-console */
-          console.log( error )
+          console.log( error );
         } );
     } );
 
