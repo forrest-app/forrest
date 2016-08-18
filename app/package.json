@@ -1,7 +1,7 @@
 {
   "name": "forrest",
   "productName": "Forrest",
-  "version": "1.0.0-delta",
+  "version": "1.0.0-epsilon",
   "description": "The npm script desktop client",
   "main": "electron.js",
   "dependencies": {
