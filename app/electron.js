@@ -212,8 +212,8 @@ function createWindow( event, hash ) {
           emitAll( 'repos updated', repos );
         } )
         .catch( ( error ) => {
+          /* eslint-disable no-console */
           console.log( error )
-          // TODO put error handling here
         } );
     } );
 
@@ -230,8 +230,9 @@ function createWindow( event, hash ) {
 
           emitAll( 'repos updated', repos );
         } )
-        .catch( () => {
-          // TODO put error handling here
+        .catch( ( error ) => {
+          /* eslint-disable no-console */
+          console.log( error )
         } );
     } );
 
