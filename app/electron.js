@@ -204,12 +204,15 @@ function createWindow( event, hash ) {
     rpc.on( 'add repo', ( repoPath ) => {
       repoUtils.readRepoData( repoPath )
         .then( repo => {
-          const repos = [ ...settings.get( 'repos' ), repo ];
+          const savedRepos = settings.get( 'repos' ) || [];
+          const repos = [ ...savedRepos, repo ];
+
           settings.set( 'repos', repos );
 
           emitAll( 'repos updated', repos );
         } )
-        .catch( () => {
+        .catch( ( error ) => {
+          console.log( error )
           // TODO put error handling here
         } );
     } );
