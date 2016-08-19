@@ -144,7 +144,7 @@
                 return {
                   name           : key,
                   command        : packageJSON.scripts[ key ],
-                  slug           : key.replace( /\s/g, '-' ),
+                  slug           : key.replace( /[\s:]/g, '-' ),
                   detailsVisible : false
                 };
               } )
